@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>شروط الاستخدام وسياسة الخصوصية — نظام الامتحانات الآمن</title>
+    <meta
+      name="description"
+      content="شروط الاستخدام وسياسة الخصوصية الخاصة بنظام الامتحانات الآمن"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 10L6 22l26 12 26-12L32 10z' fill='%235d5fef'/%3E%3Cpath d='M14 26.5V44c0 4 8 10 18 10s18-6 18-10V26.5' fill='%238b5cf6'/%3E%3Cpath d='M32 22v14' stroke='%23f59e0b' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='22' r='3' fill='%23f59e0b'/%3E%3Cpath d='M30 36h4l-1 8h-2l-1 8z' fill='%23f59e0b'/%3E%3C/svg%3E"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --_SA_bg: #ffffff;
+        --_SH_accent: #7c5cfc;
+        --_SA_accent2: #a78bfa;
+        --_SH_green: #10b981;
+        --_SA_red: #ef4444;
+        --_SH_orange: #f59e0b;
+        --_SA_gold: #f59e0b;
+        --_SH_surface: transparent;
+        --_SA_border: transparent;
+        --_SH_text: #1a1a2e;
+        --_SA_text2: #64648a;
+        --_SH_text3: #9e9eb8;
+        --_SA_font: "Cairo", sans-serif;
+        --_SH_fontEn: "Inter", sans-serif;
+        --_SA_spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        --_SH_ease: cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--_SA_font);
+        background: var(--_SA_bg);
+        color: var(--_SH_text);
+        direction: rtl;
+        min-height: 100vh;
+        line-height: 1.65;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(93, 95, 239, 0.3);
+        border-radius: 99px;
+      }
+
+      .sa-particles {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            ellipse at 20% 20%,
+            rgba(93, 95, 239, 0.03) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 60%,
+            rgba(139, 92, 246, 0.02) 0%,
+            transparent 50%
+          );
+      }
+
+      .sa-hero {
+        position: relative;
+        z-index: 1;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 5rem 1.5rem 3rem;
+      }
+      .sa-hero-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 680px;
+      }
+
+      .sa-shield {
+        width: 110px;
+        height: 110px;
+        border-radius: 30px;
+        margin: 0 auto 2.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--_SH_accent),
+          var(--_SA_accent2)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.8rem;
+        color: #fff;
+        box-shadow:
+          0 0 40px rgba(93, 95, 239, 0.2),
+          0 15px 30px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .sa-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 900;
+        margin-bottom: 0.8rem;
+        color: var(--_SH_text);
+        letter-spacing: -0.03em;
+        line-height: 1.3;
+      }
+      .sa-hero p {
+        font-size: 1.05rem;
+        color: var(--_SA_text2);
+        line-height: 1.9;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      .sa-content {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1.5rem 5rem;
+      }
+
+      .sa-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--_SH_text);
+        font-weight: 700;
+        font-size: 0.88rem;
+        padding: 12px 24px;
+        border-radius: 99px;
+        background: rgba(124, 92, 252, 0.08);
+        border: 1px solid rgba(124, 92, 252, 0.15);
+        transition: all 0.3s var(--_SH_ease);
+        text-decoration: none;
+        margin-bottom: 3rem;
+      }
+      .sa-back:hover {
+        background: var(--_SH_accent);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(124, 92, 252, 0.3);
+      }
+
+      .sa-section-title {
+        font-size: 1.6rem;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--_SH_text);
+        margin-top: 2.5rem;
+      }
+      .sa-section-title i {
+        color: var(--_SH_accent);
+        font-size: 1.2rem;
+      }
+
+      .sa-text-block {
+        font-size: 0.95rem;
+        color: var(--_SA_text2);
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+      }
+
+      .sa-list {
+        list-style: none;
+        margin-bottom: 2rem;
+      }
+      .sa-list li {
+        position: relative;
+        padding-right: 24px;
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+        color: var(--_SA_text2);
+        line-height: 1.8;
+      }
+      .sa-list li::before {
+        content: "•";
+        position: absolute;
+        right: 0;
+        color: var(--_SH_accent);
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      .sa-footer-back {
+        text-align: center;
+        padding-top: 3rem;
+        margin-top: 3rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      @media (max-width: 640px) {
+        .sa-hero h1 {
+          font-size: 1.8rem;
+        }
+        .sa-hero {
+          min-height: 40vh;
+          padding: 3rem 1rem 2rem;
+        }
+        .sa-section-title {
+          font-size: 1.3rem;
+        }
+        .sa-text-block,
+        .sa-list li {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sa-particles" id="sa-particles"></div>
+
+    <section class="sa-hero">
+      <div class="sa-hero-inner">
+        <div class="sa-shield">
+          <i
+            class="fa-solid fa-file-contract"
+            style="position: relative; z-index: 1"
+          ></i>
+        </div>
+        <h1>شروط الاستخدام وسياسة الخصوصية</h1>
+        <p>
+          يا ريت قراءة هذه الشروط والسياسات بعناية قبل استخدام المنصة لتجنب أي
+          مشاكل أو مخالفات.
+        </p>
+      </div>
+    </section>
+
+    <div class="sa-content">
+      <a href="javascript:history.back()" class="sa-back">
+        <i class="fa-solid fa-arrow-right"></i> العودة للخلف
+      </a>
+
+      <h2 class="sa-section-title">
+        <i class="fa-solid fa-gavel"></i> شروط الاستخدام العامة
+      </h2>
+      <div class="sa-text-block">
+        بموافقتك على استخدام هذه المنصة كطالب أو كمعلم، فإنك تقر وتوافق على
+        الالتزام الكامل بجميع الشروط والأحكام المذكورة أدناه. المنصة مخصصة
+        لإجراء الاختبارات بأعلى درجات النزاهة والموثوقية، وأي محاولة للتلاعب
+        ستؤدي إلى إجراءات صارمة.
+      </div>
+      <ul class="sa-list">
+        <li>
+          يمنع منعاً باتاً محاولة استغلال أي ثغرة في النظام أو استخدام أدوات
+          خارجية للتلاعب بالنتائج.
+        </li>
+        <li>
+          المنصة مزودة بتقنيات متقدمة لمراقبة السلوك، ومجرد محاولتك لفتح أدوات
+          المطور (DevTools) يعتبر مخالفة صريحة.
+        </li>
+        <li>
+          يجب تقديم بيانات صحيحة وحقيقية عند سجل دخول بجوجل أو غيره، ويتحمل
+          المستخدم مسؤولية حسابه بالكامل.
+        </li>
+        <li>
+          للمعلم الحق في إلغاء نتائج أي طالب في حال اشتباهه بوجود تلاعب أو غش،
+          وتقرير الذكاء الاصطناعي يكون استرشادياً.
+        </li>
+        <li>
+          لا يحق للمستخدم إعادة نشر أو نسخ محتوى الامتحانات بأي شكل من الأشكال
+          بدون إذن صريح من المعلم.
+        </li>
+      </ul>
+
+      <h2 class="sa-section-title">
+        <i class="fa-solid fa-user-shield"></i> سياسة الخصوصية
+      </h2>
+      <div class="sa-text-block">
+        خصوصيتك وأمان بياناتك هما أولويتنا. نحن نلتزم بالشفافية المطلقة فيما
+        يتعلق بالبيانات التي نقوم بجمعها وكيفية استخدامها:
+      </div>
+      <ul class="sa-list">
+        <li>
+          <strong>البيانات الشخصية:</strong> نقوم بجمع اسمك، بريدك الإلكتروني
+          (من خلال تسجيل دخول جوجل)، وعنوان IP الخاص بك لتأكيد هويتك وضمان عدم
+          تكرار الدخول.
+        </li>
+        <li>
+          <strong>تسجيل الشاشة والكاميرا:</strong> في حال تفعيل المراقبة، يتم
+          أخذ لقطات متقطعة لشاشتك أو كاميرتك لمعالجتها عبر تقنيات الذكاء
+          الاصطناعي لاكتشاف الغش. هذه اللقطات لا تُنشر وتتاح للمعلم فقط لأغراض
+          المراجعة، ويتم التخلص منها دورياً.
+        </li>
+        <li>
+          <strong>مشاركة البيانات:</strong> لا نقوم ببيع أو مشاركة بياناتك
+          الشخصية مع أي طرف ثالث لأغراض تسويقية مطلقاً. بياناتك تُستخدم حصرياً
+          لإدارة وتأمين الاختبارات.
+        </li>
+        <li>
+          <strong>البصمة الرقمية (Fingerprinting):</strong> نستخدم تقنيات البصمة
+          الرقمية لمعرفة الأجهزة المستخدمة ومنع سجل دخول المتعدد في نفس الوقت.
+        </li>
+      </ul>
+
+      <h2 class="sa-section-title">
+        <i class="fa-solid fa-handshake-angle"></i> حقوق المستخدم
+      </h2>
+      <div class="sa-text-block">
+        نحن نكفل لك حقوقك كمستخدم في الوصول إلى بياناتك وحذفها إذا رغبت في ذلك،
+        مع مراعاة حق المعلم في الاحتفاظ بسجلات الاختبارات الضرورية. إذا كان لديك
+        أي استفسار أو قلق بشأن خصوصيتك، يا ريت التواصل مع مسؤول المنصة أو المعلم
+        الخاص بك.
+      </div>
+
+      <div class="sa-footer-back">
+        <p
+          style="margin-bottom: 1rem; color: var(--_SA_text2); font-weight: 700"
+        >
+          جميع الحقوق محفوظة. المنصة تابعة لـ
+          <strong style="color: var(--_SH_accent)">مؤسسة SA</strong>
+        </p>
+        <a href="javascript:history.back()" class="sa-back">
+          <i class="fa-solid fa-arrow-right"></i> العودة للصفحة السابقة
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

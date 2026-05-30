@@ -1,0 +1,1156 @@
+<!--
+ *          ▄▄██████▄▄
+ *        ▄████████████▄
+ *       ▄████▀    ▀████▄
+ *      ▄████   SA   ████▄
+ *      ████          ████
+ *      ▀████   TM   ████▀
+ *       ▀████▄    ▄████▀
+ *        ▀████████████▀
+ *          ▀▀██████▀▀
+ *     SA SAFE EXAM PLATFORM
+ *  ───────────────────────────
+ *   INTERNAL BRAND SIGNATURE
+ *     ALL RIGHTS RESERVED
+ -->
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>لوحة تحكم المعلم | منصة SA للامتحانات</title>
+    <meta
+      name="description"
+      content="منصة SA للمعلمين — أنشئ امتحاناتك الآمنة، راقب الطلاب في الوقت الفعلي، واحصل على تقارير تفصيلية بتقنية الذكاء الاصطناعي ضد الغش."
+    />
+    <meta
+      name="keywords"
+      content="امتحانات اونلاين، لوحة تحكم المعلم، منصة تعليمية، ضد الغش، SA، مؤسسة SA، إنشاء امتحان"
+    />
+    <meta name="author" content="SA — Saif Hany" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#7c5cfc" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SA للامتحانات" />
+    <meta property="og:title" content="لوحة تحكم المعلم | منصة SA للامتحانات" />
+    <meta
+      property="og:description"
+      content="أقوى أدوات إنشاء ومراقبة الامتحانات للمعلمين. تحكم كامل وحماية ضد الغش."
+    />
+    <meta
+      property="og:image"
+      content="https://i.postimg.cc/kDrzDHGN/image-(16).jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="لوحة تحكم المعلم — SA" />
+    <meta property="og:url" content="https://sa-exams.com/teacher.html" />
+    <meta property="og:locale" content="ar_EG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SA_Exams" />
+    <meta
+      name="twitter:title"
+      content="لوحة تحكم المعلم | منصة SA للامتحانات"
+    />
+    <meta
+      name="twitter:description"
+      content="أدوات متطورة للمعلمين لإنشاء الامتحانات ومراقبة الطلاب بذكاء."
+    />
+    <meta
+      name="twitter:image"
+      content="https://i.postimg.cc/kDrzDHGN/image-(16).jpg"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'/%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'/%3E%3C/svg%3E"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .ambient-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background: var(--bg);
+        overflow: hidden;
+      }
+      .ambient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.5;
+        animation: orbFloat 25s infinite alternate ease-in-out;
+      }
+      .orb-1 {
+        width: 45vw;
+        height: 45vw;
+        background: var(--accent-glow);
+        top: -10%;
+        right: -10%;
+      }
+      .orb-2 {
+        width: 35vw;
+        height: 35vw;
+        background: var(--blue-glow);
+        bottom: -10%;
+        left: -10%;
+        animation-delay: -5s;
+      }
+      .grid-pattern {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        transform: perspective(500px) rotateX(60deg) translateY(-100px)
+          translateZ(-200px);
+        animation: gridMove 20s linear infinite;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 40%,
+          transparent 90%
+        );
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 40%,
+          transparent 90%
+        );
+      }
+      @keyframes gridMove {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 0 50px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient-bg">
+      <div class="ambient-orb orb-1"></div>
+      <div class="ambient-orb orb-2"></div>
+    </div>
+    <div class="grid-pattern"></div>
+    <nav class="float-actions" id="float-nav">
+      <button class="float-pill active" data-view="builder" title="إنشاء">
+        <i class="fa-solid fa-plus"></i>
+        <span class="pill-tooltip">اعمل امتحان</span>
+      </button>
+      <button class="float-pill" data-view="exams" title="الامتحانات">
+        <i class="fa-solid fa-layer-group"></i>
+        <span class="pill-tooltip">امتحاناتي</span>
+      </button>
+      <div class="nav-divider"></div>
+      <div class="float-account" id="account-menu-wrap">
+        <button class="float-avatar" id="account-btn" title="الحساب">
+          <i class="fa-solid fa-user"></i>
+        </button>
+      </div>
+    </nav>
+    <div class="toast-area" id="toast-area"></div>
+    <main class="main">
+      <section class="view active" id="view-builder">
+        <div class="page-head">
+          <div>
+            <h2 class="page-title" id="builder-title">امتحان جديد</h2>
+            <p class="page-desc" id="builder-desc">
+              ضيف الأسئلة وارفع الامتحان علطول
+            </p>
+          </div>
+        </div>
+        <div class="editing-banner hidden" id="editing-banner">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>إنت بتعدل في امتحان موجود</span>
+          <button class="btn btn-sm btn-soft" id="btn-cancel-edit">
+            إلغاء
+          </button>
+        </div>
+        <div class="form-grid">
+          <div class="field-wrap">
+            <label for="exam-title">اسم الامتحان</label>
+            <input
+              type="text"
+              class="field"
+              id="exam-title"
+              placeholder="مثال: امتحان الرياضة — الباب الأول"
+            />
+          </div>
+          <div class="field-wrap">
+            <label for="exam-duration">المدة (دقيقة)</label>
+            <input
+              type="number"
+              class="field"
+              id="exam-duration"
+              placeholder="30"
+              min="1"
+              max="300"
+            />
+          </div>
+          <div class="field-wrap">
+            <label for="exam-max-attempts">عدد المحاولات</label>
+            <select class="field" id="exam-max-attempts">
+              <option value="0">براحته (مفيش حد)</option>
+              <option value="1" selected>محاولة واحدة بس</option>
+              <option value="2">محاولتين</option>
+              <option value="3">3 محاولات</option>
+              <option value="5">5 محاولات</option>
+            </select>
+          </div>
+          <div
+            class="field-wrap"
+            style="
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              padding: 10px 0;
+            "
+          >
+            <label
+              for="show-correct-toggle"
+              style="
+                margin: 0;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.82rem;
+                text-transform: none;
+              "
+            >
+              <input
+                type="checkbox"
+                id="show-correct-toggle"
+                style="
+                  width: 18px;
+                  height: 18px;
+                  accent-color: var(--accent);
+                  cursor: pointer;
+                "
+              />
+              <span
+                ><i
+                  class="fa-solid fa-eye"
+                  style="margin-left: 4px; opacity: 0.5"
+                ></i>
+                خلي الطالب يشوف الإجابات الصح بعد ما يخلص</span
+              >
+            </label>
+          </div>
+          <div class="field-wrap">
+            <label
+              for="exam-warn-mode"
+              style="
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 0.82rem;
+                text-transform: none;
+              "
+            >
+              <i class="fa-solid fa-shield-halved" style="opacity: 0.5"></i>
+              نظام مكافحة الغش
+              <button
+                type="button"
+                class="info-tip-btn"
+                id="btn-warn-info"
+                title="اضغط للتوضيح"
+                style="
+                  background: rgba(255, 255, 255, 0.06);
+                  border: 1px solid rgba(255, 255, 255, 0.1);
+                  color: var(--text-2);
+                  width: 22px;
+                  height: 22px;
+                  border-radius: 50%;
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 0.65rem;
+                  cursor: pointer;
+                  font-weight: 900;
+                  transition: all 0.2s;
+                "
+              >
+                ?
+              </button>
+            </label>
+            <select class="field" id="exam-warn-mode">
+              <option value="warn-first" selected>
+                تحذير الأول وبعدين طرد
+              </option>
+              <option value="instant-kick">طرد فوري من غير إنذار</option>
+            </select>
+            <div
+              id="warn-info-popup"
+              style="
+                display: none;
+                margin-top: 8px;
+                padding: 14px 16px;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                border-radius: 12px;
+                font-size: 0.78rem;
+                line-height: 1.8;
+                color: var(--text-2);
+                animation: slideUp 0.2s var(--ease);
+              "
+            >
+              <strong
+                style="color: var(--text); display: block; margin-bottom: 6px"
+                ><i class="fa-solid fa-circle-info"></i> يعني إيه أنظمة مكافحة
+                الغش؟</strong
+              >
+              <b>تحذير وبعدين طرد:</b> لو الطالب خرج من الصفحة (فتح تاب جديد أو
+              أخد سكرين) بيجيله إنذار. لو كررها هيتطرد فوراً والامتحان هيتقفل
+              عليه.<br />
+              <b>طرد فوري:</b> أي حركة غش = طرد علطول من غير كلام. ده ينفع
+              للامتحانات الرسمية والمهمة جداً.
+            </div>
+          </div>
+        </div>
+        <div id="questions-container"></div>
+        <div class="builder-footer">
+          <button class="btn btn-soft" id="btn-add-question">
+            <i class="fa-solid fa-plus"></i> ضيف سؤال
+          </button>
+          <button class="btn btn-accent" id="btn-upload-exam">
+            <i class="fa-solid fa-cloud-arrow-up"></i> ارفع الامتحان
+          </button>
+        </div>
+      </section>
+      <section class="view" id="view-exams">
+        <div class="page-head">
+          <div>
+            <h2 class="page-title">امتحاناتي</h2>
+            <p class="page-desc">تحكم في كل امتحاناتك من هنا</p>
+          </div>
+        </div>
+        <div id="exams-list">
+          <div class="empty-state" id="exams-empty">
+            <div class="empty-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+              </svg>
+            </div>
+            <h3>مفيش امتحانات لسه</h3>
+            <p>اعمل أول امتحان ليك من قسم "اعمل امتحان"</p>
+          </div>
+        </div>
+      </section>
+      <section class="view" id="view-results">
+        <div class="page-head">
+          <div>
+            <h2 class="page-title" id="results-title">النتائج</h2>
+            <p class="page-desc" id="results-desc"></p>
+          </div>
+          <button class="back-btn" id="btn-back-results">
+            <i class="fa-solid fa-arrow-right"></i> رجوع
+          </button>
+        </div>
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="val" id="s-total">0</div>
+            <div class="lab">الطلاب</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" id="s-avg">0%</div>
+            <div class="lab">المتوسط</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" id="s-pass">0</div>
+            <div class="lab">ناجح</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" id="s-cheat">0</div>
+            <div class="lab">غش</div>
+          </div>
+        </div>
+        <div
+          class="chart-wrapper"
+          style="
+            background: var(--glass2);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--r);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+          "
+        >
+          <div class="section-label" style="margin-bottom: 1rem">
+            <i class="fa-solid fa-chart-bar"></i> إحصائيات درجات الطلاب
+          </div>
+          <div style="position: relative; height: 300px; width: 100%">
+            <canvas id="results-chart"></canvas>
+          </div>
+        </div>
+        <div
+          class="leaderboard-wrap"
+          id="leaderboard-wrap"
+          style="display: none"
+        >
+          <div class="section-label">
+            <i class="fa-solid fa-trophy"></i> المتفوقون
+          </div>
+          <div class="leaderboard" id="leaderboard"></div>
+        </div>
+        <div class="section-label" style="margin-bottom: 0.6rem">
+          <i class="fa-solid fa-list-ul"></i> جميع الطلاب
+        </div>
+        <div class="data-table">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>الطالب</th>
+                <th>الدرجة</th>
+                <th>الوقت المستغرق</th>
+                <th>الحالة</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="stu-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="view" id="view-report">
+        <div class="page-head">
+          <h2 class="page-title">تقرير تفصيلي</h2>
+          <button class="back-btn" id="btn-back-report">
+            <i class="fa-solid fa-arrow-right"></i> رجوع
+          </button>
+        </div>
+        <div id="rpt-header"></div>
+        <div class="proctor-section" id="proctor-section" style="display: none">
+          <h3>
+            <i class="fa-solid fa-camera"></i> تقرير مراقبة الكاميرا (ذكاء
+            اصطناعي)
+          </h3>
+          <div class="proctor-summary">
+            <div class="proctor-stat">
+              <div class="pval" id="p-total">0</div>
+              <div class="plab">إجمالي اللقطات</div>
+            </div>
+            <div class="proctor-stat flagged">
+              <div class="pval" id="p-flagged">0</div>
+              <div class="plab">لقطات مشبوهة</div>
+            </div>
+            <div class="proctor-stat clean">
+              <div class="pval" id="p-clean">0</div>
+              <div class="plab">سلوك طبيعي</div>
+            </div>
+            <div class="proctor-stat">
+              <div class="pval" id="p-pct">0%</div>
+              <div class="plab">نسبة الشك</div>
+            </div>
+          </div>
+          <div class="proctor-events" id="proctor-events"></div>
+        </div>
+        <div id="rpt-questions"></div>
+        <div class="ai-section">
+          <div class="ai-section-head">
+            <i class="fa-solid fa-robot"></i>
+            <span>تحليل ذكي للسلوك</span>
+          </div>
+          <button class="ai-btn" id="btn-ai-analyze">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> حلل بالذكاء
+            الاصطناعي
+          </button>
+          <div id="ai-output"></div>
+        </div>
+        <div class="logs-wrap">
+          <div class="section-label">
+            <i class="fa-solid fa-timeline"></i> سجل النشاط
+          </div>
+          <div class="log-list" id="rpt-log-list"></div>
+        </div>
+      </section>
+      <section class="view" id="view-profile">
+        <div
+          style="
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 2rem 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: calc(100vh - 120px);
+          "
+        >
+          <div
+            class="page-head"
+            style="
+              margin-bottom: 2rem;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 15px;
+            "
+          >
+            <div>
+              <h2 class="page-title">حسابك الشخصي</h2>
+              <p class="page-desc">إعدادات الحساب وتعديل البيانات الأساسية</p>
+            </div>
+            <button
+              class="btn btn-soft"
+              id="btn-back-profile"
+              style="
+                border-radius: 99px;
+                padding: 10px 22px;
+                font-weight: 800;
+                border: 1px solid var(--border);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <i class="fa-solid fa-arrow-right"></i> رجوع
+            </button>
+          </div>
+          <div
+            class="q-card"
+            style="
+              margin-bottom: 1.5rem;
+              text-align: center;
+              padding: 3rem 1.5rem;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 12px;
+              border-radius: var(--radius-lg);
+            "
+          >
+            <div
+              style="
+                width: 90px;
+                height: 90px;
+                font-size: 2.5rem;
+                background: linear-gradient(
+                  135deg,
+                  var(--accent),
+                  var(--accent2)
+                );
+                color: #fff;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 10px 25px var(--accent-glow);
+              "
+            >
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <h3
+              id="profile-page-name"
+              style="
+                font-size: 1.8rem;
+                font-weight: 900;
+                margin: 0;
+                color: var(--text);
+              "
+            >
+              المعلم
+            </h3>
+            <p
+              style="
+                color: var(--text2);
+                font-size: 0.95rem;
+                margin: 0;
+                background: var(--bg2);
+                padding: 5px 16px;
+                border-radius: 99px;
+                border: 1px solid var(--border);
+                font-weight: 700;
+              "
+            >
+              حساب معلم
+            </p>
+          </div>
+          <div
+            style="
+              display: grid;
+              gap: 1.5rem;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            "
+          >
+            <div
+              class="q-card"
+              style="
+                padding: 1.8rem;
+                border-radius: var(--radius-lg);
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  margin-bottom: 1rem;
+                "
+              >
+                <div
+                  style="
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    background: var(--accent-soft);
+                    color: var(--accent);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.2rem;
+                  "
+                >
+                  <i class="fa-solid fa-pen"></i>
+                </div>
+                <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0">
+                  تغيير اسم العرض
+                </h3>
+              </div>
+              <p
+                style="
+                  color: var(--text2);
+                  font-size: 0.9rem;
+                  margin-bottom: 1.5rem;
+                  line-height: 1.6;
+                  flex: 1;
+                "
+              >
+                تحديث الاسم اللي بيظهر لطلابك في الامتحانات والنتائج.
+              </p>
+              <button
+                class="btn btn-soft"
+                id="btn-page-edit-name"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  padding: 12px;
+                  border-radius: 99px;
+                "
+              >
+                تغيير الاسم
+              </button>
+            </div>
+            <div
+              class="q-card"
+              style="
+                padding: 1.8rem;
+                border-radius: var(--radius-lg);
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                grid-column: 1 / -1;
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  margin-bottom: 1rem;
+                "
+              >
+                <div
+                  style="
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    background: var(--green-bg);
+                    color: var(--green);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.2rem;
+                    border: 1px solid var(--green-border);
+                  "
+                >
+                  <i class="fa-solid fa-comment-dots"></i>
+                </div>
+                <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0">
+                  الرسائل الافتراضية للطلاب
+                </h3>
+              </div>
+              <p
+                style="
+                  color: var(--text2);
+                  font-size: 0.9rem;
+                  margin-bottom: 1.5rem;
+                  line-height: 1.6;
+                "
+              >
+                رسائل بتظهر للطالب أوتوماتيك أول ما يسلم الامتحان وتتطبق على كل
+                امتحاناتك.
+              </p>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 15px;
+                  margin-bottom: 1.5rem;
+                "
+              >
+                <div class="field-wrap" style="margin: 0">
+                  <label
+                    for="global-success-msg"
+                    style="color: var(--green); font-weight: 800"
+                    ><i class="fa-solid fa-party-horn"></i> رسالة التهنئة (درجات
+                    50% أو أعلى)</label
+                  >
+                  <input
+                    type="text"
+                    class="field"
+                    id="global-success-msg"
+                    placeholder="عاش جداً يا بطل! استمر على مستواك ده..."
+                    style="border-color: var(--green-border)"
+                  />
+                </div>
+                <div class="field-wrap" style="margin: 0">
+                  <label
+                    for="global-fail-msg"
+                    style="color: var(--red); font-weight: 800"
+                    ><i class="fa-solid fa-heart"></i> رسالة الدعم (درجات أقل من
+                    50%)</label
+                  >
+                  <input
+                    type="text"
+                    class="field"
+                    id="global-fail-msg"
+                    placeholder="حاول تركز أكتر المرة الجاية، تقدر تتواصل معايا على 010..."
+                    style="border-color: var(--red-border)"
+                  />
+                </div>
+              </div>
+              <button
+                class="btn btn-accent"
+                id="btn-save-global-msgs"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  padding: 12px;
+                  border-radius: 99px;
+                "
+              >
+                <i class="fa-solid fa-floppy-disk"></i> حفظ الرسائل
+              </button>
+            </div>
+            <div
+              class="q-card"
+              style="
+                padding: 1.8rem;
+                border-radius: var(--radius-lg);
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  margin-bottom: 1rem;
+                "
+              >
+                <div
+                  style="
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    background: var(--bg2);
+                    color: var(--text);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.2rem;
+                    border: 1px solid var(--border);
+                  "
+                >
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </div>
+                <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0">
+                  اخرج من الحساب
+                </h3>
+              </div>
+              <p
+                style="
+                  color: var(--text2);
+                  font-size: 0.9rem;
+                  margin-bottom: 1.5rem;
+                  line-height: 1.6;
+                  flex: 1;
+                "
+              >
+                قفل الجلسة الحالية لضمان أمان حسابك.
+              </p>
+              <button
+                class="btn btn-outline"
+                id="btn-page-logout"
+                style="
+                  width: 100%;
+                  justify-content: center;
+                  padding: 12px;
+                  border-radius: 99px;
+                "
+              >
+                خروج من المنصة
+              </button>
+            </div>
+          </div>
+          <div
+            class="q-card"
+            style="
+              padding: 1.8rem;
+              margin-top: 1.5rem;
+              margin-bottom: 2rem;
+              border: 1px solid rgba(239, 68, 68, 0.2);
+              background: rgba(239, 68, 68, 0.03);
+              border-radius: var(--radius-lg);
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 1rem;
+              "
+            >
+              <div
+                style="
+                  width: 45px;
+                  height: 45px;
+                  border-radius: 50%;
+                  background: rgba(239, 68, 68, 0.1);
+                  color: var(--red);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 1.2rem;
+                "
+              >
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <h3
+                style="
+                  font-size: 1.2rem;
+                  font-weight: 800;
+                  margin: 0;
+                  color: var(--red);
+                "
+              >
+                منطقة الخطر (حذف الحساب)
+              </h3>
+            </div>
+            <p
+              style="
+                color: var(--text2);
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.6;
+              "
+            >
+              لو حذفت الحساب، كل امتحاناتك ونتائج الطلاب هتتمسح نهائياً ومفيش أي
+              طريقة لاسترجاعها. يا ريت الحذر الشديد.
+            </p>
+            <button
+              class="btn btn-red"
+              id="btn-page-delete-account"
+              style="
+                width: 100%;
+                justify-content: center;
+                padding: 12px;
+                border-radius: 99px;
+                box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+              "
+            >
+              <i class="fa-solid fa-trash"></i> حذف الحساب وجميع البيانات
+            </button>
+          </div>
+        </div>
+      </section>
+      <div
+        style="
+          text-align: center;
+          margin-top: 3.5rem;
+          padding-bottom: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          align-items: center;
+          border-top: 1px solid rgba(124, 92, 252, 0.1);
+          padding-top: 2rem;
+        "
+      >
+        <div
+          style="
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          "
+        >
+          شير المنصة
+        </div>
+        <div style="display: flex; gap: 12px; margin-bottom: 5px">
+          <a
+            href="https://www.facebook.com/sharer/sharer.php?u=https://sa-exams.com"
+            target="_blank"
+            class="icon-btn"
+            style="
+              background: var(--glass2);
+              color: #1877f2;
+              box-shadow: var(--shadow-sm);
+            "
+            ><i class="fa-brands fa-facebook-f"></i
+          ></a>
+          <a
+            href="https://api.whatsapp.com/send?text=جرب منصة SA الامتحانية الآمنة الآن!"
+            target="_blank"
+            class="icon-btn"
+            style="
+              background: var(--glass2);
+              color: #25d366;
+              box-shadow: var(--shadow-sm);
+            "
+            ><i class="fa-brands fa-whatsapp"></i
+          ></a>
+          <a
+            href="https://t.me/share/url?url=https://sa-exams.com&text=نظام الامتحانات الآمن من SA"
+            target="_blank"
+            class="icon-btn"
+            style="
+              background: var(--glass2);
+              color: #0088cc;
+              box-shadow: var(--shadow-sm);
+            "
+            ><i class="fa-brands fa-telegram"></i
+          ></a>
+        </div>
+        <div
+          style="
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+          "
+        >
+          <a
+            href="terms.html"
+            style="
+              font-size: 0.85rem;
+              font-weight: 600;
+              color: var(--text2);
+              text-decoration: none;
+              transition: color 0.3s;
+            "
+            ><i
+              class="fa-solid fa-file-contract"
+              style="color: var(--accent)"
+            ></i>
+            الشروط والأحكام</a
+          >
+          <a
+            href="policy.html"
+            style="
+              font-size: 0.85rem;
+              font-weight: 600;
+              color: var(--text2);
+              text-decoration: none;
+              transition: color 0.3s;
+            "
+            ><i
+              class="fa-solid fa-shield-halved"
+              style="color: var(--accent)"
+            ></i>
+            سياسة الخصوصية</a
+          >
+          <a
+            href="about.html"
+            style="
+              font-size: 0.85rem;
+              font-weight: 600;
+              color: var(--text2);
+              text-decoration: none;
+              transition: color 0.3s;
+            "
+            ><i class="fa-solid fa-bullseye" style="color: var(--accent)"></i>
+            عننا</a
+          >
+        </div>
+      </div>
+    </main>
+    <div class="modal-bg" id="modal-share">
+      <div class="modal">
+        <button class="modal-x" id="modal-share-x">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal-ic ok"><i class="fa-solid fa-share-nodes"></i></div>
+        <h2>شير الامتحان</h2>
+        <p>اختار الطريقة اللي عايز تشير بيها الامتحان لطلابك</p>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+          "
+        >
+          <button
+            class="btn"
+            id="btn-share-whatsapp"
+            style="background: #25d366; color: #fff; width: 100%; border: none"
+          >
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem"></i> شارك
+            عبر واتساب
+          </button>
+          <button
+            class="btn"
+            id="btn-share-telegram"
+            style="background: #0088cc; color: #fff; width: 100%; border: none"
+          >
+            <i class="fa-brands fa-telegram" style="font-size: 1.2rem"></i> شارك
+            عبر تليجرام
+          </button>
+          <button
+            class="btn"
+            id="btn-share-facebook"
+            style="background: #1877f2; color: #fff; width: 100%; border: none"
+          >
+            <i class="fa-brands fa-facebook" style="font-size: 1.2rem"></i> شارك
+            عبر فيسبوك
+          </button>
+        </div>
+        <div
+          class="section-label"
+          style="text-align: center; display: block; margin-bottom: 10px"
+        >
+          أو انسخ الرابط / الكود
+        </div>
+        <div class="copy-box">
+          <input type="text" id="share-link-input" readonly />
+          <button class="cp-btn" id="btn-copy-share-link">نسخ الرابط</button>
+        </div>
+        <div class="copy-box">
+          <input type="text" id="share-code-input" readonly />
+          <button class="cp-btn" id="btn-copy-share-code">نسخ الكود</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-bg" id="modal-upload">
+      <div class="modal">
+        <button class="modal-x" id="modal-upload-x">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal-ic ok"><i class="fa-solid fa-check"></i></div>
+        <h2>اترفع بنجاح!</h2>
+        <p>شير الرابط ده مع الطلاب</p>
+        <div class="copy-box">
+          <input type="text" id="exam-link-input" readonly />
+          <button class="cp-btn" id="btn-copy-link">نسخ</button>
+        </div>
+        <p style="font-size: 0.78rem; margin-bottom: 0; color: var(--text-2)">
+          كود الامتحان: <strong id="exam-id-show" class="font-en"></strong>
+        </p>
+      </div>
+    </div>
+    <div class="modal-bg" id="modal-del">
+      <div class="modal">
+        <button class="modal-x" id="modal-del-x">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal-ic bad"><i class="fa-solid fa-eraser"></i></div>
+        <h2>عايز تمسح الامتحان؟</h2>
+        <p>لو مسحته كل الإجابات والدرجات هتروح ومفيش رجوع</p>
+        <div class="modal-btns">
+          <button class="btn btn-soft" id="btn-cancel-del">إلغاء</button>
+          <button class="btn btn-red" id="btn-confirm-del">
+            <i class="fa-solid fa-trash-can"></i> حذف
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-bg" id="modal-student-attempts">
+      <div class="modal" style="max-width: 500px; padding: 2rem">
+        <button class="modal-x" id="modal-attempts-x">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div
+          class="modal-ic"
+          style="background: var(--accent-soft); color: var(--accent)"
+        >
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <h2
+          id="modal-attempts-title"
+          style="font-size: 1.3rem; margin-bottom: 0.5rem"
+        >
+          محاولات الطالب
+        </h2>
+        <p
+          style="color: var(--text2); font-size: 0.9rem; margin-bottom: 1.5rem"
+        >
+          اختار المحاولة اللي عايز تشوف التقرير بتاعها
+        </p>
+        <div
+          id="modal-attempts-list"
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+          "
+        ></div>
+      </div>
+    </div>
+    <div class="modal-bg" id="modal-confirm">
+      <div class="modal">
+        <button class="modal-x" id="modal-confirm-x">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal-ic" id="modal-confirm-ic">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <h2 id="modal-confirm-title">SA Exam</h2>
+        <p id="modal-confirm-msg">إنت متأكد من اللي بتعمله؟</p>
+        <div class="modal-btns">
+          <button class="btn btn-soft" id="btn-confirm-cancel">إلغاء</button>
+          <button class="btn btn-accent" id="btn-confirm-ok">أيوة متأكد</button>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script type="module" src="js/teacher.js"></script>
+    <script type="module" src="js/magic.js"></script>
+  </body>
+</html>

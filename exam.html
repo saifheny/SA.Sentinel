@@ -1,0 +1,919 @@
+<!--
+ *          ▄▄██████▄▄
+ *        ▄████████████▄
+ *       ▄████▀    ▀████▄
+ *      ▄████   SA   ████▄
+ *      ████          ████
+ *      ▀████   TM   ████▀
+ *       ▀████▄    ▄████▀
+ *        ▀████████████▀
+ *          ▀▀██████▀▀
+ *     SA SAFE EXAM PLATFORM
+ *  ───────────────────────────
+ *   INTERNAL BRAND SIGNATURE
+ *     ALL RIGHTS RESERVED
+ -->
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (regs) {
+          for (var r of regs) r.unregister();
+        });
+      }
+      if (window.caches) {
+        caches.keys().then(function (keys) {
+          for (var k of keys) caches.delete(k);
+        });
+      }
+    </script>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>امتحان أونلاين | منصة SA للامتحانات</title>
+    <meta
+      name="description"
+      content="ادخل الامتحان الآن عبر منصة SA للامتحانات الآمنة. أسرع وأقوى نظام امتحانات إلكتروني في مصر، مع حماية متقدمة ضد الغش."
+    />
+    <meta
+      name="keywords"
+      content="امتحان اونلاين، اختبار الكتروني، منصة تعليمية، SA، مؤسسة SA، حل امتحان"
+    />
+    <meta name="author" content="SA — Saif Hany" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#7c5cfc" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SA للامتحانات" />
+    <meta property="og:title" content="امتحان أونلاين | منصة SA للامتحانات" />
+    <meta
+      property="og:description"
+      content="لديك امتحان! ادخل الآن عبر منصة SA للامتحانات الآمنة والمتقدمة."
+    />
+    <meta
+      property="og:image"
+      content="https://i.postimg.cc/kDrzDHGN/image-(16).jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="امتحان أونلاين — SA" />
+    <meta property="og:url" content="https://sa-exams.com/exam.html" />
+    <meta property="og:locale" content="ar_EG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SA_Exams" />
+    <meta name="twitter:title" content="امتحان أونلاين | منصة SA للامتحانات" />
+    <meta
+      name="twitter:description"
+      content="أقوى وأسرع نظام امتحانات إلكتروني."
+    />
+    <meta
+      name="twitter:image"
+      content="https://i.postimg.cc/kDrzDHGN/image-(16).jpg"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'/%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'/%3E%3C/svg%3E"
+    />
+    <link rel="manifest" href="manifest.json" />
+
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/exam.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .ambient-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background: var(--bg);
+        overflow: hidden;
+      }
+      .ambient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.5;
+        animation: orbFloat 25s infinite alternate ease-in-out;
+      }
+      .orb-1 {
+        width: 45vw;
+        height: 45vw;
+        background: var(--accent-glow);
+        top: -10%;
+        right: -10%;
+      }
+      .orb-2 {
+        width: 35vw;
+        height: 35vw;
+        background: var(--blue-glow);
+        bottom: -10%;
+        left: -10%;
+        animation-delay: -5s;
+      }
+      .grid-pattern {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        transform: perspective(500px) rotateX(60deg) translateY(-100px)
+          translateZ(-200px);
+        animation: gridMove 20s linear infinite;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 40%,
+          transparent 90%
+        );
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 40%,
+          transparent 90%
+        );
+      }
+      @keyframes gridMove {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 0 50px;
+        }
+      }
+      @media (max-width: 768px) {
+        .ambient-orb,
+        .grid-pattern {
+          display: none !important;
+        }
+      }
+      /* ===== Split Layout ===== */
+      .split-layout {
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+        z-index: 10;
+        overflow-x: hidden;
+      }
+      .split-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4rem;
+        max-width: 600px;
+        position: relative;
+        z-index: 20;
+        background: var(--bg2);
+      }
+      .split-left {
+        flex: 1.2;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .edu-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.8) contrast(1.1);
+        transform: scale(1.05);
+        animation: slowZoom 20s infinite alternate linear;
+      }
+      @keyframes slowZoom {
+        0% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1.15);
+        }
+      }
+      .wave-divider {
+        position: absolute;
+        right: -1px;
+        top: 0;
+        bottom: 0;
+        width: 150px;
+        height: 100%;
+        z-index: 5;
+        pointer-events: none;
+      }
+      .wave-divider svg {
+        width: 100%;
+        height: 100%;
+      }
+      .wave-divider svg path {
+        fill: var(--bg2) !important;
+      }
+      .wave-mobile {
+        display: none;
+      }
+      .auth-content {
+        width: 100%;
+        max-width: 440px;
+        margin: 0 auto;
+        animation: modalIn 1s var(--spring) both;
+        text-align: center;
+      }
+      @media (max-width: 900px) {
+        .split-layout {
+          flex-direction: column;
+          overflow-y: visible;
+          overflow-x: hidden;
+        }
+        .split-left {
+          min-height: 250px;
+          flex: none;
+          width: 100%;
+          order: -1;
+        }
+        .split-right {
+          padding: 2rem 1.5rem;
+          max-width: 100%;
+          justify-content: flex-start;
+          background: var(--bg2);
+          flex: 1;
+          margin: 0;
+          box-sizing: border-box;
+        }
+        .wave-divider {
+          width: 100%;
+          height: 60px;
+          right: 0;
+          left: 0;
+          top: auto;
+          bottom: -1px;
+          transform: none;
+        }
+        .wave-desktop {
+          display: none;
+        }
+        .wave-mobile {
+          display: block;
+        }
+        .auth-content {
+          margin-top: -10px;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+        .edu-img {
+          mask-image: linear-gradient(to bottom, black 60%, transparent);
+          -webkit-mask-image: linear-gradient(
+            to bottom,
+            black 60%,
+            transparent
+          );
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient-bg">
+      <div class="ambient-orb orb-1"></div>
+      <div class="ambient-orb orb-2"></div>
+    </div>
+    <div class="grid-pattern"></div>
+    <div class="force-landscape" id="force-landscape">
+      <div class="fl-content">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          class="fl-icon"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="2" y="6" width="20" height="12" rx="2" ry="2" />
+          <path d="M12 12v.01" />
+        </svg>
+        <h2>امتحان بشاشة عريضة</h2>
+        <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 1.5rem">
+          الامتحان ده متصمم بنظام الشاشة العريضة عشان راحتك. دوس هنا عشان تقلب
+          الشاشة بالعرض.
+        </p>
+        <button
+          class="btn btn-accent"
+          id="btn-force-landscape"
+          style="width: 100%; justify-content: center; margin-bottom: 10px"
+        >
+          <i class="fa-solid fa-expand"></i> شغل الشاشة العريضة
+        </button>
+        <button
+          class="btn"
+          id="btn-skip-landscape"
+          style="
+            width: 100%;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            font-weight: 800;
+          "
+        >
+          كمل بالوضع العادي
+        </button>
+      </div>
+    </div>
+    <div class="load-overlay" id="load-overlay">
+      <div class="spin"></div>
+      <div class="load-txt">بيحمل...</div>
+    </div>
+    <div class="warn-screen" id="warn-screen">
+      <div class="warn-box">
+        <div class="warn-pulse"></div>
+        <div class="modal-ic bad">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h2>⚠️ حاسب! (إنذار أخير)</h2>
+        <p id="warn-text">
+          قفشناك! إنت خرجت من الامتحان أو بتحاول تغش!<br />سجلنا إنذار ضدك. لو
+          عملتها تاني هتطرد بره الامتحان علطول.
+        </p>
+        <button class="btn btn-red" id="btn-dismiss-warn">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> خلاص فهمت — رجعني
+        </button>
+      </div>
+    </div>
+    <div class="split-layout" id="login-screen">
+      <div class="split-left">
+        <img
+          src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800"
+          onerror="this.src = 'assets/notepad.png'"
+          class="edu-img"
+          alt="Education"
+          loading="lazy"
+        />
+        <div class="wave-divider">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path
+              class="wave-desktop"
+              d="M100,0 C30,30 100,70 0,100 L100,100 Z"
+            >
+              <animate
+                attributeName="d"
+                dur="10s"
+                repeatCount="indefinite"
+                values="M100,0 C30,30 100,70 0,100 L100,100 Z; M100,0 C80,40 10,60 0,100 L100,100 Z; M100,0 C30,30 100,70 0,100 L100,100 Z"
+              />
+            </path>
+            <path
+              class="wave-mobile"
+              d="M0,80 C30,40 70,120 100,60 L100,100 L0,100 Z"
+            >
+              <animate
+                attributeName="d"
+                dur="8s"
+                repeatCount="indefinite"
+                values="M0,80 C30,40 70,120 100,60 L100,100 L0,100 Z; M0,60 C40,90 60,30 100,80 L100,100 L0,100 Z; M0,80 C30,40 70,120 100,60 L100,100 L0,100 Z"
+              />
+            </path>
+          </svg>
+        </div>
+        <h2 id="sv-exam-title" style="display: none"></h2>
+        <p id="sv-exam-sub" style="display: none"></p>
+        <video
+          id="screen-video"
+          autoplay
+          muted
+          playsinline
+          style="display: none"
+        ></video>
+      </div>
+      <div class="split-right">
+        <div class="auth-content">
+          <div class="tutorial-cursor"></div>
+          <h1 id="mobile-exam-title" style="display: none">الامتحان</h1>
+          <div class="form-panel" id="step-1" style="display: none"></div>
+          <div class="form-panel" id="step-2">
+            <h1
+              class="auth-title"
+              style="
+                font-size: 1.8rem;
+                font-weight: 900;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(135deg, var(--text), var(--accent));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+              "
+            >
+              جاهز للامتحان؟
+            </h1>
+            <p
+              class="auth-sub"
+              id="login-exam-title"
+              style="
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: var(--accent);
+                margin-bottom: 0.5rem;
+              "
+            >
+              بيحمل...
+            </p>
+            <p
+              class="auth-sub"
+              id="student-welcome-text"
+              style="
+                font-size: 0.9rem;
+                color: var(--text2);
+                margin-bottom: 1.5rem;
+                line-height: 1.6;
+              "
+            >
+              سجل دخولك بحساب جوجل عشان تبدأ
+            </p>
+            <div
+              id="exam-rules-summary"
+              style="
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid var(--glass-border);
+                border-radius: 20px;
+                padding: 20px;
+                margin-bottom: 1.5rem;
+                text-align: right;
+                box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.02);
+              "
+            >
+              <div
+                style="
+                  font-weight: 800;
+                  font-size: 0.9rem;
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                "
+              >
+                <div
+                  style="
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 8px;
+                    background: var(--accent-soft);
+                    color: var(--accent);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                المراقبة شغالة ومفتحين عنينا
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px;
+                  font-size: 0.8rem;
+                  color: var(--text2);
+                  font-weight: 600;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <i class="fa-solid fa-check" style="color: var(--green)"></i>
+                  ممنوع تفتح تابات تانية أو تسكرين شوت
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <i class="fa-solid fa-check" style="color: var(--green)"></i>
+                  لازم تفضل في وضع الشاشة الكاملة
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <i class="fa-solid fa-check" style="color: var(--green)"></i>
+                  أي حركة غش هتتمسك في ساعتها
+                </div>
+              </div>
+            </div>
+            <div class="login-err" id="login-err"></div>
+            <div id="google-login-container">
+              <button
+                type="button"
+                class="btn-google"
+                id="btn-student-google-login"
+                style="
+                  width: 100%;
+                  padding: 16px;
+                  background: #ffffff;
+                  border: 1px solid rgba(124, 92, 252, 0.3);
+                  color: var(--text) !important;
+                  border-radius: 16px;
+                  font-size: 1.05rem;
+                  font-weight: 700;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 14px;
+                  cursor: pointer;
+                  transition: all 0.4s var(--spring);
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                "
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)">
+                    <path
+                      fill="#4285F4"
+                      d="M -3.264 51.509 C -3.264 50.719 -3.334 49.969 -3.454 49.239 L -14.754 49.239 L -14.754 53.749 L -8.284 53.749 C -8.574 55.229 -9.424 56.479 -10.684 57.329 L -10.684 60.329 L -6.824 60.329 C -4.564 58.239 -3.264 55.159 -3.264 51.509 Z"
+                    />
+                    <path
+                      fill="#34A853"
+                      d="M -14.754 63.239 C -11.514 63.239 -8.804 62.159 -6.824 60.329 L -10.684 57.329 C -11.764 58.049 -13.134 58.489 -14.754 58.489 C -17.884 58.489 -20.534 56.379 -21.484 53.529 L -25.464 53.529 L -25.464 56.619 C -23.494 60.539 -19.444 63.239 -14.754 63.239 Z"
+                    />
+                    <path
+                      fill="#FBBC05"
+                      d="M -21.484 53.529 C -21.734 52.809 -21.864 52.039 -21.864 51.239 C -21.864 50.439 -21.724 49.669 -21.484 48.949 L -21.484 45.859 L -25.464 45.859 C -26.284 47.479 -26.754 49.299 -26.754 51.239 C -26.754 53.179 -26.284 54.999 -25.464 56.619 L -21.484 53.529 Z"
+                    />
+                    <path
+                      fill="#EA4335"
+                      d="M -14.754 43.989 C -12.984 43.989 -11.404 44.599 -10.154 45.789 L -6.734 42.369 C -8.804 40.429 -11.514 39.239 -14.754 39.239 C -19.444 39.239 -23.494 41.939 -25.464 45.859 L -21.484 48.949 C -20.534 46.099 -17.884 43.989 -14.754 43.989 Z"
+                    />
+                  </g>
+                </svg>
+                <span style="color: var(--text) !important"
+                  >سجل دخول بجوجل وابدأ</span
+                >
+              </button>
+            </div>
+            <div id="start-exam-container" class="hidden">
+              <button
+                type="button"
+                class="btn btn-accent w-full"
+                id="btn-start-exam"
+                style="
+                  justify-content: center;
+                  width: 100%;
+                  margin-top: 10px;
+                  padding: 16px;
+                  font-size: 1.05rem;
+                  border-radius: 16px;
+                  box-shadow: 0 8px 25px var(--accent-glow);
+                "
+              >
+                <i class="fa-solid fa-play"></i> ابدأ الامتحان دلوقتي
+              </button>
+              <button
+                type="button"
+                class="btn btn-soft w-full"
+                id="btn-student-logout"
+                style="
+                  justify-content: center;
+                  width: 100%;
+                  margin-top: 12px;
+                  border-radius: 16px;
+                  padding: 12px;
+                  background: transparent;
+                  box-shadow: none;
+                  border: 1px solid var(--red);
+                  color: var(--red);
+                  font-weight: 700;
+                "
+              >
+                مش حسابي — تسجيل خروج
+              </button>
+            </div>
+            <div
+              style="
+                margin-top: 2.5rem;
+                text-align: center;
+                border-top: 1px solid var(--glass-border);
+                padding-top: 1.5rem;
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 12px;
+                  align-items: center;
+                "
+              >
+                <a
+                  href="terms.html"
+                  style="
+                    color: var(--text2);
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: all 0.3s;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                  onmouseover="this.style.color = 'var(--accent)'"
+                  onmouseout="this.style.color = 'var(--text2)'"
+                >
+                  <div
+                    style="
+                      width: 24px;
+                      height: 24px;
+                      border-radius: 6px;
+                      background: var(--glass2);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      border: 1px solid var(--glass-border);
+                    "
+                  >
+                    <i class="fa-solid fa-file-contract"></i>
+                  </div>
+                  شروط الاستخدام وسياسة الخصوصية
+                </a>
+                <a
+                  href="policy.html"
+                  style="
+                    color: var(--text2);
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: all 0.3s;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                  onmouseover="this.style.color = 'var(--accent)'"
+                  onmouseout="this.style.color = 'var(--text2)'"
+                >
+                  <div
+                    style="
+                      width: 24px;
+                      height: 24px;
+                      border-radius: 6px;
+                      background: var(--glass2);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      border: 1px solid var(--glass-border);
+                    "
+                  >
+                    <i class="fa-solid fa-shield-halved"></i>
+                  </div>
+                  سياسة الأمان ومكافحة الغش التلقائية
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="exam-ui" id="exam-ui" style="padding-top: 80px">
+      <div
+        class="floating-controls"
+        style="
+          position: fixed;
+          top: 20px;
+          left: 20px;
+          right: 20px;
+          z-index: 1000;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          pointer-events: none;
+        "
+      >
+        <div
+          style="
+            pointer-events: auto;
+            background: var(--glass2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 99px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+            max-width: 50%;
+          "
+        >
+          <span
+            id="exam-title-bar"
+            style="
+              font-weight: 800;
+              color: var(--text);
+              font-size: 0.95rem;
+              display: block;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            "
+          ></span>
+        </div>
+        <div
+          style="
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div
+            class="font-size-controls"
+            style="
+              margin: 0;
+              background: var(--glass2);
+              backdrop-filter: blur(10px);
+              -webkit-backdrop-filter: blur(10px);
+              border-radius: 99px;
+              border: 1px solid var(--glass-border);
+              box-shadow: var(--shadow-sm);
+              padding: 4px;
+              display: flex;
+              gap: 4px;
+            "
+          >
+            <button
+              class="fz-btn"
+              id="btn-fz-down"
+              title="تصغير الخط"
+              style="
+                background: transparent;
+                border: none;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 800;
+                cursor: pointer;
+                transition: all 0.3s;
+                color: var(--text);
+              "
+            >
+              -A
+            </button>
+            <button
+              class="fz-btn"
+              id="btn-fz-up"
+              title="تكبير الخط"
+              style="
+                background: transparent;
+                border: none;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 800;
+                cursor: pointer;
+                transition: all 0.3s;
+                color: var(--text);
+              "
+            >
+              +A
+            </button>
+          </div>
+          <div
+            class="timer"
+            id="timer-box"
+            style="
+              background: var(--glass2);
+              backdrop-filter: blur(10px);
+              -webkit-backdrop-filter: blur(10px);
+              padding: 8px 16px;
+              border-radius: 99px;
+              border: 1px solid var(--glass-border);
+              box-shadow: var(--shadow-sm);
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              font-weight: 800;
+              font-family: var(--font-en);
+              font-size: 1.1rem;
+              color: var(--accent);
+            "
+          >
+            <i class="fa-solid fa-clock"></i>
+            <span id="timer-val">00:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="exam-prog-area">
+        <div class="prog-track">
+          <div class="prog-fill" id="prog-fill" style="width: 0%"></div>
+        </div>
+        <div class="prog-txt" id="prog-txt">السؤال 1 من 1</div>
+      </div>
+      <div class="exam-body">
+        <div class="q-card" id="q-card">
+          <div
+            class="q-num-label"
+            id="q-label"
+            style="justify-content: space-between"
+          >
+            <span></span>
+            <button class="tts-btn" id="btn-tts" title="اسمع السؤال">
+              <i class="fa-solid fa-volume-high"></i>
+            </button>
+          </div>
+          <div class="q-card-content">
+            <div class="q-txt" id="q-txt"></div>
+            <div class="q-answers opts" id="q-opts"></div>
+          </div>
+        </div>
+        <div class="q-nav">
+          <button class="btn btn-soft" id="btn-prev">
+            <i class="fa-solid fa-arrow-right"></i> اللي فات
+          </button>
+          <button class="btn btn-accent" id="btn-next">
+            اللي بعده <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button class="btn btn-green hidden" id="btn-submit">
+            <i class="fa-solid fa-paper-plane"></i> سلم الامتحان
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="done-screen" id="done-screen">
+      <div class="ambient-bg">
+        <div
+          class="ambient-orb orb-primary"
+          style="width: 80vw; height: 80vw"
+        ></div>
+        <div
+          class="ambient-orb orb-secondary"
+          style="width: 70vw; height: 70vw"
+        ></div>
+      </div>
+      <div
+        class="done-card"
+        style="
+          position: relative;
+          z-index: 10;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          min-height: 100vh;
+          width: 100%;
+          padding: 5rem 2rem 6rem;
+        "
+      >
+        <div id="done-ic">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h2 id="done-title">الامتحان اتسلم!</h2>
+        <p id="done-text"></p>
+      </div>
+    </div>
+    <div class="modal-bg" id="modal-submit">
+      <div class="modal">
+        <button class="modal-x" id="modal-submit-x">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal-ic warn"><i class="fa-solid fa-paper-plane"></i></div>
+        <h2>أكد التسليم</h2>
+        <p>خلاص متأكد إنك عايز تسلم الامتحان؟</p>
+        <div class="modal-btns">
+          <button class="btn btn-soft" id="btn-cancel-sub">إلغاء</button>
+          <button class="btn btn-green" id="btn-final-sub">
+            <i class="fa-solid fa-check"></i> أيوة، سلم
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-bg" id="modal-confirm">
+      <div class="modal">
+        <button class="modal-x" id="modal-confirm-x">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal-ic warn" id="modal-confirm-ic">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <h2 id="modal-confirm-title">تأكيد الخروج</h2>
+        <p id="modal-confirm-msg">إنت متأكد إنك عايز تسجل خروج؟</p>
+        <div class="modal-btns">
+          <button class="btn btn-soft" id="btn-confirm-cancel">إلغاء</button>
+          <button class="btn btn-red" id="btn-confirm-ok">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> أيوة متأكد
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script type="module" src="js/student.js"></script>
+  </body>
+</html>

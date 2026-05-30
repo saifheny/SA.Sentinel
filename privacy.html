@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>سياسة الخصوصية — نظام الامتحانات الآمن</title>
+    <meta
+      name="description"
+      content="سياسة الخصوصية الخاصة بنظام الامتحانات الآمن — منصة SA.Exams"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c5cfc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'/%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'/%3E%3C/svg%3E"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --bg: #fff;
+        --accent: #7c5cfc;
+        --accent2: #a78bfa;
+        --green: #10b981;
+        --text: #1a1a2e;
+        --text2: #64648a;
+        --text3: #9e9eb8;
+        --border: rgba(0, 0, 0, 0.06);
+        --font: "Cairo", sans-serif;
+        --ease: cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        direction: rtl;
+        min-height: 100vh;
+        line-height: 1.65;
+        overflow-x: hidden;
+      }
+
+      .hero {
+        position: relative;
+        z-index: 1;
+        min-height: 45vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4rem 1.5rem 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(124, 92, 252, 0.04),
+          rgba(167, 139, 250, 0.02)
+        );
+      }
+      .hero-inner {
+        max-width: 640px;
+      }
+      .hero-icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 28px;
+        margin: 0 auto 2rem;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: #fff;
+        box-shadow: 0 12px 40px rgba(124, 92, 252, 0.2);
+        animation: heroFloat 5s ease-in-out infinite;
+      }
+      @keyframes heroFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+        font-weight: 900;
+        margin-bottom: 0.6rem;
+        letter-spacing: -0.03em;
+        color: var(--text);
+      }
+      .hero p {
+        font-size: 1rem;
+        color: var(--text2);
+        line-height: 1.9;
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1.5rem 4rem;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.88rem;
+        padding: 12px 24px;
+        border-radius: 99px;
+        background: rgba(124, 92, 252, 0.06);
+        border: 1px solid rgba(124, 92, 252, 0.12);
+        transition: all 0.3s var(--ease);
+        text-decoration: none;
+        margin-bottom: 2.5rem;
+      }
+      .back-link:hover {
+        background: var(--accent);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(124, 92, 252, 0.2);
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--text);
+      }
+      .section-title i {
+        color: var(--green);
+        font-size: 1.1rem;
+      }
+      .section-desc {
+        font-size: 0.9rem;
+        color: var(--text2);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
+
+      .privacy-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-bottom: 2rem;
+      }
+      .privacy-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 16px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        font-size: 0.88rem;
+        line-height: 1.8;
+        transition: all 0.3s var(--ease);
+        animation: revealUp 0.4s var(--ease) both;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        color: var(--text);
+      }
+      .privacy-item:hover {
+        transform: translateX(-4px);
+        border-color: rgba(124, 92, 252, 0.12);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+      }
+      .privacy-item i {
+        color: var(--green);
+        margin-top: 4px;
+        flex-shrink: 0;
+        font-size: 0.9rem;
+      }
+      .privacy-item strong {
+        color: var(--text);
+      }
+      @keyframes revealUp {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .footer-back {
+        text-align: center;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 1px solid var(--border);
+      }
+      .footer-back p {
+        margin-bottom: 1rem;
+        color: var(--text2);
+        font-weight: 700;
+        font-size: 0.88rem;
+      }
+      .footer-back strong {
+        color: var(--accent);
+      }
+
+      @media (max-width: 640px) {
+        .hero h1 {
+          font-size: 1.6rem;
+        }
+        .hero {
+          min-height: 35vh;
+          padding: 3rem 1rem 1.5rem;
+        }
+        .section-title {
+          font-size: 1.2rem;
+        }
+        .privacy-item {
+          padding: 12px 14px;
+          font-size: 0.84rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-icon"><i class="fa-solid fa-user-shield"></i></div>
+        <h1>سياسة الخصوصية</h1>
+        <p>
+          خصوصيتك وأمان بياناتك هما أولويتنا. نحن نلتزم بالشفافية والحماية
+          الكاملة لمعلوماتك الشخصية.
+        </p>
+      </div>
+    </section>
+
+    <div class="content">
+      <a href="javascript:history.back()" class="back-link"
+        ><i class="fa-solid fa-arrow-right"></i> العودة</a
+      >
+
+      <h2 class="section-title">
+        <i class="fa-solid fa-database"></i> البيانات التي نجمعها
+      </h2>
+      <p class="section-desc">
+        نجمع الحد الأدنى من البيانات اللازمة لضمان نزاهة الامتحانات وتشغيل
+        المنصة بأمان
+      </p>
+      <div class="privacy-list">
+        <div class="privacy-item" style="animation-delay: 0.05s">
+          <i class="fa-solid fa-check-circle"></i
+          ><span
+            ><strong>البيانات الشخصية:</strong> اسمك، بريدك الإلكتروني (من تسجيل
+            دخول جوجل)، وعنوان IP — لتأكيد هويتك ومنع تكرار الدخول</span
+          >
+        </div>
+        <div class="privacy-item" style="animation-delay: 0.1s">
+          <i class="fa-solid fa-check-circle"></i
+          ><span
+            ><strong>البصمة الرقمية:</strong> تُستخدم فقط لمنع تكرار الدخول من
+            أجهزة متعددة — ولا تحتوي على بيانات شخصية</span
+          >
+        </div>
+        <div class="privacy-item" style="animation-delay: 0.15s">
+          <i class="fa-solid fa-check-circle"></i
+          ><span
+            ><strong>الكاميرا:</strong> لقطات الكاميرا تُلتقط فقط أثناء الامتحان
+            ويطلع عليها المعلم فقط — ولا تُحفظ بعد انتهاء الحاجة منها</span
+          >
+        </div>
+      </div>
+
+      <h2 class="section-title">
+        <i class="fa-solid fa-lock"></i> كيف نستخدم بياناتك
+      </h2>
+      <p class="section-desc">
+        جميع البيانات تُستخدم حصرياً لضمان نزاهة الامتحان ومنع الغش
+      </p>
+      <div class="privacy-list">
+        <div class="privacy-item" style="animation-delay: 0.05s">
+          <i class="fa-solid fa-check-circle"></i
+          ><span
+            ><strong>الغرض:</strong> لا نقوم ببيع أو مشاركة بياناتك الشخصية مع
+            أي طرف ثالث لأغراض تسويقية مطلقاً</span
+          >
+        </div>
+        <div class="privacy-item" style="animation-delay: 0.1s">
+          <i class="fa-solid fa-check-circle"></i
+          ><span
+            ><strong>التخزين:</strong> البيانات تُخزن على خوادم Firebase المؤمنة
+            ويمكن للمعلم حذفها في أي وقت</span
+          >
+        </div>
+        <div class="privacy-item" style="animation-delay: 0.15s">
+          <i class="fa-solid fa-check-circle"></i
+          ><span
+            ><strong>التشفير:</strong> كل البيانات تُنقل عبر HTTPS مشفر إلى
+            خوادم Firebase الآمنة</span
+          >
+        </div>
+      </div>
+
+      <h2 class="section-title">
+        <i class="fa-solid fa-handshake-angle"></i> حقوقك
+      </h2>
+      <div class="privacy-list">
+        <div class="privacy-item" style="animation-delay: 0.05s">
+          <i class="fa-solid fa-check-circle"></i
+          ><span
+            ><strong>حق الحذف:</strong> يحق لك طلب حذف بياناتك في أي وقت من خلال
+            التواصل مع المعلم المسؤول</span
+          >
+        </div>
+        <div class="privacy-item" style="animation-delay: 0.1s">
+          <i class="fa-solid fa-check-circle"></i
+          ><span
+            ><strong>الموافقة:</strong> بدخولك الامتحان فأنت توافق على هذه
+            السياسة — ويمكنك رفض الدخول إذا لم تقبل</span
+          >
+        </div>
+        <div class="privacy-item" style="animation-delay: 0.15s">
+          <i class="fa-solid fa-check-circle"></i
+          ><span
+            ><strong>الشفافية:</strong> نكفل لك حقك في الوصول إلى بياناتك ومعرفة
+            ما تم جمعه في أي وقت</span
+          >
+        </div>
+      </div>
+
+      <div class="footer-back">
+        <p>جميع الحقوق محفوظة. المنصة تابعة لـ <strong>مؤسسة SA</strong></p>
+        <a href="javascript:history.back()" class="back-link"
+          ><i class="fa-solid fa-arrow-right"></i> العودة للصفحة السابقة</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

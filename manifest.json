@@ -1,0 +1,23 @@
+{
+  "name": "نظام الامتحانات الآمن",
+  "short_name": "الامتحانات",
+  "description": "نظام امتحانات إلكتروني آمن مع حماية متقدمة ضد الغش",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/app-image.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/app-image.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

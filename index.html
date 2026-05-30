@@ -1,0 +1,788 @@
+<!--
+ *          ▄▄██████▄▄
+ *        ▄████████████▄
+ *       ▄████▀    ▀████▄
+ *      ▄████   SA   ████▄
+ *      ████          ████
+ *      ▀████   TM   ████▀
+ *       ▀████▄    ▄████▀
+ *        ▀████████████▀
+ *          ▀▀██████▀▀
+ *     SA SAFE EXAM PLATFORM
+ *  ───────────────────────────
+ *   INTERNAL BRAND SIGNATURE
+ *     ALL RIGHTS RESERVED
+ -->
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (regs) {
+          for (var r of regs) r.unregister();
+        });
+      }
+      if (window.caches) {
+        caches.keys().then(function (keys) {
+          for (var k of keys) caches.delete(k);
+        });
+      }
+    </script>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>
+      منصة SA للامتحانات الآمنة | نظام امتحانات إلكتروني بالذكاء الاصطناعي
+    </title>
+    <meta
+      name="description"
+      content="منصة SA — أقوى نظام امتحانات إلكتروني في مصر. حماية متقدمة ضد الغش بالذكاء الاصطناعي، نتائج فورية، وتجربة تعليمية لا مثيل لها. سجّل مجاناً الآن."
+    />
+    <meta
+      name="keywords"
+      content="امتحانات اونلاين، نظام امتحانات، منصة تعليمية، ضد الغش، امتحانات مصر، SA، مؤسسة SA، اختبارات الكترونية، Saif Hany"
+    />
+    <meta name="author" content="SA — Saif Hany" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="theme-color" content="#7c5cfc" />
+    <link rel="canonical" href="https://sa-exams.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SA للامتحانات" />
+    <meta
+      property="og:title"
+      content="منصة SA للامتحانات الآمنة | ذكاء اصطناعي ضد الغش"
+    />
+    <meta
+      property="og:description"
+      content="أقوى منصة امتحانات إلكترونية في مصر. حماية متقدمة بالذكاء الاصطناعي، نتائج فورية، لوحة تحكم للمعلمين. جرّبها مجاناً!"
+    />
+    <meta
+      property="og:image"
+      content="https://i.postimg.cc/kDrzDHGN/image-(16).jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="منصة SA للامتحانات الآمنة" />
+    <meta property="og:url" content="https://sa-exams.com/" />
+    <meta property="og:locale" content="ar_EG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SA_Exams" />
+    <meta name="twitter:title" content="منصة SA للامتحانات الآمنة" />
+    <meta
+      name="twitter:description"
+      content="أقوى منصة امتحانات إلكترونية في مصر — ذكاء اصطناعي، حماية من الغش، نتائج فورية."
+    />
+    <meta
+      name="twitter:image"
+      content="https://i.postimg.cc/kDrzDHGN/image-(16).jpg"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "SA للامتحانات",
+        "url": "https://sa-exams.com",
+        "description": "منصة امتحانات إلكترونية آمنة بالذكاء الاصطناعي، تطوير مؤسسة SA — Saif Hany",
+        "inLanguage": "ar",
+        "publisher": {
+          "@type": "Organization",
+          "name": "SA — Saif Hany",
+          "url": "https://sa-exams.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://i.postimg.cc/kDrzDHGN/image-(16).jpg"
+          }
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://sa-exams.com/exam.html?id={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SA — Saif Hany",
+        "url": "https://sa-exams.com",
+        "logo": "https://i.postimg.cc/kDrzDHGN/image-(16).jpg",
+        "description": "مؤسسة SA للتعليم الإلكتروني — Saif Hany Education",
+        "sameAs": ["https://www.facebook.com/saexams", "https://t.me/saexams"]
+      }
+    </script>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'/%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'/%3E%3C/svg%3E"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+    <style>
+      body {
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+      }
+      .ambient-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background: var(--bg);
+        overflow: hidden;
+      }
+      .ambient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.6;
+        animation: orbFloat 25s infinite alternate ease-in-out;
+      }
+      .orb-primary {
+        width: 50vw;
+        height: 50vw;
+        background: var(--accent-glow);
+        top: -10%;
+        right: -10%;
+      }
+      .orb-secondary {
+        width: 40vw;
+        height: 40vw;
+        background: var(--blue-glow);
+        bottom: -10%;
+        left: -10%;
+        animation-delay: -5s;
+      }
+      .split-layout {
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+        z-index: 10;
+        overflow-x: hidden;
+      }
+      .split-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4rem;
+        max-width: 600px;
+        position: relative;
+        z-index: 20;
+        background: var(--bg2);
+      }
+      .split-left {
+        flex: 1.2;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .edu-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.8) contrast(1.1);
+        transform: scale(1.05);
+        animation: slowZoom 20s infinite alternate linear;
+      }
+      @keyframes slowZoom {
+        0% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1.15);
+        }
+      }
+      .wave-divider {
+        position: absolute;
+        right: -1px;
+        top: 0;
+        bottom: 0;
+        width: 150px;
+        height: 100%;
+        z-index: 5;
+        pointer-events: none;
+      }
+      .wave-divider svg {
+        width: 100%;
+        height: 100%;
+      }
+      .wave-divider svg path {
+        fill: var(--bg2) !important;
+      }
+      .wave-mobile {
+        display: none;
+      }
+      .auth-content {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        animation: modalIn 1s var(--spring) both;
+      }
+      .auth-logo {
+        width: 72px;
+        height: 72px;
+        margin-bottom: 2rem;
+        background: linear-gradient(135deg, var(--accent), var(--blue));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 30px var(--accent-glow);
+      }
+      .auth-logo svg {
+        width: 36px;
+        height: 36px;
+        stroke: #fff;
+      }
+      .auth-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(to right, #fff, var(--text2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .auth-sub {
+        color: var(--text2);
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+      .auth-input-group {
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+      .auth-input-group label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text2);
+        margin-bottom: 8px;
+      }
+      .auth-input {
+        width: 100%;
+        padding: 16px 20px 16px 45px;
+        background: #ffffff;
+        border: 1px solid rgba(124, 92, 252, 0.3);
+        border-radius: 16px;
+        color: var(--text);
+        font-size: 1.05rem;
+        transition: all 0.3s;
+        font-family: var(--font);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
+      .auth-input:focus {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-soft);
+        outline: none;
+      }
+      .input-icon {
+        position: absolute;
+        left: 16px;
+        top: 43px;
+        color: var(--text3);
+        font-size: 1.1rem;
+      }
+      .btn-glow {
+        width: 100%;
+        padding: 16px;
+        border-radius: 16px;
+        font-size: 1.05rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--accent), var(--blue));
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: all 0.4s var(--spring);
+        box-shadow: 0 10px 30px var(--accent-glow);
+        margin-bottom: 1rem;
+      }
+      .btn-glow:hover {
+        transform: translateY(-3px);
+        filter: brightness(1.1);
+        box-shadow: 0 15px 40px var(--accent-glow);
+      }
+      .btn-glow:active {
+        transform: scale(0.97);
+      }
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 1.5rem 0;
+        color: var(--text3);
+        font-size: 0.9rem;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .divider:not(:empty)::before {
+        margin-left: 0.5em;
+      }
+      .divider:not(:empty)::after {
+        margin-right: 0.5em;
+      }
+      .btn-google {
+        width: 100%;
+        padding: 16px;
+        background: #ffffff;
+        border: 1px solid rgba(124, 92, 252, 0.3);
+        color: var(--text) !important;
+        border-radius: 16px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        cursor: pointer;
+        transition: all 0.4s var(--spring);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+      .btn-google span {
+        color: var(--text) !important;
+      }
+      .btn-google:hover {
+        background: #f8fafc;
+        transform: translateY(-3px);
+        border-color: var(--accent);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      .switch-mode {
+        text-align: center;
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+        color: var(--text2);
+      }
+      .switch-mode a {
+        color: var(--accent);
+        cursor: pointer;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .switch-mode a:hover {
+        text-decoration: underline;
+      }
+      .sa-links {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding-top: 2rem;
+      }
+      .sa-links-text {
+        font-size: 0.85rem;
+        color: var(--text3);
+        font-weight: 700;
+      }
+      .sa-socials {
+        display: flex;
+        gap: 12px;
+      }
+      .sa-socials a {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        color: var(--text2);
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
+        border: 1px solid var(--glass-border);
+      }
+      .sa-socials a:hover {
+        transform: translateY(-3px);
+        color: var(--accent);
+        border-color: var(--accent);
+        box-shadow: 0 6px 15px var(--accent-glow);
+      }
+      #global-loader {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.6s var(--ease);
+      }
+      .modern-spinner {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: var(--accent);
+        border-right-color: var(--blue);
+        animation: spin 1s linear infinite;
+        filter: drop-shadow(0 0 10px var(--accent-glow));
+      }
+      #view-register,
+      #view-setup {
+        display: none;
+      }
+      @media (max-width: 900px) {
+        .split-layout {
+          flex-direction: column;
+          overflow-y: visible;
+          overflow-x: hidden;
+        }
+        .split-left {
+          min-height: 250px;
+          flex: none;
+          width: 100%;
+        }
+        .split-right {
+          padding: 2rem 1.5rem;
+          max-width: 100%;
+          justify-content: flex-start;
+          background: var(--bg2);
+          flex: 1;
+          margin: 0;
+          box-sizing: border-box;
+        }
+        .wave-divider {
+          width: 100%;
+          height: 60px;
+          right: 0;
+          left: 0;
+          top: auto;
+          bottom: -1px;
+          transform: none;
+        }
+        .wave-desktop {
+          display: none;
+        }
+        .wave-mobile {
+          display: block;
+        }
+        .auth-content {
+          margin-top: -10px;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+        .edu-img {
+          mask-image: linear-gradient(to bottom, black 60%, transparent);
+          -webkit-mask-image: linear-gradient(
+            to bottom,
+            black 60%,
+            transparent
+          );
+        }
+        body {
+          overflow-x: hidden;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient-bg">
+      <div class="ambient-orb orb-primary"></div>
+      <div class="ambient-orb orb-secondary"></div>
+    </div>
+    <div id="global-loader"><div class="modern-spinner"></div></div>
+    <div class="split-layout">
+      <div class="split-left">
+        <img
+          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1470&auto=format&fit=crop"
+          class="edu-img"
+          alt="Education"
+          loading="lazy"
+        />
+        <div class="wave-divider">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path
+              class="wave-desktop"
+              d="M100,0 C30,30 100,70 0,100 L100,100 Z"
+            >
+              <animate
+                attributeName="d"
+                dur="10s"
+                repeatCount="indefinite"
+                values="M100,0 C30,30 100,70 0,100 L100,100 Z; M100,0 C80,40 10,60 0,100 L100,100 Z; M100,0 C30,30 100,70 0,100 L100,100 Z"
+              />
+            </path>
+            <path
+              class="wave-mobile"
+              d="M0,100 C30,50 70,100 100,60 L100,100 L0,100 Z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="split-right">
+        <div class="auth-content">
+          <div class="auth-logo">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
+          </div>
+          <div id="view-login">
+            <h1 class="auth-title">مرحباً بعودتك</h1>
+            <p class="auth-sub">
+              سجل دخولك دلوقتي عشان تبدأ أحسن تجربة امتحانات أونلاين.
+            </p>
+            <div class="auth-input-group">
+              <label>الإيميل</label>
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input
+                type="email"
+                id="login-email"
+                class="auth-input font-en"
+                placeholder="saif@mail.com"
+                dir="ltr"
+              />
+            </div>
+            <div class="auth-input-group">
+              <label>الباسورد (6 أرقام أو رموز)</label>
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input
+                type="password"
+                id="login-pass"
+                class="auth-input font-en"
+                placeholder="••••••"
+                dir="ltr"
+                maxlength="6"
+              />
+            </div>
+            <button class="btn-glow" id="btn-login-email">سجل دخول</button>
+            <div class="divider">أو</div>
+            <button class="btn-google" id="btn-login-google">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)">
+                  <path
+                    fill="#4285F4"
+                    d="M -3.264 51.509 C -3.264 50.719 -3.334 49.969 -3.454 49.239 L -14.754 49.239 L -14.754 53.749 L -8.284 53.749 C -8.574 55.229 -9.424 56.479 -10.684 57.329 L -10.684 60.329 L -6.824 60.329 C -4.564 58.239 -3.264 55.159 -3.264 51.509 Z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M -14.754 63.239 C -11.514 63.239 -8.804 62.159 -6.824 60.329 L -10.684 57.329 C -11.764 58.049 -13.134 58.489 -14.754 58.489 C -17.884 58.489 -20.534 56.379 -21.484 53.529 L -25.464 53.529 L -25.464 56.619 C -23.494 60.539 -19.444 63.239 -14.754 63.239 Z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M -21.484 53.529 C -21.734 52.809 -21.864 52.039 -21.864 51.239 C -21.864 50.439 -21.724 49.669 -21.484 48.949 L -21.484 45.859 L -25.464 45.859 C -26.284 47.479 -26.754 49.299 -26.754 51.239 C -26.754 53.179 -26.284 54.999 -25.464 56.619 L -21.484 53.529 Z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M -14.754 43.989 C -12.984 43.989 -11.404 44.599 -10.154 45.789 L -6.734 42.369 C -8.804 40.429 -11.514 39.239 -14.754 39.239 C -19.444 39.239 -23.494 41.939 -25.464 45.859 L -21.484 48.949 C -20.534 46.099 -17.884 43.989 -14.754 43.989 Z"
+                  />
+                </g>
+              </svg>
+              <span>كمل بحساب جوجل</span>
+            </button>
+            <div class="switch-mode">
+              معندكش حساب؟ <a id="link-to-register">أنشئ حساب جديد</a>
+            </div>
+          </div>
+          <div id="view-register">
+            <h1 class="auth-title">حساب جديد</h1>
+            <p class="auth-sub">انضم لينا دلوقتي واعمل حساب في ثواني.</p>
+            <div class="auth-input-group">
+              <label>الإيميل</label>
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input
+                type="email"
+                id="reg-email"
+                class="auth-input font-en"
+                placeholder="saif@mail.com"
+                dir="ltr"
+              />
+            </div>
+            <div class="auth-input-group">
+              <label>الباسورد (6 أرقام أو رموز)</label>
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input
+                type="password"
+                id="reg-pass"
+                class="auth-input font-en"
+                placeholder="••••••"
+                dir="ltr"
+                maxlength="6"
+              />
+            </div>
+            <button class="btn-glow" id="btn-register-email">
+              إنشاء الحساب
+            </button>
+            <div class="divider">أو</div>
+            <button class="btn-google" id="btn-reg-google">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)">
+                  <path
+                    fill="#4285F4"
+                    d="M -3.264 51.509 C -3.264 50.719 -3.334 49.969 -3.454 49.239 L -14.754 49.239 L -14.754 53.749 L -8.284 53.749 C -8.574 55.229 -9.424 56.479 -10.684 57.329 L -10.684 60.329 L -6.824 60.329 C -4.564 58.239 -3.264 55.159 -3.264 51.509 Z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M -14.754 63.239 C -11.514 63.239 -8.804 62.159 -6.824 60.329 L -10.684 57.329 C -11.764 58.049 -13.134 58.489 -14.754 58.489 C -17.884 58.489 -20.534 56.379 -21.484 53.529 L -25.464 53.529 L -25.464 56.619 C -23.494 60.539 -19.444 63.239 -14.754 63.239 Z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M -21.484 53.529 C -21.734 52.809 -21.864 52.039 -21.864 51.239 C -21.864 50.439 -21.724 49.669 -21.484 48.949 L -21.484 45.859 L -25.464 45.859 C -26.284 47.479 -26.754 49.299 -26.754 51.239 C -26.754 53.179 -26.284 54.999 -25.464 56.619 L -21.484 53.529 Z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M -14.754 43.989 C -12.984 43.989 -11.404 44.599 -10.154 45.789 L -6.734 42.369 C -8.804 40.429 -11.514 39.239 -14.754 39.239 C -19.444 39.239 -23.494 41.939 -25.464 45.859 L -21.484 48.949 C -20.534 46.099 -17.884 43.989 -14.754 43.989 Z"
+                  />
+                </g>
+              </svg>
+              <span>كمل بحساب جوجل</span>
+            </button>
+            <div class="switch-mode">
+              عندك حساب بالفعل؟ <a id="link-to-login">سجل دخول</a>
+            </div>
+          </div>
+          <div id="view-setup">
+            <h1 class="auth-title">كمل بياناتك</h1>
+            <p class="auth-sub">
+              اختار دورك واكتب اسمك الحقيقي اللي هيظهر في المنصة.
+            </p>
+            <style>
+              .role-toggle {
+                display: flex;
+                position: relative;
+                gap: 0;
+                background: var(--glass2);
+                border-radius: 99px;
+                padding: 6px;
+                margin-bottom: 2rem;
+                border: 1px solid var(--glass-border);
+                box-shadow: var(--shadow-sm);
+              }
+              .role-toggle::before {
+                content: "";
+                position: absolute;
+                top: 6px;
+                bottom: 6px;
+                right: 6px;
+                width: calc(50% - 6px);
+                background: linear-gradient(
+                  135deg,
+                  var(--accent),
+                  var(--accent2)
+                );
+                border-radius: 99px;
+                transition: transform 0.4s var(--spring);
+                z-index: 0;
+                box-shadow: 0 4px 15px var(--accent-glow);
+              }
+              .role-toggle[data-active="student"]::before {
+                transform: translateX(-100%);
+              }
+              .role-option {
+                flex: 1;
+                text-align: center;
+                padding: 14px;
+                font-weight: 800;
+                font-size: 0.95rem;
+                color: var(--text2);
+                cursor: pointer;
+                border-radius: 99px;
+                transition: color 0.4s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                z-index: 1;
+              }
+              .role-option i {
+                font-size: 1.1rem;
+              }
+              .role-option.active {
+                color: #fff;
+              }
+            </style>
+            <div class="role-toggle">
+              <div class="role-option active" data-role="teacher">
+                <i class="fa-solid fa-chalkboard-user"></i> معلم
+              </div>
+              <div class="role-option" data-role="student">
+                <i class="fa-solid fa-user-graduate"></i> طالب
+              </div>
+            </div>
+            <div class="auth-input-group">
+              <label>الاسم بالكامل</label>
+              <input
+                type="text"
+                id="user-fullname"
+                class="auth-input"
+                style="padding-right: 20px"
+                placeholder="مثال: سيف محمود"
+              />
+            </div>
+            <button class="btn-glow" id="btn-save-profile">أكد وادخل</button>
+          </div>
+        </div>
+        <div class="sa-links">
+          <div class="sa-links-text">
+            تطوير مؤسسة SA للامتحانات الأونلاين &copy; 2026
+          </div>
+          <div class="sa-socials">
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u=https://sa-exams.com"
+              target="_blank"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a
+              href="https://api.whatsapp.com/send?text=جرب منصة SA الامتحانية الآمنة دلوقتي!"
+              target="_blank"
+              ><i class="fa-brands fa-whatsapp"></i
+            ></a>
+            <a
+              href="https://t.me/share/url?url=https://sa-exams.com&text=منصة الامتحانات الآمنة من SA"
+              target="_blank"
+              ><i class="fa-brands fa-telegram"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/magic.js"></script>
+  </body>
+</html>

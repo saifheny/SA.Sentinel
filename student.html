@@ -1,0 +1,707 @@
+<!--
+ *          ▄▄██████▄▄
+ *        ▄████████████▄
+ *       ▄████▀    ▀████▄
+ *      ▄████   SA   ████▄
+ *      ████          ████
+ *      ▀████   TM   ████▀
+ *       ▀████▄    ▄████▀
+ *        ▀████████████▀
+ *          ▀▀██████▀▀
+ *     SA SAFE EXAM PLATFORM
+ *  ───────────────────────────
+ *   INTERNAL BRAND SIGNATURE
+ *     ALL RIGHTS RESERVED
+ -->
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (regs) {
+          for (var r of regs) r.unregister();
+        });
+      }
+      if (window.caches) {
+        caches.keys().then(function (keys) {
+          for (var k of keys) caches.delete(k);
+        });
+      }
+    </script>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>لوحة الطالب | منصة SA للامتحانات</title>
+    <meta
+      name="description"
+      content="منصة SA للطلاب — تابع نتائجك، ادخل امتحاناتك بسهولة، واستمتع بتجربة أداء سلسة وسريعة."
+    />
+    <meta
+      name="keywords"
+      content="امتحانات اونلاين، لوحة الطالب، منصة تعليمية، SA، مؤسسة SA، نتائج الامتحانات"
+    />
+    <meta name="author" content="SA — Saif Hany" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#7c5cfc" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SA للامتحانات" />
+    <meta property="og:title" content="لوحة الطالب | منصة SA للامتحانات" />
+    <meta
+      property="og:description"
+      content="ادخل امتحاناتك وتابع نتائجك بكل سهولة مع منصة SA."
+    />
+    <meta
+      property="og:image"
+      content="https://i.postimg.cc/kDrzDHGN/image-(16).jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="لوحة الطالب — SA" />
+    <meta property="og:url" content="https://sa-exams.com/student.html" />
+    <meta property="og:locale" content="ar_EG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SA_Exams" />
+    <meta name="twitter:title" content="لوحة الطالب | منصة SA للامتحانات" />
+    <meta
+      name="twitter:description"
+      content="ادخل امتحاناتك وتابع نتائجك بكل سهولة مع منصة SA."
+    />
+    <meta
+      name="twitter:image"
+      content="https://i.postimg.cc/kDrzDHGN/image-(16).jpg"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'/%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'/%3E%3C/svg%3E"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>منصة الامتحانات — دخول الطلاب</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'/%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'/%3E%3C/svg%3E"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      body {
+        overflow-x: hidden;
+      }
+      .ambient-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background: var(--bg);
+        overflow: hidden;
+      }
+      .ambient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.5;
+        animation: orbFloat 25s infinite alternate ease-in-out;
+      }
+      .orb-1 {
+        width: 45vw;
+        height: 45vw;
+        background: var(--accent-glow);
+        top: -10%;
+        left: -10%;
+      }
+      .orb-2 {
+        width: 35vw;
+        height: 35vw;
+        background: var(--green-glow);
+        bottom: -10%;
+        right: -10%;
+        animation-delay: -5s;
+      }
+      .grid-pattern {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        transform: perspective(500px) rotateX(60deg) translateY(-100px)
+          translateZ(-200px);
+        animation: gridMove 20s linear infinite;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 40%,
+          transparent 90%
+        );
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 40%,
+          transparent 90%
+        );
+      }
+      @keyframes gridMove {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 0 50px;
+        }
+      }
+      @media (max-width: 768px) {
+        .ambient-orb,
+        .grid-pattern {
+          display: none !important;
+        }
+      }
+      .icon-wrap {
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: float 5s ease-in-out infinite;
+      }
+      .exam-input-wrap {
+        display: flex;
+        gap: 0;
+        max-width: 420px;
+        margin: 2rem auto;
+        position: relative;
+        background: var(--glass2);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        box-shadow: var(--shadow-sm);
+        padding: 5px;
+        transition: all 0.3s var(--spring);
+      }
+      .exam-input-wrap:focus-within {
+        border-color: var(--accent);
+        box-shadow:
+          0 0 0 4px var(--accent-soft),
+          var(--shadow);
+        transform: translateY(-2px);
+      }
+      .exam-input-wrap .field {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        font-size: 1.05rem;
+        padding: 12px 16px 12px 8px;
+        border-radius: 99px;
+        backdrop-filter: none;
+        color: var(--text);
+        width: 100%;
+        transition: all 0.3s var(--spring);
+      }
+      .exam-input-wrap .field:focus {
+        background: transparent;
+        transform: none;
+        box-shadow: none;
+      }
+      .exam-input-wrap .field::placeholder {
+        color: var(--text3);
+      }
+      .exam-input-wrap .inline-enter {
+        flex-shrink: 0;
+        padding: 10px 22px;
+        border-radius: 99px;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.3s var(--spring);
+        box-shadow: 0 4px 16px var(--accent-glow);
+        white-space: nowrap;
+      }
+      .exam-input-wrap .inline-enter:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 6px 22px var(--accent-glow);
+        transform: scale(1.04);
+      }
+      .exam-input-wrap .inline-enter:active {
+        transform: scale(0.96);
+      }
+      .footer-links {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--glass-border);
+      }
+      .social-btns {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin: 1rem 0;
+      }
+      .social-btns a {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--glass2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        color: var(--text);
+        border: 1px solid var(--glass-border);
+        transition: all 0.3s var(--spring);
+      }
+      .social-btns a:hover {
+        transform: translateY(-4px) scale(1.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+      .social-btns a.fb:hover {
+        background: #1877f2;
+        border-color: #1877f2;
+      }
+      .social-btns a.wa:hover {
+        background: #25d366;
+        border-color: #25d366;
+      }
+      .social-btns a.tg:hover {
+        background: #0088cc;
+        border-color: #0088cc;
+      }
+      .stu-float-account {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+        animation: entryBlur 0.7s var(--ease) 0.1s both;
+      }
+      @media (max-width: 768px) {
+        .stu-float-account {
+          top: 16px;
+          left: 16px;
+        }
+        .exam-input-wrap .inline-enter {
+          padding: 9px 16px;
+          font-size: 0.78rem;
+        }
+      }
+      .split-layout {
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+        z-index: 10;
+        overflow-x: hidden;
+      }
+      .split-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4rem;
+        max-width: 600px;
+        position: relative;
+        z-index: 20;
+        background: var(--bg2);
+      }
+      .split-left {
+        flex: 1.2;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .edu-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.8) contrast(1.1);
+        transform: scale(1.05);
+        animation: slowZoom 20s infinite alternate linear;
+      }
+      @keyframes slowZoom {
+        0% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1.15);
+        }
+      }
+      .wave-divider {
+        position: absolute;
+        right: -1px;
+        top: 0;
+        bottom: 0;
+        width: 150px;
+        height: 100%;
+        z-index: 5;
+        pointer-events: none;
+      }
+      .wave-divider svg {
+        width: 100%;
+        height: 100%;
+      }
+      .wave-divider svg path {
+        fill: var(--bg2) !important;
+      }
+      .wave-mobile {
+        display: none;
+      }
+      .auth-content {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        animation: modalIn 1s var(--spring) both;
+      }
+      .auth-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(to right, #fff, var(--text2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      @media (max-width: 900px) {
+        .split-layout {
+          flex-direction: column;
+          overflow-y: visible;
+          overflow-x: hidden;
+        }
+        .split-left {
+          min-height: 250px;
+          flex: none;
+          width: 100%;
+          order: -1;
+        }
+        .split-right {
+          padding: 2rem 1.5rem;
+          max-width: 100%;
+          justify-content: flex-start;
+          background: var(--bg2);
+          flex: 1;
+          margin: 0;
+          box-sizing: border-box;
+        }
+        .wave-divider {
+          width: 100%;
+          height: 60px;
+          right: 0;
+          left: 0;
+          top: auto;
+          bottom: -1px;
+          transform: none;
+        }
+        .wave-desktop {
+          display: none;
+        }
+        .wave-mobile {
+          display: block;
+        }
+        .auth-content {
+          margin-top: -10px;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+        .edu-img {
+          mask-image: linear-gradient(to bottom, black 60%, transparent);
+          -webkit-mask-image: linear-gradient(
+            to bottom,
+            black 60%,
+            transparent
+          );
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient-bg">
+      <div class="ambient-orb orb-1"></div>
+      <div class="ambient-orb orb-2"></div>
+    </div>
+    <div class="grid-pattern"></div>
+    <div class="stu-float-account" id="account-menu-wrap">
+      <button class="float-avatar" id="account-btn" title="الحساب">
+        <i class="fa-solid fa-user"></i>
+      </button>
+      <div class="account-dropdown" id="account-dropdown">
+        <div class="dropdown-header">
+          <span id="dropdown-user-name">طالب</span>
+        </div>
+        <button class="dropdown-item" id="btn-edit-name">
+          <i class="fa-solid fa-pen"></i> غير اسمك
+        </button>
+        <button class="dropdown-item" id="btn-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> اخرج من الحساب
+        </button>
+        <button class="dropdown-item delete-item" id="btn-delete-account">
+          <i class="fa-solid fa-user-xmark"></i> امسح الحساب
+        </button>
+      </div>
+    </div>
+    <div class="toast-area" id="toast-area"></div>
+    <div class="split-layout">
+      <div class="split-left">
+        <img
+          src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800"
+          onerror="this.src = 'assets/notepad.png'"
+          class="edu-img"
+          alt="Student Studying"
+          loading="lazy"
+        />
+        <div class="wave-divider">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path
+              class="wave-desktop"
+              d="M100,0 C30,30 100,70 0,100 L100,100 Z"
+            >
+              <animate
+                attributeName="d"
+                dur="10s"
+                repeatCount="indefinite"
+                values="M100,0 C30,30 100,70 0,100 L100,100 Z; M100,0 C80,40 10,60 0,100 L100,100 Z; M100,0 C30,30 100,70 0,100 L100,100 Z"
+              />
+            </path>
+            <path
+              class="wave-mobile"
+              d="M0,80 C30,40 70,120 100,60 L100,100 L0,100 Z"
+            >
+              <animate
+                attributeName="d"
+                dur="8s"
+                repeatCount="indefinite"
+                values="M0,80 C30,40 70,120 100,60 L100,100 L0,100 Z; M0,60 C40,90 60,30 100,80 L100,100 L0,100 Z; M0,80 C30,40 70,120 100,60 L100,100 L0,100 Z"
+              />
+            </path>
+          </svg>
+        </div>
+      </div>
+      <div class="split-right">
+        <div
+          class="auth-content"
+          style="max-width: 440px; margin: 0 auto; text-align: center"
+        >
+          <div class="icon-wrap" id="logo-easter-egg">
+            <div
+              style="
+                width: 80px;
+                height: 80px;
+                background: linear-gradient(
+                  135deg,
+                  var(--accent),
+                  var(--accent2)
+                );
+                border-radius: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 10px 30px var(--accent-glow);
+                margin: 0 auto 1.5rem;
+              "
+            >
+              <i
+                class="fa-solid fa-graduation-cap"
+                style="font-size: 2.2rem; color: #fff"
+              ></i>
+            </div>
+          </div>
+          <h1
+            class="auth-title"
+            id="welcome-title"
+            style="font-size: 2.2rem; margin-bottom: 0.5rem"
+          >
+            يا هلا بيك!
+          </h1>
+          <h3
+            style="
+              margin-bottom: 1.5rem;
+              font-size: 1.1rem;
+              color: var(--accent);
+              min-height: 32px;
+            "
+            id="typewriter-text"
+          ></h3>
+          <p
+            style="
+              color: var(--text2);
+              font-size: 0.95rem;
+              margin: 0 auto 2.5rem;
+              line-height: 1.8;
+            "
+          >
+            لو المدرس بعتلك رابط، دوس عليه وهيفتحلك الامتحان علطول.
+            <br />أو اكتب كود الامتحان هنا عشان تبدأ:
+          </p>
+          <div class="exam-input-wrap">
+            <i
+              class="fa-solid fa-keyboard"
+              style="
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--text3);
+                z-index: 2;
+              "
+            ></i>
+            <input
+              type="text"
+              id="exam-code-input"
+              class="field font-en"
+              placeholder="الكود هنا"
+              style="
+                text-align: center;
+                font-weight: 800;
+                letter-spacing: 4px;
+                padding-right: 45px;
+                height: 50px;
+              "
+            />
+            <button
+              class="inline-enter"
+              id="btn-enter-exam"
+              style="height: 40px; margin: 5px"
+            >
+              <i class="fa-solid fa-arrow-left"></i> ادخل
+            </button>
+          </div>
+          <div
+            class="footer-links"
+            style="
+              margin-top: 3rem;
+              padding-top: 2rem;
+              border-top: 1px solid var(--glass-border);
+            "
+          >
+            <div
+              style="
+                font-size: 0.75rem;
+                font-weight: 800;
+                color: var(--text3);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+              "
+            >
+              شير المنصة
+            </div>
+            <div class="social-btns">
+              <a
+                href="https://www.facebook.com/sharer/sharer.php?u=https://sa-exams.com"
+                target="_blank"
+                class="fb"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a
+                href="https://api.whatsapp.com/send?text=جرب منصة SA الامتحانية الآمنة دلوقتي!"
+                target="_blank"
+                class="wa"
+                ><i class="fa-brands fa-whatsapp"></i
+              ></a>
+              <a
+                href="https://t.me/share/url?url=https://sa-exams.com&text=منصة الامتحانات الآمنة من SA"
+                target="_blank"
+                class="tg"
+                ><i class="fa-brands fa-telegram"></i
+              ></a>
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 16px;
+                justify-content: center;
+                margin-top: 1.5rem;
+                flex-wrap: wrap;
+              "
+            >
+              <a
+                href="terms.html"
+                style="
+                  font-size: 0.85rem;
+                  font-weight: 700;
+                  color: var(--text2);
+                  text-decoration: none;
+                  padding: 8px 16px;
+                  border-radius: 99px;
+                  background: var(--glass2);
+                  border: 1px solid var(--glass-border);
+                  transition: all 0.3s;
+                "
+                ><i class="fa-solid fa-file-contract"></i> الشروط</a
+              >
+              <a
+                href="policy.html"
+                style="
+                  font-size: 0.85rem;
+                  font-weight: 700;
+                  color: var(--text2);
+                  text-decoration: none;
+                  padding: 8px 16px;
+                  border-radius: 99px;
+                  background: var(--glass2);
+                  border: 1px solid var(--glass-border);
+                  transition: all 0.3s;
+                "
+                ><i class="fa-solid fa-shield-halved"></i> الخصوصية</a
+              >
+              <a
+                href="about.html"
+                style="
+                  font-size: 0.85rem;
+                  font-weight: 700;
+                  color: var(--text2);
+                  text-decoration: none;
+                  padding: 8px 16px;
+                  border-radius: 99px;
+                  background: var(--glass2);
+                  border: 1px solid var(--glass-border);
+                  transition: all 0.3s;
+                "
+                ><i class="fa-solid fa-bullseye"></i> عننا</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-bg" id="modal-confirm">
+      <div class="modal">
+        <button class="modal-x" id="modal-confirm-x">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal-ic warn" id="modal-confirm-ic">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <h2 id="modal-confirm-title">SA Exam</h2>
+        <p id="modal-confirm-msg">إنت متأكد من اللي بتعمله؟</p>
+        <div class="modal-btns">
+          <button class="btn btn-soft" id="btn-confirm-cancel">إلغاء</button>
+          <button class="btn btn-accent" id="btn-confirm-ok">أيوة متأكد</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="js/student_portal.js"></script>
+    <script
+      src="https://kit.fontawesome.com/71239bf0b7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="js/magic.js"></script>
+  </body>
+</html>
