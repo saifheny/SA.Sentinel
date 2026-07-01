@@ -118,7 +118,7 @@
   animation: spin 3s linear infinite;
 }
 .float-avatar:hover {
-  transform: scale(1.12) rotate(5deg);
+  transform: scale(1.12) none;
 }
 .float-avatar:hover::before {
   opacity: 1;
@@ -510,39 +510,10 @@ select.field {
   opacity: 1;
 }
 
-.modal-x {
-  position: absolute;
-  top: -15px;
-  left: -15px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--red);
-  font-size: 1.15rem;
-  font-weight: 900;
-  background: #ffffff;
-  border: 1px solid rgba(239, 68, 68, 0.15);
-  box-shadow:
-    0 4px 12px rgba(239, 68, 68, 0.15),
-    inset 0 -3px 5px rgba(239, 68, 68, 0.05),
-    inset 0 2px 4px rgba(255, 255, 255, 1);
-  transition: all 0.3s var(--spring);
-  z-index: 10;
-}
-.modal-x:hover {
-  background: #ffffff;
-  color: var(--red);
-  transform: translateY(-2px) rotate(90deg);
-  box-shadow:
-    0 8px 18px rgba(239, 68, 68, 0.25),
-    inset 0 -3px 5px rgba(239, 68, 68, 0.1),
-    inset 0 2px 4px rgba(255, 255, 255, 1);
-}
+.modal-x { position: absolute; top: 16px; left: 16px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 1.15rem; background: #f1f5f9; border: 1px solid #cbd5e1; box-shadow: none !important; transform: none !important; transition: background 0.2s; z-index: 10; cursor: pointer; }
+.modal-x:hover { background: #e2e8f0 !important; color: #333 !important; border-color: #cbd5e1 !important; transform: none !important; box-shadow: none !important; }
 .modal-x:active {
-  transform: translateY(2px) rotate(90deg);
+  transform: translateY(2px) none;
   box-shadow:
     0 2px 5px rgba(239, 68, 68, 0.1),
     inset 0 3px 5px rgba(239, 68, 68, 0.1);

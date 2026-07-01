@@ -179,7 +179,7 @@ img {
 }
 @keyframes spin {
   to {
-    transform: rotate(360deg);
+    transform: none;
   }
 }
 @keyframes float {
@@ -221,16 +221,16 @@ img {
 }
 @keyframes orbFloat {
   0% {
-    transform: translate(0, 0) scale(1) rotate(0deg);
+    transform: translate(0, 0) scale(1) none;
   }
   33% {
-    transform: translate(25px, -35px) scale(1.04) rotate(3deg);
+    transform: translate(25px, -35px) scale(1.04) none;
   }
   66% {
-    transform: translate(-18px, 18px) scale(0.96) rotate(-2deg);
+    transform: translate(-18px, 18px) scale(0.96) none;
   }
   100% {
-    transform: translate(0, 0) scale(1) rotate(0deg);
+    transform: translate(0, 0) scale(1) none;
   }
 }
 @keyframes entryBlur {

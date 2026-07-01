@@ -69,7 +69,7 @@
 .q-del:hover {
   background: var(--red-soft);
   color: var(--red);
-  transform: rotate(15deg) scale(1.1);
+  transform: none scale(1.1);
 }
 
 .q-input {
@@ -168,7 +168,7 @@
 }
 .opt-x:hover {
   color: var(--red);
-  transform: rotate(90deg) scale(1.2);
+  transform: none scale(1.2);
 }
 
 .add-opt {
@@ -239,7 +239,7 @@
   transition: all 0.35s var(--spring);
 }
 .exam-card:hover .exam-card-icon {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.1) none;
   box-shadow: 0 4px 15px var(--accent-glow);
 }
 .exam-card-icon svg {

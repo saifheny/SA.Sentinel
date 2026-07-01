@@ -459,7 +459,7 @@
 .score-ring-svg {
   width: 140px;
   height: 140px;
-  transform: rotate(-90deg);
+  transform: none;
 }
 .score-ring-bg {
   fill: none;
