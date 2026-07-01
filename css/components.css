@@ -70,8 +70,8 @@
 .float-pill.active {
   color: #fff;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
-  box-shadow: 0 4px 18px var(--accent-glow);
-  animation: pulseGlow 3s infinite;
+  
+  
 }
 .float-pill.active::after {
   display: none;
@@ -102,7 +102,7 @@
   font-size: 1.15rem;
   cursor: pointer;
   transition: all 0.4s var(--spring);
-  box-shadow: 0 4px 18px var(--accent-glow);
+  
   position: relative;
   overflow: hidden;
 }
@@ -256,24 +256,24 @@
 .btn-accent {
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   color: #fff;
-  box-shadow: 0 6px 25px var(--accent-glow);
+  
   backdrop-filter: none;
 }
 .btn-accent:hover {
-  box-shadow: 0 10px 40px var(--accent-glow);
+  
   filter: brightness(1.08);
 }
 
 .btn-green {
   background: linear-gradient(135deg, var(--green), #059669);
   color: #fff;
-  box-shadow: 0 6px 20px var(--green-glow);
+  
   backdrop-filter: none;
 }
 .btn-red {
   background: linear-gradient(135deg, var(--red), #dc2626);
   color: #fff;
-  box-shadow: 0 6px 20px var(--red-glow);
+  
   backdrop-filter: none;
 }
 .btn-soft {

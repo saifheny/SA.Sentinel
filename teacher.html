@@ -140,6 +140,28 @@
           background-position: 0 50px;
         }
       }
+    
+      .bottom-noise-left, .bottom-noise-right {
+        position: fixed;
+        bottom: 0;
+        width: 350px;
+        height: 350px;
+        background-image: radial-gradient(var(--blue) 2px, transparent 2px);
+        background-size: 20px 20px;
+        opacity: 0.25;
+        pointer-events: none;
+        z-index: -1;
+      }
+      .bottom-noise-left {
+        left: 0;
+        mask-image: radial-gradient(circle at bottom left, black, transparent 70%);
+        -webkit-mask-image: radial-gradient(circle at bottom left, black, transparent 70%);
+      }
+      .bottom-noise-right {
+        right: 0;
+        mask-image: radial-gradient(circle at bottom right, black, transparent 70%);
+        -webkit-mask-image: radial-gradient(circle at bottom right, black, transparent 70%);
+      }
     </style>
   </head>
   <body>
@@ -1152,5 +1174,8 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script type="module" src="js/teacher.js"></script>
     <script type="module" src="js/magic.js"></script>
+  
+    <div class="bottom-noise-left"></div>
+    <div class="bottom-noise-right"></div>
   </body>
 </html>
