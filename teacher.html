@@ -570,111 +570,72 @@
           <div class="log-list" id="rpt-log-list"></div>
         </div>
       </section>
+      
       <section class="view" id="view-profile">
-        <div
-          style="
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-            padding: 2rem 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: calc(100vh - 120px);
-          "
-        >
-          <div
-            class="page-head"
-            style="
-              margin-bottom: 2rem;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              flex-wrap: wrap;
-              gap: 15px;
-            "
-          >
+        <div style="max-width: 800px; margin: 0 auto; width: 100%; padding: 2rem 10px; display: flex; flex-direction: column; justify-content: center; min-height: calc(100vh - 120px);">
+          <div class="page-head" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
             <div>
               <h2 class="page-title">حسابك الشخصي</h2>
               <p class="page-desc">إعدادات الحساب وتعديل البيانات الأساسية</p>
             </div>
-            
           </div>
           
-            
+          <div class="q-card" style="margin-bottom: 1.5rem; text-align: center; padding: 3rem 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border-radius: var(--radius-lg);">
+            <div style="width: 90px; height: 90px; font-size: 2.5rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px var(--accent-glow);">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <h3 id="profile-page-name" style="font-size: 1.8rem; font-weight: 900; margin: 0; color: var(--text);">المعلم</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; margin: 0; background: var(--bg2); padding: 5px 16px; border-radius: 99px; border: 1px solid var(--border); font-weight: 700;">حساب معلم</p>
+            <div style="display: flex; gap: 16px; margin-top: 8px; justify-content: center;">
+              <button id="btn-quick-edit-name" title="تغيير اسم العرض" style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button id="btn-quick-logout" title="اخرج من الحساب" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(239,68,68,0.08); color: var(--red); border: 1px solid rgba(239,68,68,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </button>
+            </div>
           </div>
-          <div
-            class="q-card"
-            style="
-              padding: 1.8rem;
-              margin-top: 1.5rem;
-              margin-bottom: 2rem;
-              border: 1px solid rgba(239, 68, 68, 0.2);
-              background: rgba(239, 68, 68, 0.03);
-              border-radius: var(--radius-lg);
-            "
-          >
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                margin-bottom: 1rem;
-              "
-            >
-              <div
-                style="
-                  width: 45px;
-                  height: 45px;
-                  border-radius: 50%;
-                  background: rgba(239, 68, 68, 0.1);
-                  color: var(--red);
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-size: 1.2rem;
-                "
-              >
+
+          <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <div class="q-card" style="padding: 1.8rem; border-radius: var(--radius-lg); display: flex; flex-direction: column; height: 100%; grid-column: 1 / -1;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--green-bg); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border: 1px solid var(--green-border);">
+                  <i class="fa-solid fa-comment-dots"></i>
+                </div>
+                <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0">الرسائل الافتراضية للطلاب</h3>
+              </div>
+              <p style="color: var(--text2); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.6;">رسائل بتظهر للطالب أوتوماتيك أول ما يسلم الامتحان وتتطبق على كل امتحاناتك.</p>
+              <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 1.5rem;">
+                <div class="field-wrap" style="margin: 0">
+                  <label for="global-success-msg" style="color: var(--green); font-weight: 800"><i class="fa-solid fa-party-horn"></i> رسالة التهنئة (درجات 50% أو أعلى)</label>
+                  <input type="text" class="field" id="global-success-msg" placeholder="عاش جداً يا بطل! استمر على مستواك ده..." style="border-color: var(--green-border)" />
+                </div>
+                <div class="field-wrap" style="margin: 0">
+                  <label for="global-fail-msg" style="color: var(--red); font-weight: 800"><i class="fa-solid fa-heart"></i> رسالة الدعم (درجات أقل من 50%)</label>
+                  <input type="text" class="field" id="global-fail-msg" placeholder="حاول تركز أكتر المرة الجاية، تقدر تتواصل معايا على 010..." style="border-color: var(--red-border)" />
+                </div>
+              </div>
+              <button class="btn btn-accent" id="btn-save-global-msgs" style="width: 100%; justify-content: center; padding: 12px; border-radius: 99px;">
+                <i class="fa-solid fa-floppy-disk"></i> حفظ الرسائل
+              </button>
+            </div>
+          </div>
+
+          <div class="q-card" style="padding: 1.8rem; margin-top: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.03); border-radius: var(--radius-lg);">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+              <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(239, 68, 68, 0.1); color: var(--red); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
               </div>
-              <h3
-                style="
-                  font-size: 1.2rem;
-                  font-weight: 800;
-                  margin: 0;
-                  color: var(--red);
-                "
-              >
-                منطقة الخطر (حذف الحساب)
-              </h3>
+              <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0; color: var(--red);">منطقة الخطر (حذف الحساب)</h3>
             </div>
-            <p
-              style="
-                color: var(--text2);
-                font-size: 0.9rem;
-                margin-bottom: 1.5rem;
-                line-height: 1.6;
-              "
-            >
-              لو حذفت الحساب، كل امتحاناتك ونتائج الطلاب هتتمسح نهائياً ومفيش أي
-              طريقة لاسترجاعها. يا ريت الحذر الشديد.
-            </p>
-            <button
-              class="btn btn-red"
-              id="btn-page-delete-account"
-              style="
-                width: 100%;
-                justify-content: center;
-                padding: 12px;
-                border-radius: 99px;
-                box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-              "
-            >
+            <p style="color: var(--text2); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.6;">لو حذفت الحساب، كل امتحاناتك ونتائج الطلاب هتتمسح نهائياً ومفيش أي طريقة لاسترجاعها. يا ريت الحذر الشديد.</p>
+            <button class="btn btn-red" id="btn-page-delete-account" style="width: 100%; justify-content: center; padding: 12px; border-radius: 99px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);">
               <i class="fa-solid fa-trash"></i> حذف الحساب وجميع البيانات
             </button>
           </div>
         </div>
       </section>
+
       <div
         style="
           text-align: center;
