@@ -10,11 +10,11 @@
   align-items: center;
   gap: 12px;
   padding: 12px 20px;
-  background: var(--orange-soft);
+  background: var(--accent-soft);
   border-radius: 99px;
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--orange);
+  color: var(--accent);
   margin-bottom: 1.5rem;
   animation: slideUp 0.3s var(--ease) both;
 }
@@ -677,7 +677,7 @@
   direction: ltr;
 }
 .log-item.warn {
-  color: var(--orange);
+  color: var(--accent);
 }
 .log-item.err {
   color: var(--red);

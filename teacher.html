@@ -208,7 +208,7 @@
         transition: all 0.25s;
         font-size: 0;
       }
-      .modal-x:hover { background: var(--red-bg); color: var(--red); border-color: var(--red-border); transform: rotate(90deg); }
+      .modal-x:hover { background: var(--bg); color: var(--text); border-color: var(--text3); }
     </style>
   </head>
   <body>
@@ -385,7 +385,7 @@
                 font-size: 0.82rem;
                 line-height: 1.8;
                 color: var(--text2);
-                box-shadow: var(--shadow-lg);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
                 z-index: 2000;
                 animation: slideUp 0.25s var(--ease);
               "
@@ -528,8 +528,7 @@
         <div id="rpt-header"></div>
         <div class="proctor-section" id="proctor-section" style="display: none">
           <h3>
-            <i class="fa-solid fa-camera"></i> تقرير مراقبة الكاميرا (ذكاء
-            اصطناعي)
+            <i class="fa-solid fa-camera"></i> تقرير مراقبة الكاميرا (متقدم)
           </h3>
           <div class="proctor-summary">
             <div class="proctor-stat">
@@ -554,12 +553,11 @@
         <div id="rpt-questions"></div>
         <div class="ai-section">
           <div class="ai-section-head">
-            <i class="fa-solid fa-robot"></i>
-            <span>تحليل ذكي للسلوك</span>
+            <i class="fa-solid fa-microchip"></i>
+            <span>تحليل متقدم للسلوك</span>
           </div>
           <button class="ai-btn" id="btn-ai-analyze">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> حلل بالذكاء
-            الاصطناعي
+            <i class="fa-solid fa-magnifying-glass-chart"></i> تشغيل التحليل المتقدم
           </button>
           <div id="ai-output"></div>
         </div>
@@ -600,231 +598,7 @@
             </div>
             
           </div>
-          <div
-            class="q-card"
-            style="
-              margin-bottom: 1.5rem;
-              text-align: center;
-              padding: 3rem 1.5rem;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              gap: 12px;
-              border-radius: var(--radius-lg);
-            "
-          >
-            <div
-              style="
-                width: 90px;
-                height: 90px;
-                font-size: 2.5rem;
-                background: linear-gradient(
-                  135deg,
-                  var(--accent),
-                  var(--accent2)
-                );
-                color: #fff;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 10px 25px var(--accent-glow);
-              "
-            >
-              <i class="fa-solid fa-user"></i>
-            </div>
-            <h3
-              id="profile-page-name"
-              style="
-                font-size: 1.8rem;
-                font-weight: 900;
-                margin: 0;
-                color: var(--text);
-              "
-            >
-              المعلم
-            </h3>
-            <p
-              style="
-                color: var(--text2);
-                font-size: 0.95rem;
-                margin: 0;
-                background: var(--bg2);
-                padding: 5px 16px;
-                border-radius: 99px;
-                border: 1px solid var(--border);
-                font-weight: 700;
-              "
-            >
-              حساب معلم
-            </p>
-            <div style="display: flex; gap: 16px; margin-top: 8px; justify-content: center;">
-              <button id="btn-quick-edit-name" title="تغيير اسم العرض" style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;">
-                <i class="fa-solid fa-pen"></i>
-              </button>
-              <button id="btn-quick-logout" title="اخرج من الحساب" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(239,68,68,0.08); color: var(--red); border: 1px solid rgba(239,68,68,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-              </button>
-            </div>
           </div>
-          <div
-            style="
-              display: grid;
-              gap: 1.5rem;
-              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            "
-          >
-            <div
-              class="q-card"
-              style="
-                padding: 1.8rem;
-                border-radius: var(--radius-lg);
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                  margin-bottom: 1rem;
-                "
-              >
-                <div
-                  style="
-                    width: 45px;
-                    height: 45px;
-                    border-radius: 50%;
-                    background: var(--accent-soft);
-                    color: var(--accent);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.2rem;
-                  "
-                >
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-                <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0">
-                  تغيير اسم العرض
-                </h3>
-              </div>
-              <p
-                style="
-                  color: var(--text2);
-                  font-size: 0.9rem;
-                  margin-bottom: 1.5rem;
-                  line-height: 1.6;
-                  flex: 1;
-                "
-              >
-                تحديث الاسم اللي بيظهر لطلابك في الامتحانات والنتائج.
-              </p>
-              <button
-                class="btn btn-soft"
-                id="btn-page-edit-name"
-                style="
-                  width: 100%;
-                  justify-content: center;
-                  padding: 12px;
-                  border-radius: 99px;
-                "
-              >
-                تغيير الاسم
-              </button>
-            </div>
-            <div
-              class="q-card"
-              style="
-                padding: 1.8rem;
-                border-radius: var(--radius-lg);
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-                grid-column: 1 / -1;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                  margin-bottom: 1rem;
-                "
-              >
-                <div
-                  style="
-                    width: 45px;
-                    height: 45px;
-                    border-radius: 50%;
-                    background: var(--green-bg);
-                    color: var(--green);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.2rem;
-                    border: 1px solid var(--green-border);
-                  "
-                >
-                  <i class="fa-solid fa-comment-dots"></i>
-                </div>
-                <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0">
-                  الرسائل الافتراضية للطلاب
-                </h3>
-              </div>
-              <p
-                style="
-                  color: var(--text2);
-                  font-size: 0.9rem;
-                  margin-bottom: 1.5rem;
-                  line-height: 1.6;
-                "
-              >
-                رسائل بتظهر للطالب أوتوماتيك أول ما يسلم الامتحان وتتطبق على كل
-                امتحاناتك.
-              </p>
-              <div
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  gap: 15px;
-                  margin-bottom: 1.5rem;
-                "
-              >
-                <div class="field-wrap" style="margin: 0">
-                  <label
-                    for="global-success-msg"
-                    style="color: var(--green); font-weight: 800"
-                    ><i class="fa-solid fa-party-horn"></i> رسالة التهنئة (درجات
-                    50% أو أعلى)</label
-                  >
-                  <input
-                    type="text"
-                    class="field"
-                    id="global-success-msg"
-                    placeholder="عاش جداً يا بطل! استمر على مستواك ده..."
-                    style="border-color: var(--green-border)"
-                  />
-                </div>
-                <div class="field-wrap" style="margin: 0">
-                  <label
-                    for="global-fail-msg"
-                    style="color: var(--red); font-weight: 800"
-                    ><i class="fa-solid fa-heart"></i> رسالة الدعم (درجات أقل من
-                    50%)</label
-                  >
-                  <input
-                    type="text"
-                    class="field"
-                    id="global-fail-msg"
-                    placeholder="حاول تركز أكتر المرة الجاية، تقدر تتواصل معايا على 010..."
-                    style="border-color: var(--red-border)"
-                  />
-                </div>
-              </div>
               <button
                 class="btn btn-accent"
                 id="btn-save-global-msgs"
@@ -838,68 +612,7 @@
                 <i class="fa-solid fa-floppy-disk"></i> حفظ الرسائل
               </button>
             </div>
-            <div
-              class="q-card"
-              style="
-                padding: 1.8rem;
-                border-radius: var(--radius-lg);
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                  margin-bottom: 1rem;
-                "
-              >
-                <div
-                  style="
-                    width: 45px;
-                    height: 45px;
-                    border-radius: 50%;
-                    background: var(--bg2);
-                    color: var(--text);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.2rem;
-                    border: 1px solid var(--border);
-                  "
-                >
-                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                </div>
-                <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0">
-                  اخرج من الحساب
-                </h3>
-              </div>
-              <p
-                style="
-                  color: var(--text2);
-                  font-size: 0.9rem;
-                  margin-bottom: 1.5rem;
-                  line-height: 1.6;
-                  flex: 1;
-                "
-              >
-                قفل الجلسة الحالية لضمان أمان حسابك.
-              </p>
-              <button
-                class="btn btn-outline"
-                id="btn-page-logout"
-                style="
-                  width: 100%;
-                  justify-content: center;
-                  padding: 12px;
-                  border-radius: 99px;
-                "
-              >
-                خروج من المنصة
-              </button>
-            </div>
+            
           </div>
           <div
             class="q-card"
@@ -1274,6 +987,28 @@
         if(b) b.click();
       });
     });
+    
+    // Popup click outside logic
+    document.addEventListener('click', function(e) {
+      const popup = document.getElementById('warn-info-popup');
+      const btn = document.getElementById('btn-warn-info');
+      if (popup && popup.style.display === 'block') {
+        if (!popup.contains(e.target) && e.target !== btn) {
+          popup.style.display = 'none';
+        }
+      }
+    });
+    const warnBtn = document.getElementById('btn-warn-info');
+    if(warnBtn) {
+      // Remove any inline onclick if it existed and add proper listener
+      warnBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const popup = document.getElementById('warn-info-popup');
+        popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+      };
+    }
+        
     </script>
   </body>
 </html>

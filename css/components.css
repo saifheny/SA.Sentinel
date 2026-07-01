@@ -224,33 +224,20 @@
   overflow: hidden;
   background: var(--glass2);
   color: var(--text2);
-  box-shadow: var(--shadow-sm);
+  
   backdrop-filter: blur(10px);
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
 }
-.btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at var(--ripple-x, 50%) var(--ripple-y, 50%),
-    var(--accent-glow),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.5s;
-}
+
 .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
+  
+  
   color: var(--text);
 }
-.btn:hover::before {
-  opacity: 1;
-}
+
 .btn:active {
-  transform: translateY(0) scale(0.97);
+  transform: scale(0.97);
 }
 
 .btn-accent {
@@ -458,7 +445,7 @@ select.field {
   font-size: 1.2rem;
   text-decoration: none;
   transition: all 0.3s;
-  box-shadow: var(--shadow-sm);
+  
 }
 .social-btns .fb {
   background: rgba(24, 119, 242, 0.1);
@@ -476,7 +463,7 @@ select.field {
   border: 1px solid rgba(0, 136, 204, 0.2);
 }
 .social-btns a:hover {
-  transform: translateY(-3px);
+  
   filter: brightness(1.1);
 }
 
@@ -659,7 +646,7 @@ select.field {
   background: var(--glass2);
   backdrop-filter: blur(20px);
   border-radius: 99px;
-  box-shadow: var(--shadow);
+  
   font-size: 0.82rem;
   font-weight: 600;
   pointer-events: auto;
@@ -743,7 +730,7 @@ select.field {
 }
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow);
+  
 }
 
 .skeleton {

@@ -304,6 +304,7 @@ function go(viewId) {
   el.classList.add("active");
   window.scrollTo(0, 0);
 }
+window.goTo = goTo;
 function goTo(viewId) {
   setNavActive(viewId);
   go(viewId);
