@@ -106,9 +106,9 @@ function initTeacher() {
         window.location.hash = "builder";
       });
     }
-    document
-      .getElementById("btn-page-logout")
-      .addEventListener("click", function () {
+    const btnLogout = document.getElementById("btn-quick-logout");
+    if (btnLogout) {
+      btnLogout.addEventListener("click", function () {
         showConfirmModal(
           "خروج",
           "متأكد إنك عايز تخرج من الحساب؟",
@@ -121,9 +121,10 @@ function initTeacher() {
           },
         );
       });
-    document
-      .getElementById("btn-page-edit-name")
-      .addEventListener("click", function () {
+    }
+    const btnEditName = document.getElementById("btn-quick-edit-name");
+    if (btnEditName) {
+      btnEditName.addEventListener("click", function () {
         var newName = prompt("اكتب اسمك الجديد هنا:");
         if (newName && newName.trim() !== "") {
           update(ref(db, "users/" + teacherId), { name: newName.trim() }).then(
@@ -135,6 +136,7 @@ function initTeacher() {
           );
         }
       });
+    }
     const btnSaveMsgs = document.getElementById("btn-save-global-msgs");
     if (btnSaveMsgs) {
       btnSaveMsgs.addEventListener("click", function () {
