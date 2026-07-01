@@ -364,25 +364,28 @@
           </div>
         </div>
         <div id="exams-list">
-          <div class="empty-state" id="exams-empty">
-            <div class="empty-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                <path d="M6 12v5c3 3 9 3 12 0v-5" />
-              </svg>
+                      <div class="skeleton-loader">
+              <div class="skeleton-card"></div>
+              <div class="skeleton-card"></div>
+              <div class="skeleton-card"></div>
             </div>
-            <h3>مفيش امتحانات لسه</h3>
-            <p>اعمل أول امتحان ليك من قسم "اعمل امتحان"</p>
+            <div class="empty-state" id="exams-empty" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 4rem 2rem; text-align: center;">
+              <div style="background: var(--blue-bg); width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--blue); box-shadow: 0 10px 30px rgba(59,130,246,0.1);">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="12" y1="18" x2="12" y2="12"></line>
+                  <line x1="9" y1="15" x2="15" y2="15"></line>
+                </svg>
+              </div>
+              <h3 style="font-size: 1.6rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 800;">لا يوجد لديك امتحانات بعد!</h3>
+              <p style="color: var(--text2); max-width: 400px; margin-bottom: 2rem; font-size: 1rem; line-height: 1.6;">ابدأ الآن بإنشاء أول امتحان تفاعلي لطلابك واستمتع بسهولة التصحيح والأمان الكامل.</p>
+              <button class="btn btn-accent" onclick="goTo('editor')" style="padding: 14px 32px; font-size: 1.05rem;">
+                <i class="fa-solid fa-plus"></i> أنشئ أول امتحان لك الآن
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       <section class="view" id="view-results">
         <div class="page-head">
           <div>

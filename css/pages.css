@@ -758,3 +758,30 @@ header {
 header.hidden {
   transform: translateY(-100%);
 }
+
+/* Skeleton Loader */
+.skeleton-loader {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+.skeleton-card {
+  background: var(--glass);
+  border-radius: var(--r);
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.skeleton-card::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
