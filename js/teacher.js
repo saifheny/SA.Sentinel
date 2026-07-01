@@ -869,21 +869,21 @@ function openShareModal(examId, examTitle) {
   var linkEnc = encodeURIComponent(link);
   document.getElementById("btn-share-whatsapp").onclick = function () {
     window.open(
-      "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText),
+      "https://api.whatsapp.com/send?text=" + shareText,
     );
   };
   document.getElementById("btn-share-telegram").onclick = function () {
     window.open(
       "https://t.me/share/url?url=" +
-        encodeURIComponent(shareLink) +
+        linkEnc +
         "&text=" +
-        encodeURIComponent(shareText),
+        shareText,
     );
   };
   document.getElementById("btn-share-facebook").onclick = function () {
     window.open(
       "https://www.facebook.com/sharer/sharer.php?u=" +
-        encodeURIComponent(shareLink),
+        linkEnc,
     );
   };
   openModal("modal-share");

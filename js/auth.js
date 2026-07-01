@@ -168,8 +168,15 @@ document.addEventListener("DOMContentLoaded", () => {
   btnRegisterEmail.addEventListener("click", () => {
     const email = inputRegEmail.value.trim();
     const pass = inputRegPass.value;
-    if (!email || pass.length < 6)
-      return alert("برجاء كتابة إيميل صحيح وكلمة مرور لا تقل عن 6 أحرف");
+    if (!email) return alert("برجاء كتابة إيميل صحيح");
+    if (pass.length < 6)
+      return alert("كلمة المرور لازم تكون 6 أحرف على الأقل");
+    if (!/[a-zA-Z]/.test(pass))
+      return alert("كلمة المرور لازم تحتوي على حرف واحد على الأقل (a-z)");
+    if (!/[0-9]/.test(pass))
+      return alert("كلمة المرور لازم تحتوي على رقم واحد على الأقل (0-9)");
+    if (!/[^a-zA-Z0-9]/.test(pass))
+      return alert("كلمة المرور لازم تحتوي على رمز واحد على الأقل (مثل @ # $ %)");
 
     btnRegisterEmail.disabled = true;
     btnRegisterEmail.textContent = "جاري الإنشاء...";
