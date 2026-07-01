@@ -162,6 +162,53 @@
         mask-image: radial-gradient(circle at bottom right, black, transparent 70%);
         -webkit-mask-image: radial-gradient(circle at bottom right, black, transparent 70%);
       }
+    
+      select.field {
+        background-size: 10px !important;
+        padding-left: 28px !important;
+      }
+    
+      .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2rem; }
+      .stat-box {
+        background: var(--glass2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.2rem 1rem;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .stat-box:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+      .stat-box .val { font-size: 2rem; font-weight: 900; color: var(--accent); margin-bottom: 4px; }
+      .stat-box .lab { font-size: 0.8rem; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
+      .stat-box:nth-child(1) .val { color: var(--blue); }
+      .stat-box:nth-child(2) .val { color: var(--accent); }
+      .stat-box:nth-child(3) .val { color: var(--green); }
+      .stat-box:nth-child(4) .val { color: var(--red); }
+      .data-table { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: var(--glass2); }
+      .data-table table { width: 100%; border-collapse: collapse; }
+      .data-table thead { background: var(--bg2); }
+      .data-table th { padding: 14px 16px; font-size: 0.78rem; font-weight: 800; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; text-align: right; }
+      .data-table td { padding: 14px 16px; font-size: 0.88rem; color: var(--text); border-top: 1px solid var(--border-2); }
+      .data-table tbody tr { transition: background 0.2s; }
+      .data-table tbody tr:hover { background: var(--accent-soft); }
+      .modal-x {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        color: var(--text2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.25s;
+        font-size: 0;
+      }
+      .modal-x:hover { background: var(--red-bg); color: var(--red); border-color: var(--red-border); transform: rotate(90deg); }
     </style>
   </head>
   <body>
@@ -322,15 +369,25 @@
               id="warn-info-popup"
               style="
                 display: none;
-                margin-top: 8px;
-                padding: 14px 16px;
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                border-radius: 12px;
-                font-size: 0.78rem;
+                position: fixed;
+                top: 50%;
+                right: 20px;
+                transform: translateY(-50%);
+                width: 300px;
+                max-height: 60vh;
+                overflow-y: auto;
+                padding: 20px;
+                background: var(--glass2);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                font-size: 0.82rem;
                 line-height: 1.8;
-                color: var(--text-2);
-                animation: slideUp 0.2s var(--ease);
+                color: var(--text2);
+                box-shadow: var(--shadow-lg);
+                z-index: 2000;
+                animation: slideUp 0.25s var(--ease);
               "
             >
               <strong
@@ -380,7 +437,7 @@
               </div>
               <h3 style="font-size: 1.6rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 800;">لا يوجد لديك امتحانات بعد!</h3>
               <p style="color: var(--text2); max-width: 400px; margin-bottom: 2rem; font-size: 1rem; line-height: 1.6;">ابدأ الآن بإنشاء أول امتحان تفاعلي لطلابك واستمتع بسهولة التصحيح والأمان الكامل.</p>
-              <button class="btn btn-accent" onclick="goTo('editor')" style="padding: 14px 32px; font-size: 1.05rem;">
+              <button class="btn btn-accent" onclick="goTo('builder')" style="padding: 14px 32px; font-size: 1.05rem;">
                 <i class="fa-solid fa-plus"></i> أنشئ أول امتحان لك الآن
               </button>
             </div>
@@ -541,19 +598,7 @@
               <h2 class="page-title">حسابك الشخصي</h2>
               <p class="page-desc">إعدادات الحساب وتعديل البيانات الأساسية</p>
             </div>
-            <button
-              class="btn btn-soft"
-              id="btn-back-profile"
-              style="
-                border-radius: 99px;
-                padding: 10px 22px;
-                font-weight: 800;
-                border: 1px solid var(--border);
-                box-shadow: var(--shadow-sm);
-              "
-            >
-              <i class="fa-solid fa-arrow-right"></i> رجوع
-            </button>
+            
           </div>
           <div
             class="q-card"
@@ -614,6 +659,14 @@
             >
               حساب معلم
             </p>
+            <div style="display: flex; gap: 16px; margin-top: 8px; justify-content: center;">
+              <button id="btn-quick-edit-name" title="تغيير اسم العرض" style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button id="btn-quick-logout" title="اخرج من الحساب" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(239,68,68,0.08); color: var(--red); border: 1px solid rgba(239,68,68,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </button>
+            </div>
           </div>
           <div
             style="
@@ -1036,7 +1089,7 @@
     <div class="modal-bg" id="modal-share">
       <div class="modal">
         <button class="modal-x" id="modal-share-x">
-          <i class="fa-solid fa-xmark"></i>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
         </button>
         <div class="modal-ic ok"><i class="fa-solid fa-share-nodes"></i></div>
         <h2>شير الامتحان</h2>
@@ -1093,7 +1146,7 @@
     <div class="modal-bg" id="modal-upload">
       <div class="modal">
         <button class="modal-x" id="modal-upload-x">
-          <i class="fa-solid fa-xmark"></i>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
         </button>
         <div class="modal-ic ok"><i class="fa-solid fa-check"></i></div>
         <h2>اترفع بنجاح!</h2>
@@ -1110,7 +1163,7 @@
     <div class="modal-bg" id="modal-del">
       <div class="modal">
         <button class="modal-x" id="modal-del-x">
-          <i class="fa-solid fa-xmark"></i>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
         </button>
         <div class="modal-ic bad"><i class="fa-solid fa-eraser"></i></div>
         <h2>عايز تمسح الامتحان؟</h2>
@@ -1126,7 +1179,7 @@
     <div class="modal-bg" id="modal-student-attempts">
       <div class="modal" style="max-width: 500px; padding: 2rem">
         <button class="modal-x" id="modal-attempts-x">
-          <i class="fa-solid fa-xmark"></i>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
         </button>
         <div
           class="modal-ic"
@@ -1161,7 +1214,7 @@
     <div class="modal-bg" id="modal-confirm">
       <div class="modal">
         <button class="modal-x" id="modal-confirm-x">
-          <i class="fa-solid fa-xmark"></i>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
         </button>
         <div class="modal-ic" id="modal-confirm-ic">
           <i class="fa-solid fa-circle-exclamation"></i>
@@ -1180,5 +1233,47 @@
   
     <div class="bottom-noise-left"></div>
     <div class="bottom-noise-right"></div>
+  
+    <script>
+    // Auto-hide navbar on scroll
+    (function(){
+      var nav = document.getElementById('float-nav');
+      if(!nav) return;
+      var lastY = 0;
+      var ticking = false;
+      window.addEventListener('scroll', function(){
+        if(!ticking){
+          window.requestAnimationFrame(function(){
+            var y = window.scrollY;
+            if(y > lastY && y > 80){
+              nav.style.transform = 'translateY(-120%)';
+              nav.style.opacity = '0';
+            } else {
+              nav.style.transform = 'translateY(0)';
+              nav.style.opacity = '1';
+            }
+            lastY = y;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+      nav.style.transition = 'transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease';
+    })();
+
+    // Quick edit name button
+    document.addEventListener('DOMContentLoaded', function(){
+      var qe = document.getElementById('btn-quick-edit-name');
+      if(qe) qe.addEventListener('click', function(){
+        var b = document.getElementById('btn-page-edit-name');
+        if(b) b.click();
+      });
+      var ql = document.getElementById('btn-quick-logout');
+      if(ql) ql.addEventListener('click', function(){
+        var b = document.getElementById('btn-page-logout');
+        if(b) b.click();
+      });
+    });
+    </script>
   </body>
 </html>
