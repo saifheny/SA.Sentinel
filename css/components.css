@@ -700,22 +700,8 @@ select.field {
   color: var(--orange);
 }
 
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 20px;
-  border-radius: 99px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--text3);
-  transition: all 0.3s var(--spring);
-  background: transparent;
-}
-.back-btn:hover {
-  color: var(--accent);
-  transform: translateX(4px);
-}
+.back-btn { background: var(--bg2); color: var(--text); border: 1px solid var(--border); border-radius: 99px; padding: 10px 20px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: none; display: inline-flex; align-items: center; gap: 8px; }
+.back-btn:hover { background: var(--bg3); border-color: var(--border-2); transform: translateY(0); box-shadow: none; }
 .back-btn i {
   transition: transform 0.3s var(--spring);
 }

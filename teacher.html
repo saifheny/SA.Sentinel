@@ -171,7 +171,7 @@
       .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2rem; }
       .stat-box {
         background: var(--glass2);
-        border: 1px solid var(--border);
+        border: none;
         border-radius: 16px;
         padding: 1.2rem 1rem;
         text-align: center;
@@ -184,7 +184,7 @@
       .stat-box:nth-child(2) .val { color: var(--accent); }
       .stat-box:nth-child(3) .val { color: var(--green); }
       .stat-box:nth-child(4) .val { color: var(--red); }
-      .data-table { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: var(--glass2); }
+      .data-table { border-radius: 16px; overflow: hidden; border: none; background: var(--glass2); }
       .data-table table { width: 100%; border-collapse: collapse; }
       .data-table thead { background: var(--bg2); }
       .data-table th { padding: 14px 16px; font-size: 0.78rem; font-weight: 800; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; text-align: right; }
@@ -199,7 +199,7 @@
         height: 32px;
         border-radius: 50%;
         background: var(--bg2);
-        border: 1px solid var(--border);
+        border: none;
         color: var(--text2);
         display: flex;
         align-items: center;
@@ -380,7 +380,7 @@
                 background: var(--glass2);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
-                border: 1px solid var(--border);
+                border: none;
                 border-radius: 16px;
                 font-size: 0.82rem;
                 line-height: 1.8;
@@ -437,7 +437,7 @@
               </div>
               <h3 style="font-size: 1.6rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 800;">لا يوجد لديك امتحانات بعد!</h3>
               <p style="color: var(--text2); max-width: 400px; margin-bottom: 2rem; font-size: 1rem; line-height: 1.6;">ابدأ الآن بإنشاء أول امتحان تفاعلي لطلابك واستمتع بسهولة التصحيح والأمان الكامل.</p>
-              <button class="btn btn-accent" onclick="goTo('builder')" style="padding: 14px 32px; font-size: 1.05rem;">
+              <button class="btn btn-accent" id="btn-create-first-exam" style="padding: 14px 32px; font-size: 1.05rem;">
                 <i class="fa-solid fa-plus"></i> أنشئ أول امتحان لك الآن
               </button>
             </div>
@@ -974,6 +974,29 @@
       nav.style.transition = 'transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease';
     })();
 
+    
+    // Close popup on outside click
+    document.addEventListener('click', function(e) {
+      var popup = document.getElementById('warn-info-popup');
+      var btn = document.getElementById('btn-warn-info');
+      if (popup && popup.style.display === 'block') {
+        if (!popup.contains(e.target) && !btn.contains(e.target)) {
+          popup.style.display = 'none';
+        }
+      }
+    });
+
+    // Create first exam button
+    document.addEventListener('DOMContentLoaded', function() {
+      var btnCreateFirst = document.getElementById('btn-create-first-exam');
+      if (btnCreateFirst) {
+        btnCreateFirst.addEventListener('click', function() {
+          var floatPill = document.querySelector('.float-pill[data-view="builder"]');
+          if (floatPill) floatPill.click();
+        });
+      }
+    });
+    
     // Quick edit name button
     document.addEventListener('DOMContentLoaded', function(){
       var qe = document.getElementById('btn-quick-edit-name');

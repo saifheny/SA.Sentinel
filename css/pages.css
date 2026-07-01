@@ -5,19 +5,7 @@
   margin-bottom: 1.5rem;
 }
 
-.editing-banner {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
-  background: var(--accent-soft);
-  border-radius: 99px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  animation: slideUp 0.3s var(--ease) both;
-}
+.editing-banner { background: var(--bg2); color: var(--text); border: 1px solid var(--border); border-radius: var(--r); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; font-weight: 700; box-shadow: none; }
 .editing-banner .btn {
   margin-right: auto;
 }
