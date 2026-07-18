@@ -789,20 +789,9 @@ async function submitExam(status) {
     screenStream = null;
   }
   var score = 0;
-  var hasPendingEssay = false;
   examData.questions.forEach(function (q, i) {
-    q.type = q.type || "mcq";
-    q.points = q.points || 1;
-    if (q.type === "mcq") {
-      if (answers[i] !== undefined && parseInt(answers[i]) === q.correctAnswer) {
-        score += q.points;
-      }
-    } else {
-      hasPendingEssay = true;
-    }
+    if (answers[i] === q.correctAnswer) score++;
   });
-  var totalExamPoints = 0;
-  examData.questions.forEach(function(q) { totalExamPoints += (q.points || 1); });
   localStorage.removeItem("examRecovery_" + examId);
   try {
     await update(ref(db, "attempts/" + examId + "/" + attemptId), {
@@ -858,7 +847,7 @@ async function submitExam(status) {
     if (typeof confetti === "function") {
       confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
     }
-    var total = totalExamPoints;
+    var total = examData.questions.length;
     var pct = Math.round((score / total) * 100);
     var wrong = total - score;
     var showCorrect = examData.showCorrectToStudent === true;
@@ -889,21 +878,20 @@ async function submitExam(status) {
       '<div class="results-summary" style="display: flex; gap: 2rem; justify-content: center; align-items: center; margin-bottom: 2rem; padding: 2rem; flex-wrap: wrap;">' +
       '<div style="text-align: center; flex: 1; min-width: 200px;">' +
       '<div style="font-size: 5rem; font-weight: 900; color: ' +
-      (pct >= 50 ? 'var(--green)' : 'var(--red)') +
+      (pct >= 50 ? "var(--green)" : "var(--red)") +
       '; line-height: 1;">' +
       pct +
-      '%</div>' +
+      "%</div>" +
       '<div style="color: var(--text2); font-size: 1.2rem; margin-top: 10px; font-weight: 700;">الدرجة: ' +
       score +
       " من " +
       total +
-      '</div>' +
-      (hasPendingEssay ? '<div style="color:var(--orange); font-size:0.9rem; margin-top:8px; font-weight:700;"><i class="fa-solid fa-clock"></i> جاري تصحيح الأسئلة المقالية وستُضاف درجاتها لاحقاً</div>' : '') +
-      '</div>' +
+      "</div>" +
+      "</div>" +
       '<div style="width: 200px; height: 200px; position: relative; display: flex; align-items: center; justify-content: center;">' +
       '<canvas id="student-score-chart"></canvas>' +
-      '</div>' +
-      '</div>';
+      "</div>" +
+      "</div>";
     if (showCorrect) {
       var toggleBtn = document.createElement("button");
       toggleBtn.className = "results-toggle";
@@ -914,21 +902,53 @@ async function submitExam(status) {
       toggleBtn.onmouseover = function () {
         this.style.borderColor = "var(--accent)";
         this.style.color = "var(--accent)";
+        this.style.transform = "translateY(-2px)";
       };
       toggleBtn.onmouseout = function () {
         this.style.borderColor = "var(--border)";
         this.style.color = "var(--text)";
+        this.style.transform = "none";
       };
       resultsArea.appendChild(toggleBtn);
       var wqList = document.createElement("div");
       wqList.className = "wrong-questions-list";
       wqList.style.display = "none";
       examData.questions.forEach(function (q, qi) {
-        q.type = q.type || "mcq";
-        q.points = q.points || 1;
+        var sa = answers[qi] !== undefined ? parseInt(answers[qi]) : -1;
+        var isCorrect = sa === q.correctAnswer;
         var item = document.createElement("div");
         item.className = "wq-item";
         item.style.animationDelay = qi * 0.05 + "s";
+        var yourAnsText =
+          sa >= 0 && sa < q.options.length
+            ? labels[sa] + ": " + escH(q.options[sa])
+            : "مجاوبتش";
+        var iconClass = isCorrect ? "fa-check" : "fa-xmark";
+        var iconColor = isCorrect ? "var(--green)" : "var(--red)";
+        var inner =
+          '<div style="padding: 1.5rem 0; margin-bottom: 1.5rem; text-align: right; border-bottom: 1px dashed var(--border); position: relative;">' +
+          '<div style="display: flex; align-items: center; gap: 10px; font-weight: 800; color: ' +
+          iconColor +
+          '; margin-bottom: 12px; font-size: 1.1rem;"><i class="fa-solid ' +
+          iconClass +
+          '"></i> السؤال ' +
+          (qi + 1) +
+          "</div>" +
+          '<div style="font-size: 1.15rem; color: var(--text); font-weight: 800; margin-bottom: 16px; line-height: 1.7;">' +
+          escH(q.text) +
+          "</div>" +
+          '<div style="display: grid; gap: 12px; margin-right: 15px; border-right: 3px solid var(--border-light); padding-right: 15px;">' +
+          '<div style="display: flex; align-items: flex-start; gap: 10px;"><i class="fa-solid fa-user-pen" style="color: var(--text3); margin-top: 4px;"></i> <div><span style="color: var(--text3); font-size: 0.9rem; display: block; margin-bottom: 4px; font-weight: 600;">إجابتك</span><span style="color: ' +
+          iconColor +
+          '; font-weight: 800; font-size: 1.05rem;">' +
+          yourAnsText +
+          "</span></div></div>" +
+          '<div style="display: flex; align-items: flex-start; gap: 10px;"><i class="fa-solid fa-circle-check" style="color: var(--green); margin-top: 4px;"></i> <div><span style="color: var(--text3); font-size: 0.9rem; display: block; margin-bottom: 4px; font-weight: 600;">الإجابة الصحيحة</span><span style="color: var(--green); font-weight: 800; font-size: 1.05rem;">' +
+          labels[q.correctAnswer] +
+          ": " +
+          escH(q.options[q.correctAnswer]) +
+          "</span></div></div>" +
+          "</div>";
         if (q.explanation) {
           inner +=
             '<div style="margin-top: 20px; padding: 15px; background: var(--orange-soft); border-radius: 16px; border: 1px solid rgba(245,158,11,0.2); display: flex; align-items: flex-start; gap: 12px;"><i class="fa-solid fa-lightbulb" style="color: var(--orange); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0;"></i><div><strong style="color: var(--orange); display: block; margin-bottom: 6px; font-size: 0.9rem;">التفسير والتوضيح</strong><span style="color: var(--text); line-height: 1.7; font-size: 0.95rem; font-weight: 600;">' +
@@ -1173,7 +1193,10 @@ if (isIos() && !isInStandaloneMode()) {
 }
 async function getIP() {
   try {
-    var r = await fetch("https://api.ipify.org?format=json");
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 2000);
+    var r = await fetch("https://api.ipify.org?format=json", { signal: controller.signal });
+    clearTimeout(id);
     var d = await r.json();
     return d.ip;
   } catch (e) {
