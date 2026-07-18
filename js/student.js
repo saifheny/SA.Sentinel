@@ -711,25 +711,16 @@ function showQ(i) {
       optsEl.appendChild(div);
     });
   } else if (q.type === "essay") {
-    // Only show textarea if the question has text (not image-only)
-    if (q.text && q.text.trim()) {
-      var txtArea = document.createElement("textarea");
-      txtArea.className = "field";
-      txtArea.style.width = "100%";
-      txtArea.style.minHeight = "140px";
-      txtArea.style.resize = "vertical";
-      txtArea.style.fontSize = "1rem";
-      txtArea.style.padding = "15px";
-      txtArea.style.marginTop = "0";
-      txtArea.style.borderRadius = "16px";
-      txtArea.placeholder = "اكتب إجابتك هنا...";
-      txtArea.value = answers[i] || "";
-      txtArea.addEventListener("input", function() {
-        answers[i] = this.value;
-      });
-      optsEl.appendChild(txtArea);
-    }
-    // If image-only essay, nothing extra shown (image already shown above)
+    // Always show textarea for essay (even if image-only — user can still write)
+    var txtArea = document.createElement("textarea");
+    txtArea.className = "field";
+    txtArea.style.cssText = "width:100%; min-height:140px; resize:vertical; font-size:1rem; padding:15px; margin-top:0; border-radius:16px; font-family:var(--font); line-height:1.8;";
+    txtArea.placeholder = "اكتب إجابتك هنا...";
+    txtArea.value = answers[i] || "";
+    txtArea.addEventListener("input", function() {
+      answers[i] = this.value;
+    });
+    optsEl.appendChild(txtArea);
   }
   
   document.getElementById("prog-fill").style.width =
@@ -748,23 +739,43 @@ function showQ(i) {
 }
 
 function openImageModal(src) {
-  var modal = document.getElementById("image-modal");
-  if (!modal) {
-    modal = document.createElement("div");
-    modal.id = "image-modal";
-    modal.style.position = "fixed";
-    modal.style.inset = "0";
-    modal.style.background = "rgba(0,0,0,0.9)";
-    modal.style.zIndex = "999999";
-    modal.style.display = "flex";
-    modal.style.alignItems = "center";
-    modal.style.justifyContent = "center";
-    modal.style.backdropFilter = "blur(10px)";
-    modal.innerHTML = '<button onclick="this.parentElement.style.display=\\\'none\\\'" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.1); border:none; color:#fff; width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);"><i class="fa-solid fa-xmark"></i></button><img src="" id="image-modal-img" style="max-width:95vw; max-height:95vh; object-fit:contain; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">';
-    document.body.appendChild(modal);
-  }
-  document.getElementById("image-modal-img").src = src;
-  modal.style.display = "flex";
+  // Remove old modal if exists to rebuild cleanly
+  var old = document.getElementById("image-modal");
+  if (old) old.remove();
+
+  var modal = document.createElement("div");
+  modal.id = "image-modal";
+  modal.style.cssText = "position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:999999; display:flex; align-items:center; justify-content:center; touch-action:pinch-zoom;";
+
+  // Close button — top-right, large, very visible
+  var closeBtn = document.createElement("button");
+  closeBtn.style.cssText = "position:fixed; top:18px; right:18px; background:rgba(255,255,255,0.18); border:2px solid rgba(255,255,255,0.35); color:#fff; width:48px; height:48px; border-radius:50%; cursor:pointer; font-size:1.4rem; display:flex; align-items:center; justify-content:center; z-index:10; backdrop-filter:blur(8px); transition:background 0.2s;";
+  closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+  closeBtn.onmouseenter = function() { this.style.background = 'rgba(255,255,255,0.32)'; };
+  closeBtn.onmouseleave = function() { this.style.background = 'rgba(255,255,255,0.18)'; };
+  closeBtn.onclick = function(e) { e.stopPropagation(); modal.remove(); };
+
+  // Image — supports pinch zoom natively on mobile, scroll zoom on desktop
+  var img = document.createElement("img");
+  img.id = "image-modal-img";
+  img.src = src;
+  img.style.cssText = "max-width:95vw; max-height:90vh; object-fit:contain; border-radius:10px; box-shadow:0 10px 50px rgba(0,0,0,0.6); touch-action:pinch-zoom; cursor:zoom-in; user-select:none;";
+
+  // Desktop scroll-to-zoom
+  var scale = 1;
+  img.addEventListener("wheel", function(e) {
+    e.preventDefault();
+    scale += e.deltaY < 0 ? 0.15 : -0.15;
+    scale = Math.max(0.5, Math.min(5, scale));
+    img.style.transform = "scale(" + scale + ")";
+  }, { passive: false });
+
+  // Click backdrop to close
+  modal.onclick = function(e) { if (e.target === modal) modal.remove(); };
+
+  modal.appendChild(closeBtn);
+  modal.appendChild(img);
+  document.body.appendChild(modal);
 }
 
 function pickAnswer(qi, oi, isMulti) {

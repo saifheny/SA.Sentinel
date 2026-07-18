@@ -255,13 +255,12 @@
   -ms-user-select: none;
 }
 .q-card {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(15px);
-  border-radius: 32px;
-  padding: 2.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   animation: entryBlur 0.4s var(--ease) both;
-  box-shadow: var(--shadow);
+  box-shadow: none;
 }
 .q-card-content {
   display: flex;
