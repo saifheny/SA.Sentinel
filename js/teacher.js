@@ -454,6 +454,9 @@ function addQuestion() {
     questions[i]._collapsed = true;
   }
   questions.push({
+    type: "mcq", // "mcq" or "essay"
+    points: 1, // default points
+    image: "", // base64 image
     text: "",
     options: ["", ""],
     correctAnswer: -1,
@@ -494,140 +497,128 @@ function removeOpt(qi, oi) {
 function renderQ() {
   var c = document.getElementById("questions-container");
   c.innerHTML = "";
-  var labels = [
-    "\u0623",
-    "\u0628",
-    "\u062c",
-    "\u062f",
-    "\u0647\u0640",
-    "\u0648",
-  ];
+  var labels = ["أ", "ب", "ج", "د", "هـ", "و"];
   questions.forEach(function (q, qi) {
-    var optsHtml = questions[qi].options
-      .map(function (opt, oi) {
+    q.type = q.type || "mcq";
+    q.points = q.points || 1;
+    q.image = q.image || "";
+    
+    var optsHtml = "";
+    if (q.type === "mcq") {
+      optsHtml = q.options.map(function (opt, oi) {
         var ok = q.correctAnswer === oi;
         return (
-          '<div class="opt' +
-          (ok ? " correct" : "") +
-          '">' +
-          '<input type="radio" class="opt-radio" name="ans-' +
-          qi +
-          '" id="ans-' +
-          qi +
-          "-" +
-          oi +
-          '" ' +
-          (ok ? "checked" : "") +
-          ' data-q="' +
-          qi +
-          '" data-o="' +
-          oi +
-          '">' +
-          '<span style="font-weight:700;color:var(--text3);font-size:0.72rem;min-width:14px">' +
-          labels[oi] +
-          "</span>" +
-          '<input type="text" class="opt-text" name="opt-text-' +
-          qi +
-          "-" +
-          oi +
-          '" id="opt-text-' +
-          qi +
-          "-" +
-          oi +
-          '" placeholder="الخيار ' +
-          labels[oi] +
-          '" value="' +
-          esc(opt) +
-          '" data-q="' +
-          qi +
-          '" data-o="' +
-          oi +
-          '">' +
-          '<button class="opt-x" data-q="' +
-          qi +
-          '" data-o="' +
-          oi +
-          '"><i class="fa-solid fa-xmark"></i></button>' +
-          "</div>"
+          '<div class="opt' + (ok ? " correct" : "") + '">' +
+          '<input type="radio" class="opt-radio" name="ans-' + qi + '" id="ans-' + qi + '-' + oi + '" ' + (ok ? "checked" : "") + ' data-q="' + qi + '" data-o="' + oi + '">' +
+          '<span style="font-weight:700;color:var(--text3);font-size:0.72rem;min-width:14px">' + labels[oi] + '</span>' +
+          '<input type="text" class="opt-text" name="opt-text-' + qi + '-' + oi + '" id="opt-text-' + qi + '-' + oi + '" placeholder="الخيار ' + labels[oi] + '" value="' + esc(opt) + '" data-q="' + qi + '" data-o="' + oi + '">' +
+          '<button class="opt-x" data-q="' + qi + '" data-o="' + oi + '"><i class="fa-solid fa-xmark"></i></button>' +
+          '</div>'
         );
-      })
-      .join("");
+      }).join("");
+    }
+    
     var block = document.createElement("div");
     block.className = "q-block";
     block.style.animationDelay = qi * 0.04 + "s";
     var isCollapsed = q._collapsed ? ' style="display:none;"' : "";
     var toggleIcon = q._collapsed ? "fa-chevron-down" : "fa-chevron-up";
-    var qTitleStr = q.text
-      ? q.text.substring(0, 40) + (q.text.length > 40 ? "..." : "")
-      : "سؤال جديد";
+    var qTitleStr = q.text ? q.text.substring(0, 40) + (q.text.length > 40 ? "..." : "") : "سؤال جديد";
+    
+    var imgPreview = q.image ? '<div style="margin-top:10px; position:relative; display:inline-block;"><img src="' + q.image + '" style="max-height:100px; border-radius:8px; border:1px solid var(--border);"><button class="btn-remove-img" data-q="' + qi + '" style="position:absolute; top:-5px; right:-5px; background:var(--red); color:#fff; border:none; border-radius:50%; width:20px; height:20px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button></div>' : '';
+
     block.innerHTML =
       '<div class="q-top" style="align-items:center;">' +
-      '<div class="q-num" style="display:flex; align-items:center;"><span class="q-badge">' +
-      (qi + 1) +
-      "</span>السؤال " +
-      (qi + 1) +
-      (q._collapsed
-        ? ' <span style="font-size:0.85rem; color: var(--text3); font-weight:normal; margin-right:15px; background:var(--bg2); padding:4px 10px; border-radius:99px; border:1px solid var(--border);">' +
-          esc(qTitleStr) +
-          "</span>"
-        : "") +
-      "</div>" +
+      '<div class="q-num" style="display:flex; align-items:center;"><span class="q-badge">' + (qi + 1) + '</span>السؤال ' + (qi + 1) + 
+      (q._collapsed ? ' <span style="font-size:0.85rem; color: var(--text3); font-weight:normal; margin-right:15px; background:var(--bg2); padding:4px 10px; border-radius:99px; border:1px solid var(--border);">' + esc(qTitleStr) + '</span>' : '') +
+      '</div>' +
       '<div style="display:flex; gap:8px;">' +
-      '<button class="icon-btn q-toggle" data-q="' +
-      qi +
-      '" title="تصغير/تكبير" style="border-radius:10px;"><i class="fa-solid ' +
-      toggleIcon +
-      '"></i></button>' +
-      '<button class="q-del" data-q="' +
-      qi +
-      '" title="امسح السؤال"><i class="fa-solid fa-eraser"></i></button>' +
-      "</div>" +
-      "</div>" +
-      '<div class="q-body"' +
-      isCollapsed +
-      ">" +
-      '<textarea class="q-input" name="q-input-' +
-      qi +
-      '" id="q-input-' +
-      qi +
-      '" data-q="' +
-      qi +
-      '" placeholder="اكتب نص السؤال هنا..." rows="1">' +
-      esc(q.text) +
-      "</textarea>" +
-      '<div class="opts">' +
-      optsHtml +
-      "</div>" +
+      '<button class="icon-btn q-toggle" data-q="' + qi + '" title="تصغير/تكبير" style="border-radius:10px;"><i class="fa-solid ' + toggleIcon + '"></i></button>' +
+      '<button class="q-del" data-q="' + qi + '" title="امسح السؤال"><i class="fa-solid fa-eraser"></i></button>' +
+      '</div></div>' +
+      '<div class="q-body"' + isCollapsed + '>' +
+      
+      '<div style="display:flex; gap:15px; margin-bottom:15px;">' +
+      '<div class="field-wrap" style="flex:1;"><label>نوع السؤال</label>' +
+      '<select class="field q-type-select" data-q="' + qi + '">' +
+      '<option value="mcq"' + (q.type === 'mcq' ? ' selected' : '') + '>اختياري</option>' +
+      '<option value="essay"' + (q.type === 'essay' ? ' selected' : '') + '>مقالي</option>' +
+      '</select></div>' +
+      
+      '<div class="field-wrap" style="flex:1;"><label>الدرجة</label>' +
+      '<input type="number" class="field q-points-input" data-q="' + qi + '" value="' + q.points + '" min="1"></div>' +
+      
+      '<div class="field-wrap" style="flex:1;"><label>صورة للسؤال</label>' +
+      '<input type="file" class="field q-img-input" data-q="' + qi + '" accept="image/*" style="font-size:0.8rem; padding: 6px;"></div>' +
+      '</div>' + imgPreview +
+      
+      '<textarea class="q-input" name="q-input-' + qi + '" id="q-input-' + qi + '" data-q="' + qi + '" placeholder="اكتب نص السؤال هنا..." rows="1">' + esc(q.text) + '</textarea>' +
+      
+      (q.type === 'mcq' ? '<div class="opts">' + optsHtml + '</div>' : '<div style="padding:15px; background:var(--bg2); border-radius:8px; margin-top:10px; color:var(--text3); font-size:0.9rem; text-align:center;"><i class="fa-solid fa-align-right"></i> سيتم عرض مربع نصي للطالب لكتابة إجابته هنا.</div>') +
+      
       '<div style="margin-top: 15px;">' +
-      '<button class="btn btn-soft btn-sm toggle-exp" data-q="' +
-      qi +
-      '" style="border-radius: 99px; padding: 6px 14px; font-size: 0.8rem; margin-bottom: 8px;"><i class="fa-solid fa-lightbulb" style="color:var(--orange);"></i> ' +
-      (q._showExp ? "إخفاء التفسير" : "ضيف تفسير للإجابة") +
-      "</button>" +
-      '<textarea class="opt-exp field" name="q-exp-' +
-      qi +
-      '" id="q-exp-' +
-      qi +
-      '" data-q="' +
-      qi +
-      '" placeholder="اكتب ليه الإجابة دي هي الصح..." rows="1" style="resize:none; display: ' +
-      (q._showExp ? "block" : "none") +
-      ';">' +
-      esc(q.explanation || "") +
-      "</textarea>" +
-      "</div>" +
-      '<button class="add-opt" data-q="' +
-      qi +
-      '"' +
-      (q.options.length >= 6 ? ' style="display:none"' : "") +
-      ">" +
-      '<i class="fa-solid fa-plus"></i> ضيف خيار</button>' +
-      "</div>";
+      '<button class="btn btn-soft btn-sm toggle-exp" data-q="' + qi + '" style="border-radius: 99px; padding: 6px 14px; font-size: 0.8rem; margin-bottom: 8px;"><i class="fa-solid fa-lightbulb" style="color:var(--orange);"></i> ' + (q._showExp ? "إخفاء التفسير" : "ضيف تفسير للإجابة") + '</button>' +
+      '<textarea class="opt-exp field" name="q-exp-' + qi + '" id="q-exp-' + qi + '" data-q="' + qi + '" placeholder="اكتب ليه الإجابة دي هي الصح..." rows="1" style="resize:none; display: ' + (q._showExp ? "block" : "none") + ';">' + esc(q.explanation || "") + '</textarea>' +
+      '</div>' +
+      (q.type === 'mcq' ? '<button class="add-opt" data-q="' + qi + '"' + (q.options.length >= 6 ? ' style="display:none"' : '') + '><i class="fa-solid fa-plus"></i> ضيف خيار</button>' : '') +
+      '</div>';
     c.appendChild(block);
   });
   bindQEvents();
 }
-function bindQEvents() {}
+
+function bindQEvents() {
+  document.querySelectorAll(".q-type-select").forEach(el => {
+    el.onchange = function() {
+      questions[this.dataset.q].type = this.value;
+      renderQ();
+    };
+  });
+  document.querySelectorAll(".q-points-input").forEach(el => {
+    el.onchange = function() {
+      questions[this.dataset.q].points = parseInt(this.value) || 1;
+    };
+  });
+  document.querySelectorAll(".q-img-input").forEach(el => {
+    el.onchange = function(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        
+        var img = new Image();
+        img.onload = function() {
+          var canvas = document.createElement("canvas");
+          var MAX = 800;
+          var width = img.width;
+          var height = img.height;
+          if (width > height) {
+            if (width > MAX) { height *= MAX / width; width = MAX; }
+          } else {
+            if (height > MAX) { width *= MAX / height; height = MAX; }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+          var dataUrl = canvas.toDataURL("image/jpeg", 0.7);
+          
+          questions[el.dataset.q].image = dataUrl;
+          renderQ();
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    };
+  });
+  document.querySelectorAll(".btn-remove-img").forEach(el => {
+    el.onclick = function() {
+      questions[this.dataset.q].image = "";
+      renderQ();
+    };
+  });
+}
+
 function startEdit(examId) {
   get(ref(db, "exams/" + examId)).then(function (snap) {
     if (!snap.exists()) {
@@ -650,9 +641,12 @@ function startEdit(examId) {
     }
     questions = data.questions.map(function (q) {
       return {
+        type: q.type || "mcq",
+        points: q.points || 1,
+        image: q.image || "",
         text: q.text,
-        options: q.options.slice(),
-        correctAnswer: q.correctAnswer,
+        options: (q.options || []).slice(),
+        correctAnswer: q.correctAnswer !== undefined ? q.correctAnswer : -1,
         explanation: q.explanation || "",
         _showExp: !!q.explanation,
       };
@@ -716,7 +710,7 @@ async function uploadExam() {
         return;
       }
     }
-    if (questions[i].correctAnswer === -1) {
+    if (questions[i].type !== "essay" && questions[i].correctAnswer === -1) {
       toast("اختار الإجابة الصح للسؤال " + (i + 1), "bad");
       return;
     }
@@ -1491,68 +1485,154 @@ async function showReport(examId, attemptId) {
     } else {
       pSection.style.display = "none";
     }
+    var totalExamPoints = 0;
+    var gradedScore = 0;
+    var pendingEssay = false;
+
+    exam.questions.forEach(function(q) {
+      totalExamPoints += (q.points || 1);
+    });
+
+    var ans = a.answers || {};
     var qCont = document.getElementById("rpt-questions");
     qCont.innerHTML = "";
-    var ans = a.answers || {};
+
+    window.currentReportExam = exam;
+    window.currentReportAttempt = a;
+    window.currentReportExamId = examId;
+    window.currentReportAttemptId = attemptId;
+
     exam.questions.forEach(function (q, qi) {
-      var sa = ans[qi] !== undefined ? parseInt(ans[qi]) : -1;
-      var ok = sa === q.correctAnswer;
-      var optsH = q.options
-        .map(function (opt, oi) {
-          var cls = "",
-            ic = '<i class="fa-regular fa-circle" style="opacity:0.25;"></i>',
-            tag = "";
-          if (oi === q.correctAnswer && oi === sa) {
-            cls = "is-correct";
-            ic = '<i class="fa-solid fa-check"></i>';
-            tag =
-              '<span class="rpt-tag ctag">\u2713 \u0635\u062d + \u0627\u062e\u062a\u064a\u0627\u0631 \u0627\u0644\u0637\u0627\u0644\u0628</span>';
-          } else if (oi === q.correctAnswer) {
-            cls = "is-correct";
-            ic = '<i class="fa-solid fa-check"></i>';
-            tag =
-              '<span class="rpt-tag ctag">\u2713 \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629</span>';
-          } else if (oi === sa) {
-            cls = "is-wrong";
-            ic = '<i class="fa-solid fa-xmark"></i>';
-            tag =
-              '<span class="rpt-tag wtag">\u2717 \u0627\u062e\u062a\u0627\u0631 \u0627\u0644\u0637\u0627\u0644\u0628</span>';
-          }
-          return (
-            '<div class="rpt-opt ' +
-            cls +
-            '">' +
-            ic +
-            " " +
-            esc(opt) +
-            tag +
-            "</div>"
-          );
-        })
-        .join("");
-      var card = document.createElement("div");
-      card.className = "rpt-q " + (ok ? "correct" : "wrong");
-      card.innerHTML =
-        '<div class="rpt-q-head">' +
-        '<span style="font-weight:800;font-size:0.85rem;">\u0627\u0644\u0633\u0624\u0627\u0644 ' +
-        (qi + 1) +
-        "</span>" +
-        '<span class="rpt-q-status ' +
-        (ok ? "correct" : "wrong") +
-        '"><i class="fa-solid ' +
-        (ok ? "fa-check" : "fa-xmark") +
-        '"></i> ' +
-        (ok ? "\u0635\u062d" : "\u063a\u0644\u0637") +
-        "</span>" +
-        "</div>" +
-        '<div class="rpt-q-text">' +
-        esc(q.text) +
-        "</div>" +
-        '<div class="rpt-opts">' +
-        optsH +
-        "</div>";
-      qCont.appendChild(card);
+      q.type = q.type || "mcq";
+      q.points = q.points || 1;
+      var qScore = 0;
+
+      if (q.type === "mcq") {
+        var sa = ans[qi] !== undefined ? parseInt(ans[qi]) : -1;
+        var ok = sa === q.correctAnswer;
+        if (ok) qScore = q.points;
+        
+        var optsH = q.options.map(function (opt, oi) {
+            var cls = "", ic = '<i class="fa-regular fa-circle" style="opacity:0.25;"></i>', tag = "";
+            if (oi === q.correctAnswer && oi === sa) {
+              cls = "is-correct";
+              ic = '<i class="fa-solid fa-check"></i>';
+              tag = '<span class="rpt-tag ctag">✓ صح + اختيار الطالب</span>';
+            } else if (oi === q.correctAnswer) {
+              cls = "is-correct";
+              ic = '<i class="fa-solid fa-check"></i>';
+              tag = '<span class="rpt-tag ctag">✓ الإجابة الصحيحة</span>';
+            } else if (oi === sa) {
+              cls = "is-wrong";
+              ic = '<i class="fa-solid fa-xmark"></i>';
+              tag = '<span class="rpt-tag wtag">✗ اختار الطالب</span>';
+            }
+            return '<div class="rpt-opt ' + cls + '">' + ic + " " + esc(opt) + tag + "</div>";
+          }).join("");
+          
+        var card = document.createElement("div");
+        card.className = "rpt-q " + (ok ? "correct" : "wrong");
+        card.innerHTML =
+          '<div class="rpt-q-head">' +
+          '<span style="font-weight:800;font-size:0.85rem;">السؤال ' + (qi + 1) + ' (اختياري - ' + q.points + ' درجات)</span>' +
+          '<span class="rpt-q-status ' + (ok ? "correct" : "wrong") + '"><i class="fa-solid ' + (ok ? "fa-check" : "fa-xmark") + '"></i> ' + (ok ? "صح" : "غلط") + " (" + qScore + "/" + q.points + ")</span>" +
+          "</div>" +
+          (q.image ? '<img src="' + q.image + '" style="max-height:200px; border-radius:8px; display:block; margin:10px 0;">' : '') +
+          '<div class="rpt-q-text">' + esc(q.text) + "</div>" +
+          '<div class="rpt-opts">' + optsH + "</div>";
+        qCont.appendChild(card);
+        gradedScore += qScore;
+        
+      } else if (q.type === "essay") {
+        var studentText = ans[qi] || "";
+        // essayPoints can be saved in a.essayGrades[qi]
+        var eGrades = a.essayGrades || {};
+        var isGraded = eGrades[qi] !== undefined;
+        var eScore = isGraded ? eGrades[qi] : 0;
+        if (isGraded) {
+          gradedScore += eScore;
+        } else {
+          pendingEssay = true;
+        }
+        
+        var card = document.createElement("div");
+        card.className = "rpt-q";
+        card.style.borderColor = isGraded ? "var(--accent)" : "var(--orange)";
+        
+        var headH = '<div class="rpt-q-head">' +
+          '<span style="font-weight:800;font-size:0.85rem;">السؤال ' + (qi + 1) + ' (مقالي - من ' + q.points + ' درجات)</span>' +
+          '<span class="rpt-q-status" style="color:' + (isGraded ? 'var(--accent)' : 'var(--orange)') + '"><i class="fa-solid ' + (isGraded ? "fa-check-double" : "fa-clock") + '"></i> ' + (isGraded ? "تم التصحيح (" + eScore + "/" + q.points + ")" : "في انتظار التصحيح") + '</span>' +
+          '</div>';
+          
+        var bodyH = (q.image ? '<img src="' + q.image + '" style="max-height:200px; border-radius:8px; display:block; margin:10px 0;">' : '') +
+                    '<div class="rpt-q-text">' + esc(q.text) + '</div>' +
+                    '<div style="background:var(--bg2); padding:15px; border-radius:8px; margin-top:10px; border:1px solid var(--border); white-space:pre-wrap; color:var(--text);">' + esc(studentText || 'لم يكتب الطالب شيئاً') + '</div>';
+                    
+        var gradeH = '<div style="margin-top:15px; display:flex; gap:10px; align-items:center; background:rgba(255,255,255,0.03); padding:10px; border-radius:8px;">' +
+                     '<label>الدرجة المستحقة:</label>' +
+                     '<input type="number" class="field essay-grade-input" data-qi="' + qi + '" data-max="' + q.points + '" value="' + (isGraded ? eScore : '') + '" min="0" max="' + q.points + '" style="width:80px; padding:6px;">' +
+                     '<span style="color:var(--text3);">من ' + q.points + '</span>' +
+                     '<button class="btn btn-sm btn-accent btn-save-essay" data-qi="' + qi + '">احفظ الدرجة</button>' +
+                     '</div>';
+                     
+        card.innerHTML = headH + bodyH + gradeH;
+        qCont.appendChild(card);
+      }
     });
+    
+    var pct = Math.round((gradedScore / totalExamPoints) * 100);
+    // Update header score text dynamically based on our gradedScore
+    // We already output a header earlier in the function, so let's update it in the DOM!
+    var scoreElem = document.getElementById("rpt-header").querySelector("strong");
+    if(scoreElem) {
+        scoreElem.innerHTML = gradedScore + "/" + totalExamPoints + " (" + pct + "%)" + (pendingEssay ? " <span style='font-size:0.75rem; color:var(--orange);'>(المقالي لسه بيتعلم)</span>" : "");
+    }
+
+    // Attach event listeners for saving essay grades
+    document.querySelectorAll('.btn-save-essay').forEach(btn => {
+      btn.onclick = async function() {
+        var qi = this.dataset.qi;
+        var input = document.querySelector('.essay-grade-input[data-qi="' + qi + '"]');
+        var val = parseFloat(input.value);
+        var max = parseFloat(input.dataset.max);
+        if (isNaN(val) || val < 0 || val > max) {
+          toast("الدرجة غير صحيحة", "bad");
+          return;
+        }
+        
+        var eg = window.currentReportAttempt.essayGrades || {};
+        eg[qi] = val;
+        
+        // Recalculate total score
+        var newScore = 0;
+        window.currentReportExam.questions.forEach((q, i) => {
+          q.type = q.type || "mcq";
+          q.points = q.points || 1;
+          if (q.type === "mcq") {
+            var sa = window.currentReportAttempt.answers[i] !== undefined ? parseInt(window.currentReportAttempt.answers[i]) : -1;
+            if (sa === q.correctAnswer) newScore += q.points;
+          } else if (q.type === "essay") {
+            if (eg[i] !== undefined) newScore += eg[i];
+          }
+        });
+        
+        try {
+          var attemptRef = ref(db, "attempts/" + window.currentReportExamId + "/" + window.currentReportAttemptId);
+          await update(attemptRef, {
+            essayGrades: eg,
+            score: newScore
+          });
+          toast("تم حفظ درجة المقالي وتحديث المجموع!", "ok");
+          window.currentReportAttempt.essayGrades = eg;
+          window.currentReportAttempt.score = newScore;
+          // Refresh report
+          showReport(window.currentReportExamId, window.currentReportAttemptId);
+        } catch(e) {
+          toast("خطأ في الحفظ", "bad");
+        }
+      };
+    });
+
     var logList = document.getElementById("rpt-log-list");
     logList.innerHTML = "";
     if (a.logs) {

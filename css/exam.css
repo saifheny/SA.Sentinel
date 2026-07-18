@@ -81,6 +81,7 @@
   direction: rtl;
   background: transparent;
   z-index: 10;
+  overflow-y: auto;
 }
 .mobile-hero {
   display: none;

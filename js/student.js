@@ -642,6 +642,9 @@ function updateTimer() {
 function showQ(i) {
   stopTTS();
   var q = examData.questions[i];
+  q.type = q.type || "mcq";
+  q.points = q.points || 1;
+  
   curQ = i;
   var tot = examData.questions.length;
   var card = document.getElementById("q-card");
@@ -652,27 +655,65 @@ function showQ(i) {
     '<i class="fa-solid fa-circle-question"></i> السؤال ' +
     (i + 1) +
     " من " +
-    tot;
-  document.getElementById("q-txt").textContent = q.text;
+    tot + " (" + q.points + " درجات)";
+    
+  var qTxtElem = document.getElementById("q-txt");
+  qTxtElem.textContent = q.text;
+  
+  // Handle image
+  var imgContainer = document.getElementById("q-img-container");
+  if (!imgContainer) {
+    imgContainer = document.createElement("div");
+    imgContainer.id = "q-img-container";
+    imgContainer.style.marginBottom = "20px";
+    imgContainer.style.textAlign = "center";
+    qTxtElem.parentNode.insertBefore(imgContainer, qTxtElem.nextSibling);
+  }
+  
+  if (q.image) {
+    imgContainer.innerHTML = '<img src="' + q.image + '" style="max-width:100%; max-height:200px; border-radius:12px; cursor:zoom-in; border:1px solid var(--border);" onclick="openImageModal(this.src)">';
+    imgContainer.style.display = "block";
+  } else {
+    imgContainer.style.display = "none";
+  }
+  
   var optsEl = document.getElementById("q-opts");
   optsEl.innerHTML = "";
-  var labels = ["أ", "ب", "ج", "د", "هـ", "و"];
-  q.options.forEach(function (opt, oi) {
-    var picked = answers[i] === oi;
-    var div = document.createElement("div");
-    div.className = "ans-opt" + (picked ? " picked" : "");
-    div.innerHTML =
-      '<div class="ans-marker">' +
-      labels[oi] +
-      '</div><span class="ans-text">' +
-      escH(opt) +
-      "</span>";
-    div.addEventListener("click", function () {
-      playTap();
-      pickAnswer(i, oi);
+  
+  if (q.type === "mcq") {
+    var labels = ["أ", "ب", "ج", "د", "هـ", "و"];
+    q.options.forEach(function (opt, oi) {
+      var picked = answers[i] === oi;
+      var div = document.createElement("div");
+      div.className = "ans-opt" + (picked ? " picked" : "");
+      div.innerHTML =
+        '<div class="ans-marker">' +
+        labels[oi] +
+        '</div><span class="ans-text">' +
+        escH(opt) +
+        "</span>";
+      div.addEventListener("click", function () {
+        playTap();
+        pickAnswer(i, oi);
+      });
+      optsEl.appendChild(div);
     });
-    optsEl.appendChild(div);
-  });
+  } else if (q.type === "essay") {
+    var txtArea = document.createElement("textarea");
+    txtArea.className = "field";
+    txtArea.style.width = "100%";
+    txtArea.style.minHeight = "150px";
+    txtArea.style.resize = "vertical";
+    txtArea.style.fontSize = "1rem";
+    txtArea.style.padding = "15px";
+    txtArea.placeholder = "اكتب إجابتك هنا...";
+    txtArea.value = answers[i] || "";
+    txtArea.addEventListener("input", function() {
+      answers[i] = this.value;
+    });
+    optsEl.appendChild(txtArea);
+  }
+  
   document.getElementById("prog-fill").style.width =
     ((i + 1) / tot) * 100 + "%";
   document.getElementById("prog-txt").textContent = "إنجاز " + i + " من " + tot;
@@ -687,6 +728,27 @@ function showQ(i) {
   }
   updateFZ();
 }
+
+function openImageModal(src) {
+  var modal = document.getElementById("image-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "image-modal";
+    modal.style.position = "fixed";
+    modal.style.inset = "0";
+    modal.style.background = "rgba(0,0,0,0.9)";
+    modal.style.zIndex = "999999";
+    modal.style.display = "flex";
+    modal.style.alignItems = "center";
+    modal.style.justifyContent = "center";
+    modal.style.backdropFilter = "blur(10px)";
+    modal.innerHTML = '<button onclick="this.parentElement.style.display='none'" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.1); border:none; color:#fff; width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);"><i class="fa-solid fa-xmark"></i></button><img src="" id="image-modal-img" style="max-width:95vw; max-height:95vh; object-fit:contain; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">';
+    document.body.appendChild(modal);
+  }
+  document.getElementById("image-modal-img").src = src;
+  modal.style.display = "flex";
+}
+
 function pickAnswer(qi, oi) {
   answers[qi] = oi;
   var optsEl = document.getElementById("q-opts");
