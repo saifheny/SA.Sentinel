@@ -554,13 +554,15 @@ function renderQ() {
       
       '<textarea class="q-input" name="q-input-' + qi + '" id="q-input-' + qi + '" data-q="' + qi + '" placeholder="اكتب نص السؤال هنا..." rows="1">' + esc(q.text) + '</textarea>' +
       
-      (q.type === 'mcq' ? '<div class="opts">' + optsHtml + '</div>' : '<div style="padding:15px; background:var(--bg2); border-radius:8px; margin-top:10px; color:var(--text3); font-size:0.9rem; text-align:center;"><i class="fa-solid fa-align-right"></i> سيتم عرض مربع نصي للطالب لكتابة إجابته هنا.</div>') +
+      (q.type === 'mcq' ? '<div class="opts">' + optsHtml + '</div>' : '<p style="color:var(--text3); font-size:0.82rem; margin-top:10px;"><i class="fa-solid fa-align-right" style="color:var(--accent);"></i> سيظهر للطالب مربع نصي لكتابة إجابته.</p>') +
       
-      '<div style="margin-top: 15px;">' +
-      '<button class="btn btn-soft btn-sm toggle-exp" data-q="' + qi + '" style="border-radius: 99px; padding: 6px 14px; font-size: 0.8rem; margin-bottom: 8px;"><i class="fa-solid fa-lightbulb" style="color:var(--orange);"></i> ' + (q._showExp ? "إخفاء التفسير" : "ضيف تفسير للإجابة") + '</button>' +
-      '<textarea class="opt-exp field" name="q-exp-' + qi + '" id="q-exp-' + qi + '" data-q="' + qi + '" placeholder="اكتب ليه الإجابة دي هي الصح..." rows="1" style="resize:none; display: ' + (q._showExp ? "block" : "none") + ';">' + esc(q.explanation || "") + '</textarea>' +
-      '</div>' +
-      (q.type === 'mcq' ? '<button class="add-opt" data-q="' + qi + '"' + (q.options.length >= 6 ? ' style="display:none"' : '') + '><i class="fa-solid fa-plus"></i> ضيف خيار</button>' : '') +
+      (q.type === 'mcq' ?
+        '<div style="margin-top: 15px;">' +
+        '<button class="btn btn-soft btn-sm toggle-exp" data-q="' + qi + '" style="border-radius: 99px; padding: 6px 14px; font-size: 0.8rem; margin-bottom: 8px;"><i class="fa-solid fa-lightbulb" style="color:var(--orange);"></i> ' + (q._showExp ? "إخفاء التفسير" : "ضيف تفسير للإجابة") + '</button>' +
+        '<textarea class="opt-exp field" name="q-exp-' + qi + '" id="q-exp-' + qi + '" data-q="' + qi + '" placeholder="اكتب ليه الإجابة دي هي الصح..." rows="1" style="resize:none; display: ' + (q._showExp ? "block" : "none") + ';">' + esc(q.explanation || "") + '</textarea>' +
+        '</div>' +
+        '<button class="add-opt" data-q="' + qi + '"' + (q.options.length >= 6 ? ' style="display:none"' : '') + '><i class="fa-solid fa-plus"></i> ضيف خيار</button>'
+      : '') +
       '</div>';
     c.appendChild(block);
   });
@@ -740,6 +742,9 @@ async function uploadExam() {
     questions: questions.map(function (q) {
       return {
         text: q.text,
+        type: q.type || "mcq",
+        points: q.points || 1,
+        image: q.image || "",
         options: q.options.slice(),
         correctAnswer: q.correctAnswer,
         explanation: q.explanation || "",
