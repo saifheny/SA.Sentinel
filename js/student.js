@@ -681,37 +681,55 @@ function showQ(i) {
   optsEl.innerHTML = "";
   
   if (q.type === "mcq") {
+    var isMulti = q.options.length > 4;
     var labels = ["أ", "ب", "ج", "د", "هـ", "و"];
+    // For multi-select, answers[i] is an array; for single, it's a number
+    if (isMulti && !Array.isArray(answers[i])) {
+      // Migrate existing single answer to array if switching
+      answers[i] = answers[i] !== undefined ? [answers[i]] : [];
+    }
+    if (isMulti) {
+      var hint = document.createElement("p");
+      hint.style.cssText = "font-size:0.78rem; color:var(--text3); margin-bottom:8px; margin-top:0;";
+      hint.textContent = "يمكنك اختيار أكثر من إجابة";
+      optsEl.appendChild(hint);
+    }
     q.options.forEach(function (opt, oi) {
-      var picked = answers[i] === oi;
+      var picked = isMulti ? (Array.isArray(answers[i]) && answers[i].indexOf(oi) !== -1) : (answers[i] === oi);
       var div = document.createElement("div");
       div.className = "ans-opt" + (picked ? " picked" : "");
       div.innerHTML =
         '<div class="ans-marker">' +
-        labels[oi] +
+        (isMulti ? '<i class="fa-solid fa-check" style="font-size:0.7rem;"></i>' : labels[oi]) +
         '</div><span class="ans-text">' +
         escH(opt) +
         "</span>";
       div.addEventListener("click", function () {
         playTap();
-        pickAnswer(i, oi);
+        pickAnswer(i, oi, isMulti);
       });
       optsEl.appendChild(div);
     });
   } else if (q.type === "essay") {
-    var txtArea = document.createElement("textarea");
-    txtArea.className = "field";
-    txtArea.style.width = "100%";
-    txtArea.style.minHeight = "150px";
-    txtArea.style.resize = "vertical";
-    txtArea.style.fontSize = "1rem";
-    txtArea.style.padding = "15px";
-    txtArea.placeholder = "اكتب إجابتك هنا...";
-    txtArea.value = answers[i] || "";
-    txtArea.addEventListener("input", function() {
-      answers[i] = this.value;
-    });
-    optsEl.appendChild(txtArea);
+    // Only show textarea if the question has text (not image-only)
+    if (q.text && q.text.trim()) {
+      var txtArea = document.createElement("textarea");
+      txtArea.className = "field";
+      txtArea.style.width = "100%";
+      txtArea.style.minHeight = "140px";
+      txtArea.style.resize = "vertical";
+      txtArea.style.fontSize = "1rem";
+      txtArea.style.padding = "15px";
+      txtArea.style.marginTop = "0";
+      txtArea.style.borderRadius = "16px";
+      txtArea.placeholder = "اكتب إجابتك هنا...";
+      txtArea.value = answers[i] || "";
+      txtArea.addEventListener("input", function() {
+        answers[i] = this.value;
+      });
+      optsEl.appendChild(txtArea);
+    }
+    // If image-only essay, nothing extra shown (image already shown above)
   }
   
   document.getElementById("prog-fill").style.width =
@@ -749,13 +767,26 @@ function openImageModal(src) {
   modal.style.display = "flex";
 }
 
-function pickAnswer(qi, oi) {
-  answers[qi] = oi;
+function pickAnswer(qi, oi, isMulti) {
+  if (isMulti) {
+    if (!Array.isArray(answers[qi])) answers[qi] = [];
+    var idx = answers[qi].indexOf(oi);
+    if (idx === -1) {
+      answers[qi].push(oi);
+    } else {
+      answers[qi].splice(idx, 1);
+    }
+  } else {
+    answers[qi] = oi;
+  }
   var optsEl = document.getElementById("q-opts");
   if (optsEl) {
     var opts = optsEl.querySelectorAll(".ans-opt");
     opts.forEach(function (optDiv, index) {
-      if (index === oi) {
+      var isPicked = isMulti
+        ? (Array.isArray(answers[qi]) && answers[qi].indexOf(index) !== -1)
+        : (index === oi);
+      if (isPicked) {
         optDiv.classList.add("picked");
       } else {
         optDiv.classList.remove("picked");

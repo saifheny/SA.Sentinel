@@ -264,9 +264,9 @@
   box-shadow: var(--shadow);
 }
 .q-card-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 .q-num-label {
@@ -283,13 +283,12 @@
   font-weight: 800;
   line-height: 1.8;
   color: var(--text);
-  background: var(--glass2);
-  padding: 1.8rem;
-  border-radius: 24px;
-  border: 1px solid var(--glass-border);
-  display: flex;
-  align-items: center;
-  box-shadow: var(--shadow-sm);
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  display: block;
+  box-shadow: none;
 }
 .q-answers {
   display: flex;
@@ -318,17 +317,15 @@
 .ans-opt:hover {
   border-color: var(--accent);
   background: var(--glass);
-  transform: scale(1.01);
 }
 .ans-opt.picked {
   border-color: var(--accent);
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   color: #fff;
-  box-shadow: 0 10px 25px var(--accent-glow);
-  transform: scale(1.03);
+  box-shadow: 0 6px 18px var(--accent-glow);
 }
 .ans-opt:active {
-  transform: scale(0.98);
+  opacity: 0.85;
 }
 .ans-marker {
   width: 28px;
