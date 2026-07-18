@@ -700,19 +700,25 @@ async function uploadExam() {
   }
   syncDOM();
   for (var i = 0; i < questions.length; i++) {
-    if (!questions[i].text.trim()) {
-      toast("السؤال " + (i + 1) + " فاضي", "bad");
+    var q = questions[i];
+    q.type = q.type || "mcq";
+    // النص إجباري فقط لو مفيش صورة
+    if (!q.text.trim() && !q.image) {
+      toast("السؤال " + (i + 1) + " فاضي (اكتب نص أو ارفع صورة)", "bad");
       return;
     }
-    for (var j = 0; j < questions[i].options.length; j++) {
-      if (!questions[i].options[j].trim()) {
-        toast("في خيار فاضي في سؤال " + (i + 1), "bad");
+    // تحقق الخيارات والإجابة فقط للأسئلة الاختيارية
+    if (q.type === "mcq") {
+      for (var j = 0; j < q.options.length; j++) {
+        if (!q.options[j].trim()) {
+          toast("في خيار فاضي في سؤال " + (i + 1), "bad");
+          return;
+        }
+      }
+      if (q.correctAnswer === -1) {
+        toast("اختار الإجابة الصح للسؤال " + (i + 1), "bad");
         return;
       }
-    }
-    if (questions[i].type !== "essay" && questions[i].correctAnswer === -1) {
-      toast("اختار الإجابة الصح للسؤال " + (i + 1), "bad");
-      return;
     }
   }
   var data = {

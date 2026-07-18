@@ -114,7 +114,6 @@
 }
 .opt:hover {
   background: rgba(255, 255, 255, 0.7);
-  transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
 .opt.correct {
@@ -184,7 +183,6 @@
 }
 .add-opt:hover {
   background: var(--accent-soft);
-  transform: translateY(-1px);
 }
 
 .builder-footer {
@@ -291,7 +289,7 @@
   animation: stagger 0.4s var(--ease) both;
 }
 .stat-box:hover {
-  transform: translateY(-4px);
+  opacity: 0.9;
 }
 .stat-box .val {
   font-size: 2rem;
@@ -607,8 +605,8 @@
   box-shadow: 0 4px 18px var(--accent-glow);
 }
 .ai-btn:hover {
-  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 28px var(--accent-glow);
+  opacity: 0.9;
 }
 .ai-result {
   margin-top: 0.75rem;
