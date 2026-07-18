@@ -742,7 +742,7 @@ function openImageModal(src) {
     modal.style.alignItems = "center";
     modal.style.justifyContent = "center";
     modal.style.backdropFilter = "blur(10px)";
-    modal.innerHTML = '<button onclick="this.parentElement.style.display='none'" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.1); border:none; color:#fff; width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);"><i class="fa-solid fa-xmark"></i></button><img src="" id="image-modal-img" style="max-width:95vw; max-height:95vh; object-fit:contain; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">';
+    modal.innerHTML = '<button onclick="this.parentElement.style.display=\\\'none\\\'" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.1); border:none; color:#fff; width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);"><i class="fa-solid fa-xmark"></i></button><img src="" id="image-modal-img" style="max-width:95vw; max-height:95vh; object-fit:contain; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">';
     document.body.appendChild(modal);
   }
   document.getElementById("image-modal-img").src = src;
