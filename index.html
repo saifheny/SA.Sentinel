@@ -240,20 +240,18 @@
         animation: modalIn 1s var(--spring) both;
       }
       .auth-logo {
-        width: 72px;
-        height: 72px;
+        width: 90px;
+        height: 90px;
         margin-bottom: 2rem;
-        background: linear-gradient(135deg, var(--accent), var(--blue));
+        background: none;
         border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 10px 30px var(--accent-glow);
+        overflow: hidden;
       }
-      .auth-logo svg {
-        width: 36px;
-        height: 36px;
-        stroke: #fff;
+      .auth-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
       }
       .auth-title {
         font-size: 2.2rem;
@@ -546,7 +544,6 @@
               src="https://i.postimg.cc/Kv1wMLRK/6a2c85258bea1252fd907d4e3eb3a7d1.png"
               class="no-copy-img"
               alt="SA"
-              style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"
               oncontextmenu="return false;"
               draggable="false"
             />
