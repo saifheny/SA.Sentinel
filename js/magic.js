@@ -96,78 +96,15 @@ let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
-});
-function showInstallBanner() {
-  if (document.getElementById("install-pwa-banner")) return;
-  const banner = document.createElement("div");
-  banner.id = "install-pwa-banner";
-  banner.style.position = "fixed";
-  banner.style.top = "-100px";
-  banner.style.left = "50%";
-  banner.style.transform = "translateX(-50%)";
-  banner.style.background = "rgba(255, 255, 255, 0.95)";
-  banner.style.backdropFilter = "blur(10px)";
-  banner.style.border = "1px solid var(--border)";
-  banner.style.padding = "12px 20px";
-  banner.style.borderRadius = "16px";
-  banner.style.boxShadow = "0 10px 40px rgba(0,0,0,0.15)";
-  banner.style.zIndex = "99999";
-  banner.style.display = "flex";
-  banner.style.alignItems = "center";
-  banner.style.gap = "15px";
-  banner.style.transition = "top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
-  banner.style.width = "calc(100% - 30px)";
-  banner.style.maxWidth = "400px";
-  banner.innerHTML = `
-        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; flex-shrink: 0;">
-            <i class="fa-solid fa-download"></i>
-        </div>
-        <div style="flex: 1;">
-            <div style="font-weight: 800; font-size: 0.95rem; color: var(--text);">ثبت التطبيق دلوقتي</div>
-            <div style="font-size: 0.75rem; color: var(--text2);">لتجربة أسرع وأفضل بدون نت!</div>
-        </div>
-        <button id="btn-install-pwa" style="background: var(--accent); color: #fff; border: none; padding: 6px 14px; border-radius: 99px; font-weight: 800; font-size: 0.8rem; cursor: pointer; white-space: nowrap;">تثبيت</button>
-        <button id="btn-close-pwa" style="background: transparent; color: var(--text3); border: none; font-size: 1.2rem; cursor: pointer; padding: 0 5px;"><i class="fa-solid fa-xmark"></i></button>
-    `;
-  document.body.appendChild(banner);
-  document.getElementById("btn-close-pwa").onclick = () => {
-    banner.style.top = "-100px";
-    setTimeout(() => banner.remove(), 500);
-  };
-  document.getElementById("btn-install-pwa").onclick = async () => {
-    banner.style.top = "-100px";
-    setTimeout(() => banner.remove(), 500);
+  // Trigger the browser's native install prompt directly
+  setTimeout(async () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === "accepted") {
         deferredPrompt = null;
       }
-    } else {
-      showMagicToast("اضغط على (Add to Home Screen) من إعدادات المتصفح");
     }
-  };
-  setTimeout(() => {
-    banner.style.top = "20px";
-  }, 100);
-  setTimeout(() => {
-    if (document.getElementById("install-pwa-banner")) {
-      banner.style.top = "-100px";
-      setTimeout(() => {
-        if (banner.parentNode) banner.remove();
-      }, 500);
-    }
-  }, 5000);
-}
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.matchMedia("(display-mode: standalone)").matches) return;
-  setTimeout(() => {
-    showInstallBanner();
-    setInterval(() => {
-      if (!window.matchMedia("(display-mode: standalone)").matches) {
-        showInstallBanner();
-      }
-    }, 120000);
   }, 2000);
 });
 
