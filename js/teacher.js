@@ -122,21 +122,7 @@ function initTeacher() {
         );
       });
     }
-    const btnEditName = document.getElementById("btn-quick-edit-name");
-    if (btnEditName) {
-      btnEditName.addEventListener("click", function () {
-        var newName = prompt("اكتب اسمك الجديد هنا:");
-        if (newName && newName.trim() !== "") {
-          update(ref(db, "users/" + teacherId), { name: newName.trim() }).then(
-            () => {
-              localStorage.setItem("teacherName", newName.trim());
-              setTeacherUI(newName.trim());
-              toast("تم تحديث الاسم بنجاح", "ok");
-            },
-          );
-        }
-      });
-    }
+
     const btnSaveMsgs = document.getElementById("btn-save-global-msgs");
     if (btnSaveMsgs) {
       btnSaveMsgs.addEventListener("click", function () {
@@ -1919,12 +1905,9 @@ document.addEventListener('click', async (e) => {
         if(navName) navName.textContent = newName;
         
         // Switch back to profile view
-        document.querySelectorAll('.view').forEach(v => { v.style.display = 'none'; v.classList.remove('active'); });
-        var profileView = document.getElementById('view-profile');
-        if(profileView) { profileView.style.display = 'block'; profileView.classList.add('active'); }
+        if(window.goTo) window.goTo('profile');
         var nav = document.getElementById('float-nav');
         if(nav) nav.style.display = '';
-        window.scrollTo(0, 0);
         
         if (window.showToast) window.showToast('تم تغيير الاسم بنجاح!');
         

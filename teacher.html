@@ -633,7 +633,7 @@
       </section>
 
       <!-- Edit Name View -->
-      <section class="view" id="view-edit-name" style="display:none;">
+      <section class="view" id="view-edit-name">
         <div style="max-width: 500px; margin: 0 auto; width: 100%; padding: 2rem 15px; min-height: calc(100vh - 120px); display: flex; flex-direction: column; justify-content: center;">
           <!-- Back button -->
           <button id="btn-back-from-edit" style="position: fixed; top: 20px; left: 20px; width: 48px; height: 48px; border-radius: 50%; background: var(--glass2); backdrop-filter: blur(10px); border: 1px solid var(--border); color: var(--text); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 100; transition: all 0.3s;">
@@ -977,28 +977,28 @@
     
     // Quick edit name button - show edit name view
     document.addEventListener('DOMContentLoaded', function(){
-      function showView(viewId) {
-        document.querySelectorAll('.view').forEach(function(v) { v.style.display = 'none'; v.classList.remove('active'); });
-        var target = document.getElementById(viewId);
-        if(target) { target.style.display = 'block'; target.classList.add('active'); }
-        var nav = document.getElementById('float-nav');
-        if(nav) nav.style.display = (viewId === 'view-edit-name') ? 'none' : '';
-        window.scrollTo(0, 0);
-      }
-
       var qe = document.getElementById('btn-quick-edit-name');
       if(qe) qe.addEventListener('click', function(){
         var input = document.getElementById('new-display-name');
         var currentName = document.getElementById('profile-page-name');
         if(currentName && input) input.value = currentName.textContent;
-        showView('view-edit-name');
-        if(input) input.focus();
+        if(window.goTo) window.goTo('edit-name');
+        
+        // Hide nav bar when in edit name view
+        var nav = document.getElementById('float-nav');
+        if(nav) nav.style.display = 'none';
+        
+        if(input) setTimeout(() => input.focus(), 300);
       });
 
       // Back & Cancel buttons
       var btnBack = document.getElementById('btn-back-from-edit');
       var btnCancel = document.getElementById('btn-cancel-edit-name');
-      function goBackToProfile() { showView('view-profile'); }
+      function goBackToProfile() { 
+        if(window.goTo) window.goTo('profile');
+        var nav = document.getElementById('float-nav');
+        if(nav) nav.style.display = '';
+      }
       if(btnBack) btnBack.addEventListener('click', goBackToProfile);
       if(btnCancel) btnCancel.addEventListener('click', goBackToProfile);
 
