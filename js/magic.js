@@ -13,38 +13,10 @@
  *   INTERNAL BRAND SIGNATURE
  *     ALL RIGHTS RESERVED
  */
-let clickCount = 0;
-let lastClickTime = 0;
-const REQUIRED_CLICKS = 5;
-const TIME_LIMIT = 3000;
 document.addEventListener("DOMContentLoaded", () => {
   const logo = document.getElementById("logo-easter-egg");
   if (logo) {
-    logo.addEventListener("click", (e) => {
-      const currentTime = new Date().getTime();
-      if (currentTime - lastClickTime > TIME_LIMIT) {
-        clickCount = 0;
-      }
-      clickCount++;
-      lastClickTime = currentTime;
-      const ripple = document.createElement("div");
-      ripple.style.position = "absolute";
-      ripple.style.inset = "0";
-      ripple.style.borderRadius = "50%";
-      ripple.style.background = "rgba(255,255,255,0.4)";
-      ripple.style.transform = "scale(0)";
-      ripple.style.transition = "transform 0.4s, opacity 0.4s";
-      logo.appendChild(ripple);
-      setTimeout(() => {
-        ripple.style.transform = "scale(2)";
-        ripple.style.opacity = "0";
-      }, 10);
-      setTimeout(() => ripple.remove(), 400);
-      if (clickCount >= REQUIRED_CLICKS) {
-        activateProMode();
-        clickCount = 0;
-      }
-    });
+    // logo click — no action
   }
   const konamiCode = [
     "ArrowUp",
@@ -74,17 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-function activateProMode() {
-  document.body.style.transition = "all 1s ease";
-  document.documentElement.style.setProperty("--accent", "#fbbf24");
-  document.documentElement.style.setProperty("--blue", "#f59e0b");
-  document.documentElement.style.setProperty(
-    "--accent-glow",
-    "rgba(251, 191, 36, 0.4)",
-  );
-  document.documentElement.style.setProperty("--bg", "#111827");
-  showMagicToast("🚀 تم تفعيل وضع المحترفين (Pro Mode)");
-}
+
 function activateMatrixMode() {
   document.documentElement.style.setProperty("--accent", "#22c55e");
   document.documentElement.style.setProperty("--blue", "#16a34a");
