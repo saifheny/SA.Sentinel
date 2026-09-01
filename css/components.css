@@ -612,12 +612,7 @@ select.field {
   width: max-content;
 }
 
-@media (max-width: 768px) {
-  .toast-area {
-    bottom: auto;
-    top: 20px;
-  }
-}
+
 
 .toast {
   display: flex;

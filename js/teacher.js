@@ -1909,8 +1909,6 @@ document.addEventListener('click', async (e) => {
         var nav = document.getElementById('float-nav');
         if(nav) nav.style.display = '';
         
-        if (window.showToast) window.showToast('تم تغيير الاسم بنجاح!');
-        
         btn.innerHTML = originalHTML;
         btn.disabled = false;
       } catch (err) {
