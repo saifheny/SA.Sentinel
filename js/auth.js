@@ -137,8 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleGoogleAuth = (btn) => {
     const originalHtml = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML =
-      '<div class="modern-spinner" style="width:20px;height:20px;border-width:2px;"></div>';
     signInWithPopup(auth, provider).catch((err) => {
       console.error(err);
       btn.disabled = false;
@@ -158,7 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!email || !pass) return showToast("برجاء إدخال البريد والباسورد", "warn");
 
     btnLoginEmail.disabled = true;
-    btnLoginEmail.textContent = "جاري الدخول...";
 
     signInWithEmailAndPassword(auth, email, pass).catch((err) => {
       btnLoginEmail.disabled = false;
@@ -189,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return showToast("كلمة المرور لازم تحتوي على رمز واحد على الأقل (مثل @ # %)", "warn");
 
     btnRegisterEmail.disabled = true;
-    btnRegisterEmail.textContent = "جاري الإنشاء...";
 
     createUserWithEmailAndPassword(auth, email, pass).catch((err) => {
       btnRegisterEmail.disabled = false;
@@ -210,8 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     btnSaveProfile.disabled = true;
-    btnSaveProfile.innerHTML =
-      '<div class="modern-spinner" style="width:20px;height:20px;border-width:2px;"></div> بيحفظ...';
 
     try {
       await update(ref(db, "users/" + currentUser.uid), {
