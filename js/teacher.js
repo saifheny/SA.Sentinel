@@ -1893,9 +1893,9 @@ function renderChart(ranked) {
   });
 }
 
-// Handle inline name editing from modal
+// Handle inline name editing from edit-name view
 document.addEventListener('click', async (e) => {
-  if (e.target && e.target.id === 'btn-save-new-name') {
+  if (e.target && (e.target.id === 'btn-save-new-name' || e.target.closest('#btn-save-new-name'))) {
     const newName = document.getElementById('new-display-name').value.trim();
     if (newName.split(' ').filter(w => w.length > 0).length < 3) {
       if (window.showToast) window.showToast('اكتب اسمك الثلاثي على الأقل', 'warn');
@@ -1906,8 +1906,8 @@ document.addEventListener('click', async (e) => {
     if (user) {
       try {
         const btn = document.getElementById('btn-save-new-name');
-        const originalText = btn.textContent;
-        btn.textContent = 'جاري الحفظ...';
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
         btn.disabled = true;
         
         await update(ref(db, "users/" + user.uid), {
@@ -1918,10 +1918,17 @@ document.addEventListener('click', async (e) => {
         const navName = document.getElementById('teacher-name-display');
         if(navName) navName.textContent = newName;
         
-        document.getElementById('modal-edit-name').style.display = 'none';
+        // Switch back to profile view
+        document.querySelectorAll('.view').forEach(v => { v.style.display = 'none'; v.classList.remove('active'); });
+        var profileView = document.getElementById('view-profile');
+        if(profileView) { profileView.style.display = 'block'; profileView.classList.add('active'); }
+        var nav = document.getElementById('float-nav');
+        if(nav) nav.style.display = '';
+        window.scrollTo(0, 0);
+        
         if (window.showToast) window.showToast('تم تغيير الاسم بنجاح!');
         
-        btn.textContent = originalText;
+        btn.innerHTML = originalHTML;
         btn.disabled = false;
       } catch (err) {
         console.error(err);
